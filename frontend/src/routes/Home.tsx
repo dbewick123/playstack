@@ -1,4 +1,4 @@
 function Home() {
-  return <a>Home Page Placeholder Inside Outlet</a>;
+  return <h1>Home Page Placeholder Inside Outlet</h1>;
 }
 export default Home;
