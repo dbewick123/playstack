@@ -15,8 +15,7 @@ export default function Header() {
     return null; // TODO: Implement a loading spinner component here
   }
   return (
-    <>
-      
+    <div className="header-content">
       <div className="header-logo">
         <Joystick className="header-logo-svg" />
         <span className="header-logo-text">playstack</span>
@@ -29,6 +28,7 @@ export default function Header() {
         {/* TODO: update to proper logout with nice button */}
         <button onClick={() => dispatch(clearUser())}>x</button>{" "}
       </nav>
-    </>
+    </div>
   );
 }
+ 

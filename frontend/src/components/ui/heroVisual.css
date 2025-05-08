@@ -1,0 +1,21 @@
+.scroll-gamepad-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    border: 1px solid red;
+  }
+  
+  .scroll-gamepad {
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+    border: 1px solid blue;
+  }
+  
+  body.scroll-locked {
+    overflow: hidden;
+  }
+
+  .middle {
+    padding-top: 2000px;
+  }

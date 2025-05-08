@@ -1,13 +1,14 @@
 .grid-container {
   display: grid;
   height: 100vh;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: var(--header-height) 1fr auto;
   /* TODO: Maybe maake left and right have a minimum for use on smaller screens. if I do then update the subgrids to match */
-  grid-template-columns: 1fr minmax(auto, 980px) 1fr;
+  grid-template-columns: 1fr minmax(auto, var(--container-width-base)) 1fr;
   grid-template-areas:
     "header header header"
     "left middle right"
     "footer footer footer";
+
 }
 
 .header-container {
@@ -19,47 +20,43 @@
   height: var(--header-height);
   display: grid;
   grid-template-areas: "header-left header-center header-right";
-  grid-template-columns: 1fr minmax(auto, 980px) 1fr;
+  grid-template-columns: 1fr minmax(auto, var(--container-width-base)) 1fr;
   justify-content: space-evenly;
   align-items: center;
   background-color: var(--color-background);
-}
+  border-bottom: 0.5px solid var(--color-separator);
 
-.header-content {
-  grid-area: header-center;
-  display: flex;
-  height: calc(var(--header-height) / 2);
-  align-items: center;
 }
 
 .left {
   grid-area: left;
-  padding-top: var(--header-height);
   background-color: var(--color-background);
   text-align: end;
 }
 
 .middle {
   grid-area: middle;
-  padding-top: var(--header-height);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
   width: 100%;
-  max-width: 980px;
+  max-width: var(--container-width-base);
   background-color: var(--color-background);
 }
 
 .right {
   grid-area: right;
-  padding-top: var(--header-height);
   background-color: var(--color-background);
 }
 
-.footer {
+.footer-container {
   grid-area: footer;
   background-color: var(--color-background);
   border: 0.5px solid var(--color-devboarder);
+  display: grid;
+  justify-items: center;
+  grid-template-areas: "footer-left footer-center footer-right";
+  grid-template-columns: 1fr minmax(auto, var(--container-width-base)) 1fr;
+  border-top: 0.5px solid var(--color-separator);
+
 }
 
 /* Mobile Responsive */
@@ -67,6 +64,7 @@
 @media (max-width: 430px) {
   .grid-container {
     grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height-mobile) 1fr auto;
     grid-template-areas:
       "header"
       "middle"
@@ -79,16 +77,7 @@
     padding-top: var(--space-md);
   }
 
-  .header-content {
-    display: grid;
-    grid-template-areas:
-      "header-logo header-links"
-      "header-search header-search";
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr 1fr;
-    row-gap: var(--space-lg);
-    column-gap: var(--space-md);
-  }
+
 
   .left,
   .right {

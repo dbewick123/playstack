@@ -1,13 +1,16 @@
-import Layout from './layout/Layout';
-import Home from './routes/Home';
-import { Route, Routes } from 'react-router-dom';
+import Layout from "./layout/Layout";
+import { Route, Routes, Navigate } from "react-router-dom";
+import Landing from "./routes/Landing";
+import Home from "./routes/Home";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="*" element={<h2>404 - Not Found</h2>} />
+        <Route index element={<Navigate to="landing" replace />} />
+        <Route path="landing" element={<Landing />} />
+        <Route path="home" element={<Home />} />
+        {/* other routes */}
       </Route>
     </Routes>
   );

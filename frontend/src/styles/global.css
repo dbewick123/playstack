@@ -3,20 +3,20 @@
 :root {
   /* 🎨 Color System */
   --color-primary: rgba(47, 169, 140, 1);
-  --color-background: rgba(18, 18, 18, 1);
-  --color-secondary: rgba(245, 0, 87, 1);
+  --color-background: rgb(30, 30, 30);
+  --color-secondary: rgba(255, 110, 97, 0.8);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(255, 255, 255, 0.6);
   --color-danger: rgba(229, 57, 53, 1);
   --color-success: rgba(67, 160, 71, 1);
-  --color-devboarder: rgba(108, 115, 118, 1);
+  --color-separator: rgb(69, 71, 72);
   --color-meadow: rgba(44, 194, 149, 1);
   --color-mint: rgba(47, 169, 140, 1);
   --color-frog: rgba(23, 135, 109, 1);
 
   /* 🎨 Color System Text */
+  --color-text-base: rgba(255, 255, 255, 0.6);
   --color-text-highemp: rgba(255, 255, 255, 0.87);
-  --color-text-mediumemp: rgba(255, 255, 255, 0.6);
   --color-text-disabled: rgba(255, 255, 255, 0.38);
   --color-text-link: rgba(47, 169, 140, 1);
 
@@ -36,24 +36,36 @@
   --overlay-24dp: rgba(255, 255, 255, 0.16);
   --overlay-32dp: rgba(255, 255, 255, 0.36);
 
+  /* container widths */
+  --container-width-base: 1280px;
+  --container-width-narrow: 700px;
+
   /* 🔤 Typography */
   --font-family-base: "Noto Sans", sans-serif;
+  --font-size-xxs: 0.625rem;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
+  --font-size-smh1: 2rem;
+  --font-size-mdh1: 2.5rem;
+  --font-size-lgh1: 4rem;
   --font-weight-light: 300;
   --font-weight-regular: 400;
+  --font-weight-medium: 600;
   --font-weight-bold: 700;
+  --font-weight-extra-bold: 900;
   --font-line-height-base: 1.5;
+  --font-line-height-h3: 1.2;
 
   /* 📏 Icon Size */
   --icon-size-xs: 16px;
   --icon-size-sm: 20px;
   --icon-size-md: 24px;
   --icon-size-lg: 32px;
-
+  --icon-size-xl: 40px;
+  
   /* 📏 Spacing Scale */
   --space-xxs: 2px;
   --space-xs: 4px;
@@ -63,9 +75,17 @@
   --space-xl: 24px;
   --space-2xl: 32px;
   --space-3xl: 40px;
+  --space-4xl: 48px;
+  --space-5xl: 56px;
+  --content-block-separator-base: 100px;
+  --content-block-separator-mobile: 50px;
+  --content-start-top-margin-base: 150px;
+  --content-start-top-margin-mobile: 30px;
+  --wrapper-padding-sides: 16px;
+
 
   /* 📐 Breakpoints */
-  --breakpoint-sm: 480px;
+  --breakpoint-sm: 430px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
@@ -91,7 +111,7 @@
  
   /* Specific Component Settings */
   --header-height: 80px;
-  --header-height-mobile: 120px;
+  --header-height-mobile: 100px;
 }
 
 /* Reset/set base styles */
@@ -106,7 +126,7 @@ body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: var(--font-line-height-base);
-  color: var(--color-text-highemp);
+  color: var(--color-text-base);
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -128,27 +148,23 @@ p {
 h1 {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-md);
 }
 
 h2 {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-sm);
 }
 
 h3 {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-sm);
 }
 
 h4,
 h5,
 h6 {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-xs);
+  font-weight: var(--font-weight-medium);
 }
 
 p {
@@ -179,6 +195,16 @@ select {
 
 a {
   color: var(--color-text-link);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  transition: color var(--transition-base) var(--ease-default);
+}
+
+.subtle-links a{
+  color: var(--color-text-highemp);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
   text-decoration: none;
   transition: color var(--transition-base) var(--ease-default);
 }
@@ -212,4 +238,15 @@ select:focus {
 
 ::placeholder {
   color: var(--color-muted);
+}
+
+/* utility classes */
+
+.text-highemp-p-span {
+  color: var(--color-text-highemp);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-highemp-h-span {
+  color: var(--color-text-highemp);
 }
