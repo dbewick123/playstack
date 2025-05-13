@@ -1,10 +1,16 @@
 {
-  "extends": "@tsconfig/node23/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
-    "forceConsistentCasingInFileNames": true
+    "target": "es2020", // Modern JS features, supported by Node 14+
+    "lib": ["es2020"], // Tell typescript the target environment and what types to support
+    "module": "commonjs", // REQUIRED to use `require()` and `module.exports`
+    "outDir": "dist", // Compiled JS files go here
+    "rootDir": "src", // Your .ts files live here
+    "strict": true, // Enables all strict type checks (highly recommended)
+    "esModuleInterop": true, // Allows `import express from "express"` even in CommonJS
+    "forceConsistentCasingInFileNames": true, // Avoids casing issues between OSs (e.g., mac vs Linux)
+    "skipLibCheck": true, // Skip type checking for external libraries
+    "moduleResolution": "node" // Mimics Node’s resolution logic (e.g., looks in node_modules)
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"], // Tells TS to compile everything in src/
+  "exclude": ["node_modules", "dist"] // Don’t compile output files or dependencies
 }
