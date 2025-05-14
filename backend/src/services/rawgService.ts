@@ -1,7 +1,8 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
-import type { Game } from "../types/game";
-import type { RawgGame, RawgGamesResponse } from "../types/rawgResponses";
+import type { Game } from "../types/game.js";
+import type { RawgGame, RawgGamesResponse } from "../types/rawgResponses.js";
 
 const mapRawgToGame = (raw: RawgGame): Game => ({
   id: raw.id,
@@ -46,4 +47,4 @@ const getGamesTextSearch = async (query: string, exact: boolean = false) => {
   };
 };
 
-module.exports = { getGameCount, getGamesTextSearch };
+export { getGameCount, getGamesTextSearch };

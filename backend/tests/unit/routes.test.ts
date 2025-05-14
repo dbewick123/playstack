@@ -1,5 +1,6 @@
-const testRoutesApp = require("../../src/app");
-const supertestRoutes = require("supertest");
+import { describe, test, expect } from "@jest/globals";
+import testRoutesApp from "../../src/app.js";
+import supertestRoutes from "supertest";
 
 describe("Rawg API Routes", () => {
   test("Should return the total number of games", async () => {

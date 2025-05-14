@@ -1,5 +1,5 @@
-require("dotenv").config();
-
+import dotenv from "dotenv";
+dotenv.config();
 
 async function checkApiStatus() {
   const url = `${process.env.THIRD_PARTY_GAME_API_URL}/platforms/4?key=${process.env.THIRD_PARTY_GAME_API_KEY}`;
@@ -8,9 +8,9 @@ async function checkApiStatus() {
     method: "GET",
     redirect: "follow",
     headers: {
-      "Accept": "application/json",
-      "User-Agent": "node-fetch"
-    }
+      Accept: "application/json",
+      "User-Agent": "node-fetch",
+    },
   };
 
   try {
@@ -21,4 +21,4 @@ async function checkApiStatus() {
   }
 }
 
-module.exports = checkApiStatus;
+export default checkApiStatus;

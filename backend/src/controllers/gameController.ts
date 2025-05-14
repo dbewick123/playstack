@@ -1,23 +1,31 @@
-import type { Request, Response, NextFunction } from "express";
-const rawgService = require("../services/rawgService");
+import { Request, Response, NextFunction } from "express";
+import { getGameCount, getGamesTextSearch } from "../services/rawgService.js";
 
-const getGameCount = async (req: Request, res: Response, next: NextFunction) => {
+const gameCountController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const gameCount = await rawgService.getGameCount();
+    const gameCount = await getGameCount();
     res.status(200).json({ count: gameCount });
   } catch (error) {
     next(error);
   }
 };
 
-const getGamesTextSearch = async (req: Request, res: Response, next: NextFunction) => {
+const gamesTextSearchController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const exact = req.params.exact === 'true';
-    const games = await rawgService.getGamesTextSearch(req.params.query, exact);
+    const exact = req.params.exact === "true";
+    const games = await getGamesTextSearch(req.params.query, exact);
     res.status(200).json(games);
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { getGameCount, getGamesTextSearch };
+export { gameCountController, gamesTextSearchController };

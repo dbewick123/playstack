@@ -1,9 +1,11 @@
-const testMiddlewareApp = require("../../src/app");
-const supertestMiddleware = require("supertest");
+import { describe, test, expect } from "@jest/globals";
+import testMiddlewareApp from "../../src/app.js";
+import supertestMiddleware from "supertest";
 
 describe("Error Handler Middleware", () => {
   test("Should return 500 with generic error message", async () => {
-    const response = await supertestMiddleware(testMiddlewareApp).get("/errorblank");
+    const response =
+      await supertestMiddleware(testMiddlewareApp).get("/errorblank");
     expect(response.status).toBe(500);
     expect(response.body.status).toBe("error");
     expect(response.body.message).toBe("Internal Server Error");

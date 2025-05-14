@@ -1,5 +1,5 @@
-import type { Request, Response, NextFunction } from "express";
-const checkApiStatus = require("../services/checkApiStatus");
+import { NextFunction, Request, Response } from "express";
+import checkApiStatus from "../services/checkApiStatus.js";
 
 async function thirdPartyAuthentication(
   req: Request,
@@ -17,4 +17,4 @@ async function thirdPartyAuthentication(
   }
 }
 
-module.exports = thirdPartyAuthentication; 
+export default thirdPartyAuthentication;

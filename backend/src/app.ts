@@ -1,37 +1,39 @@
-const express = require("express");
-const errorHandler = require("./middleware/errorHandler");
-const thirdPartyAuthentication = require("./middleware/thirdPartyAuthentication");
-const gameController = require("./controllers/gameController");
 
-import type { Request, Response } from "express";
+import express from "express";
+import cors from "cors";
+import errorHandler from "./middleware/errorHandler.js";
+import thirdPartyAuthentication from "./middleware/thirdPartyAuthentication.js";
+import {
+  gameCountController,
+  gamesTextSearchController,
+} from "./controllers/gameController.js";
 
 const app = express();
+app.use(cors());
 
 // Middleware
 app.use(express.json());
 app.use(thirdPartyAuthentication);
 
 // Only using for testing
-  app.get("/error", (req: Request, res: Response) => {
-    throw new Error("This is a test error");
-  });
+app.get("/error", (req, res) => {
+  throw new Error("This is a test error");
+});
 
-  app.get("/errorblank", (req: Request, res: Response) => {
-    throw new Error();
-  });
+app.get("/errorblank", (req, res) => {
+  throw new Error();
+});
 
 // Main routes
-  app.get("/", (req: Request, res: Response) => {
-    res.send("Node Server is up and running!");
-  });
+app.get("/", (req, res) => {
+  res.send("Node Server is up and running!");
+});
 
-  app.get("/games/count", gameController.getGameCount);
+app.get("/games/count", gameCountController);
 
-  app.get("/games/search/:query/:exact", gameController.getGamesTextSearch);
-
-
+app.get("/games/search/:query/:exact", gamesTextSearchController);
 
 //Error handler should be the last middleware & after routes
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

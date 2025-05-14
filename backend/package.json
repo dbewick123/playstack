@@ -2,17 +2,19 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config jest.config.ts",
     "lint": "eslint",
-    "dev": "tsc-watch --onSuccess nodemon"
+    "dev": "tsc-watch --onSuccess \"nodemon\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^6.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "tsc-watch": "^6.2.1"
@@ -20,9 +22,10 @@
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@tsconfig/node23": "^23.0.1",
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.14.1",
+    "@types/node": "^22.15.18",
     "@types/sinon": "^17.0.4",
     "@types/supertest": "^6.0.3",
     "eslint": "^9.24.0",

@@ -1,6 +1,5 @@
 // global error handler, should run at the end of the middleware stack
-
-import type { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 
 function errorHandler(
   err: Error,
@@ -15,5 +14,4 @@ function errorHandler(
   });
 }
 
-module.exports =  errorHandler ;
-
+export default errorHandler;

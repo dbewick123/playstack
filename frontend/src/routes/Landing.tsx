@@ -9,9 +9,30 @@ import car6 from "../assets/icons/carousel/car6.png";
 import { Button } from "@mui/material";
 import productScreenshot from "../assets/screenshots/product-screenshot.png";
 import productScreenshotMobile from "../assets/screenshots/product-screenshot-mobile.png";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 function Landing() {
   const isMobile = useIsMobile();
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [gameCount, setGameCount] = useState(0);
+
+  useEffect(() => {
+    const fetchGameCount = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_API_URL}/games/count`
+        );
+        const data = await response.json();
+        setGameCount(data.count);
+      } catch (error) {
+        setGameCount(-1);
+        console.error("Error fetching game count", error);
+      } finally {
+        setHasLoaded(true);
+      }
+    };
+    fetchGameCount();
+  }, []);
 
   const images: { src: string; alt: string; ariaHidden: boolean }[] = [
     { src: car1, alt: "spaceship", ariaHidden: false },
@@ -26,6 +47,9 @@ function Landing() {
     return [...images, ...images.map((img) => ({ ...img, ariaHidden: true }))];
   }, [images]);
 
+  if (!hasLoaded) {
+    return <div></div>;
+  }
   return (
     <div className="landing-container">
       <div className="landing-heading">
@@ -42,7 +66,7 @@ function Landing() {
         {/* <GamepadIcon /> */}
         <p>
           Join the playstack family today, track, manage and review every game
-          imaginable. We have you covered with over 500k games and counting
+          imaginable. We have you covered with {gameCount === -1 ? "thousands of" : gameCount} games and counting
         </p>
       </div>
       <div className="landing-product-screenshot">
@@ -77,9 +101,12 @@ function Landing() {
         </div>
         <div className="feature-info">
           <p>
-            <span className="text-highemp-p-span">Manage current & future collections.</span> Use our massive
-            games library alongside our collection features. Build out your
-            personal library, or pull together a wishlist with everything in it.
+            <span className="text-highemp-p-span">
+              Manage current & future collections.
+            </span>{" "}
+            Use our massive games library alongside our collection features.
+            Build out your personal library, or pull together a wishlist with
+            everything in it.
           </p>
           <br />
           <p>
