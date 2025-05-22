@@ -87,7 +87,6 @@ function Landing() {
           ))}
         </div>
       </div>
-      {/* TODO: <HeroVisual /> */}
       <div className="feature-info-container">
         <div className="feature-summary">
           <h3>

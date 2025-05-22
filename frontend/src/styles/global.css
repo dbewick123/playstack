@@ -3,7 +3,7 @@
 :root {
   /* 🎨 Color System */
   --color-primary: rgba(47, 169, 140, 1);
-  --color-background: rgb(30, 30, 30);
+  --color-background: #1e1e1e;
   --color-secondary: rgba(255, 110, 97, 0.8);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(255, 255, 255, 0.6);
@@ -14,9 +14,16 @@
   --color-mint: rgba(47, 169, 140, 1);
   --color-frog: rgba(23, 135, 109, 1);
 
+  /* Color System Platforms */
+  --color-pc: rgba(0, 0, 0, 1);
+  --color-xbox: #34701e;
+  --color-ps5: #3061c0;
+  --color-ps4: rgba(48, 97, 192, 1);
+  --color-switch: #c92c17;
+
   /* 🎨 Color System Text */
   --color-text-base: rgba(255, 255, 255, 0.6);
-  --color-text-highemp: rgba(255, 255, 255, 0.87);
+  --color-text-highemp: rgba(255, 255, 255, 0.871);
   --color-text-disabled: rgba(255, 255, 255, 0.38);
   --color-text-link: rgba(47, 169, 140, 1);
 
@@ -25,7 +32,7 @@
   --color-shadow: rgba(255, 255, 255, 0.2);
 
   /* 🎨 Color System: Overlays for Dark Theme */
-  --overlay-01dp: rgba(255, 255, 255, 0.05);
+  --overlay-01dp: rgba(255, 255, 255, 0.03);
   --overlay-02dp: rgba(255, 255, 255, 0.07);
   --overlay-03dp: rgba(255, 255, 255, 0.08);
   --overlay-04dp: rgba(255, 255, 255, 0.09);
@@ -58,6 +65,7 @@
   --font-weight-extra-bold: 900;
   --font-line-height-base: 1.5;
   --font-line-height-h3: 1.2;
+  --heading-emoji-size: 1.75rem;
 
   /* 📏 Icon Size */
   --icon-size-xs: 16px;
@@ -69,18 +77,21 @@
   /* 📏 Spacing Scale */
   --space-xxs: 2px;
   --space-xs: 4px;
+  --space-ssm: 6px;
   --space-sm: 8px;
   --space-md: 12px;
   --space-lg: 16px;
-  --space-xl: 24px;
+  --space-xl: 24px; /* must be double the size of the --space-md */
   --space-2xl: 32px;
   --space-3xl: 40px;
   --space-4xl: 48px;
   --space-5xl: 56px;
   --content-block-separator-base: 100px;
   --content-block-separator-mobile: 50px;
-  --content-start-top-margin-base: 150px;
+  --content-start-top-margin-base: 50px;
   --content-start-top-margin-mobile: 30px;
+  --content-start-marketing-top-margin-base: 100px;
+  --content-start-marketing-top-margin-mobile-base: 30px;
   --wrapper-padding-sides: 16px;
 
 
@@ -112,6 +123,12 @@
   /* Specific Component Settings */
   --header-height: 80px;
   --header-height-mobile: 100px;
+  --gallary-circle-size: 8px;
+  --gallary-circle-padding: 4px;
+  --gallary-circle-color-default: var(--color-overlay-32dp);
+  --gallary-circle-color-border: var(--color-text-highemp);
+  --gallary-circle-color-selected: var(--color-text-highemp);
+
 }
 
 /* Reset/set base styles */
@@ -160,11 +177,19 @@ h3 {
   font-weight: var(--font-weight-bold);
 }
 
-h4,
-h5,
-h6 {
+h4 {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+}
+
+h5
+{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+h6 {
+  font-size: var(--font-size-xs);
 }
 
 p {
@@ -250,3 +275,8 @@ select:focus {
 .text-highemp-h-span {
   color: var(--color-text-highemp);
 }
+
+.heading-emoji {
+  font-size: var(--heading-emoji-size);
+}
+

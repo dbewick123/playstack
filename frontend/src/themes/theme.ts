@@ -2,30 +2,33 @@ import { createTheme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Palette {
-    playstackNegative: Palette["primary"];
+    playstackSelected: Palette["primary"];
     playstackDisabled: Palette["primary"];
     playstackPrimary: Palette["primary"];
+    playstackPrimaryChip: Palette["primary"];
   }
   interface PaletteOptions {
-    playstackNegative?: PaletteOptions["primary"];
+    playstackSelected?: PaletteOptions["primary"];
     playstackDisabled?: PaletteOptions["primary"];
     playstackPrimary?: PaletteOptions["primary"];
+    playstackPrimaryChip?: PaletteOptions["primary"];
   }
 }
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
-    playstackNegative: true;
+    playstackSelected: true;
     playstackDisabled: true;
     playstackPrimary: true;
+    playstackPrimaryChip: true;
   }
 }
 
 export const theme = createTheme({
   palette: {
-    playstackNegative: {
-      main: "#d32f2f",
-      contrastText: "#fff",
+    playstackSelected: {
+      main: "#2c433b",
+      contrastText: "#2fa98c",
     },
     playstackDisabled: {
       main: "#9e9e9e",
@@ -33,7 +36,14 @@ export const theme = createTheme({
     },
     playstackPrimary: {
       main: "#ffffff1f",
+      light: "#2c433b",
+      contrastText: "#2fa98c",
+    },
+    playstackPrimaryChip: {
+      main: "#ffffff1f",
+      light: "#2c433b",
       contrastText: "#2fa98c",
     },
   },
 });
+

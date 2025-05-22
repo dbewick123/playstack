@@ -1,0 +1,20 @@
+.circle-wrapper {
+  padding: var(--gallary-circle-padding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.circle {
+  width: var(--gallary-circle-size);
+  height: var(--gallary-circle-size);
+  border-radius: 50%;
+  border: 1px solid var(--gallary-circle-color-border);
+  background-color: var(--gallary-circle-color-default);
+  transition: background-color 0.4s ease;
+}
+
+.circle-selected {
+  background-color: var(--gallary-circle-color-selected);
+}

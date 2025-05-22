@@ -1,11 +1,10 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./layout.css";
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
 
 const Layout = () => {
-  const location = useLocation();
-  const isLanding = location.pathname === "/landing"; 
+
   return (
     <div className="grid-container">
       <header className="header-container">

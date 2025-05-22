@@ -1,8 +1,7 @@
 .landing-container {
   width: 100%;
-  padding-left: var(--wrapper-padding-sides);
-  padding-right: var(--wrapper-padding-sides);
-  margin: var(--content-start-top-margin-base) auto 0 auto;
+  max-width: var(--container-width-base);
+  margin: var(--content-start-marketing-top-margin-base) auto 0 auto;
 }
 
 .landing-heading {
@@ -106,7 +105,7 @@
 
 @media (max-width: 430px) {
   .landing-container {
-    margin: var(--content-start-top-margin-mobile) auto 0 auto;
+    margin: var(--content-start-marketing-top-margin-mobile-base) auto 0 auto;
   }
 
   .landing-heading h1 {

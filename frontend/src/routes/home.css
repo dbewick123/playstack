@@ -1,0 +1,49 @@
+.home-container {
+  width: 100%;
+  max-width: var(--container-width-base);
+  margin: var(--content-start-top-margin-base) auto 0 auto;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-areas: "home-filters home-main";
+  grid-template-columns: 1fr 4fr;
+  column-gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.home-filters {
+  grid-area: home-filters;
+}
+
+.home-main {
+  grid-area: home-main;
+}
+
+.home-heading {
+  color: var(--color-text-highemp);
+}
+.home-heading h1 {
+  line-height: 1;
+  font-size: var(--font-size-mdh1);
+  font-weight: var(--font-weight-extra-bold);
+}
+
+.game-card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-xl);
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 430px) {
+  .home-container {
+    margin: var(--content-start-top-margin-mobile) auto 0 auto;
+  }
+
+  .home-heading h1 {
+    font-size: var(--font-size-xl);
+  }
+}
