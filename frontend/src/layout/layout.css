@@ -8,13 +8,17 @@
     "header header header"
     "left middle right"
     "footer footer footer";
-
+  padding-right: var(--space-lg);
+  padding-left: var(--space-lg);
 }
 
 .header-container {
   grid-area: header;
   position: fixed;
   top: 0;
+  left: 0;;
+  padding-right: var(--space-lg);
+  padding-left: var(--space-lg);
   z-index: var(--z-header);
   width: 100%;
   height: var(--header-height);
@@ -69,6 +73,9 @@
       "header"
       "middle"
       "footer";
+    padding-right: var(--space-sm);
+    padding-left: var(--space-sm);
+
   }
 
   .header-container {
@@ -76,8 +83,6 @@
     align-items: baseline;
     padding-top: var(--space-md);
   }
-
-
 
   .left,
   .right {

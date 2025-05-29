@@ -6,116 +6,101 @@ import FilterIcon from "../../../assets/icons/filter.svg?react";
 import genreIconMap from "../../utilities/GenreIcons";
 
 //platform icons
-import PsIcon from "../../../assets/icons/platforms/ps.svg?react"
-import XboxIcon from "../../../assets/icons/platforms/xbox.svg?react"
-import PcIcon from "../../../assets/icons/platforms/pc-basic.svg?react"
-import SwitchIcon from "../../../assets/icons/platforms/switch.svg?react"
-
+import PsBasicIcon from "../../../assets/icons/platforms/ps-basic.svg?react";
+import XboxIcon from "../../../assets/icons/platforms/xbox.svg?react";
+import PcIcon from "../../../assets/icons/platforms/pc.svg?react";
+import SwitchIcon from "../../../assets/icons/platforms/switch.svg?react";
 
 interface SidebarData {
-  colorScheme: string;
   title: string;
   subTitle: string;
-  // onItemClick: () => void;
-  // onGroupClick: () => void;
-  group: {
+  groups: {
     groupName: string;
-    item: { itemName: string; icon: React.ReactNode }[];
+    groupId: number;
+    items: { id: number; itemName: string; icon: React.ReactNode }[];
   }[];
 }
 
-function Sidebar(colorScheme: string) {
-  console.log(colorScheme);
-
+function Sidebar() {
   const sidebarData: SidebarData = {
     title: "Filters",
     subTitle: "Select one or more",
-    colorScheme: colorScheme,
-    group: [
+    groups: [
       {
+        //TODO: Test will all platform IDs to check correct (could just call the /platform end point for this test?)
         groupName: "Genres",
-        item: [
-          {itemName: "action", icon: genreIconMap["action"]},
-          {itemName: "indie", icon: genreIconMap["indie"]},
-          {itemName: "adventure", icon: genreIconMap["adventure"]},
-          {itemName: "role-playing-games-rpg", icon: genreIconMap["role-playing-games-rpg"]},
-          {itemName: "strategy", icon: genreIconMap["strategy"]},
-          {itemName: "shooter", icon: genreIconMap["shooter"]},
-          {itemName: "casual", icon: genreIconMap["casual"]},
-          {itemName: "simulation", icon: genreIconMap["simulation"]},
-          {itemName: "puzzle", icon: genreIconMap["puzzle"]},
-          {itemName: "arcade", icon: genreIconMap["arcade"]},
-          {itemName: "platformer", icon: genreIconMap["platformer"]},
-          {itemName: "massively-multiplayer", icon: genreIconMap["massively-multiplayer"]},
-          {itemName: "racing", icon: genreIconMap["racing"]},
-          {itemName: "sports", icon: genreIconMap["sports"]},
-          {itemName: "fighting", icon: genreIconMap["fighting"]},
-          {itemName: "family", icon: genreIconMap["family"]},
-          {itemName: "board-games", icon: genreIconMap["board-games"]},
-          {itemName: "card", icon: genreIconMap["card"]},
-          {itemName: "educational", icon: genreIconMap["educational"]},
+        groupId: 1,
+        items: [
+          { id: 4, itemName: "action", icon: genreIconMap["action"] },
+          { id: 51, itemName: "indie", icon: genreIconMap["indie"] },
+          { id: 3, itemName: "adventure", icon: genreIconMap["adventure"] },
+          {
+            id: 5,
+            itemName: "role-playing-games-rpg",
+            icon: genreIconMap["role-playing-games-rpg"],
+          },
+          { id: 10, itemName: "strategy", icon: genreIconMap["strategy"] },
+          { id: 2, itemName: "shooter", icon: genreIconMap["shooter"] },
+          { id: 40, itemName: "casual", icon: genreIconMap["casual"] },
+          { id: 14, itemName: "simulation", icon: genreIconMap["simulation"] },
+          { id: 7, itemName: "puzzle", icon: genreIconMap["puzzle"] },
+          { id: 11, itemName: "arcade", icon: genreIconMap["arcade"] },
+          { id: 83, itemName: "platformer", icon: genreIconMap["platformer"] },
+          {
+            id: 59,
+            itemName: "massively-multiplayer",
+            icon: genreIconMap["massively-multiplayer"],
+          },
+          { id: 1, itemName: "racing", icon: genreIconMap["racing"] },
+          { id: 15, itemName: "sports", icon: genreIconMap["sports"] },
+          { id: 6, itemName: "fighting", icon: genreIconMap["fighting"] },
+          { id: 19, itemName: "family", icon: genreIconMap["family"] },
+          {
+            id: 28,
+            itemName: "board-games",
+            icon: genreIconMap["board-games"],
+          },
+          { id: 17, itemName: "card", icon: genreIconMap["card"] },
+          {
+            id: 34,
+            itemName: "educational",
+            icon: genreIconMap["educational"],
+          },
         ],
       },
       {
         groupName: "Platforms",
-        item: [
-          { itemName: "Playstations", icon: <PsIcon /> },
-          { itemName: "Xbox Consoles", icon: <XboxIcon /> },
-          { itemName: "Nintendo Switch", icon: <SwitchIcon /> },
-          { itemName: "PC", icon: <PcIcon /> },
+        groupId: 2,
+        items: [
+          { id: 187, itemName: "Playstation 5", icon: <PsBasicIcon /> },
+          { id: 18, itemName: "Playstation 4", icon: <PsBasicIcon /> },
+          { id: 186, itemName: "Xbox Series X/S", icon: <XboxIcon /> },
+          { id: 7, itemName: "Nintendo Switch", icon: <SwitchIcon /> },
+          { id: 4, itemName: "PC", icon: <PcIcon /> },
         ],
       },
-      {/*
-      {
-        groupName: "Tags",
-        item: [
-          { itemName: "test item 1", icon: <TestIcon2 /> },
-          { itemName: "test item 2", icon: <TestIcon3 /> },
-        ],
-      },
-      {
-        groupName: "Miscellaneous",
-        item: [
-          { itemName: "test item 3", icon: <TestIcon2 /> },
-          { itemName: "test item 4", icon: <TestIcon3 /> },
-        ],
-      },
-      {
-        groupName: "Group One",
-        item: [
-          { itemName: "test item 1", icon: <TestIcon2 /> },
-          { itemName: "test item 2", icon: <TestIcon3 /> },
-        ],
-      },
-      {
-        groupName: "Group Two",
-        item: [
-          { itemName: "test item 3", icon: <TestIcon2 /> },
-          { itemName: "test item 4", icon: <TestIcon3 /> },
-        ],
-      },*/}
     ],
   };
 
   return (
     <>
-      <div className="sidebar">       
+      <div className="sidebar">
         <div className="sidebar-title">
           <div className="sidebar-icon">
             <FilterIcon />
           </div>
           <div className="sidebar-title-text">
-          <h2>{sidebarData.title}</h2>
-          <h6>{sidebarData.subTitle}</h6>
+            <h2>{sidebarData.title}</h2>
+            <h6>{sidebarData.subTitle}</h6>
           </div>
         </div>
-        {sidebarData.group.map((group) => {
-          return group.item ? (
+        {sidebarData.groups.map((group) => {
+          return group.items ? (
             <SidebarGroup
               key={group.groupName}
               groupName={group.groupName}
-              item={group.item}
-              colorScheme={sidebarData.colorScheme}
+              groupId={group.groupId}
+              items={group.items}
             />
           ) : null;
         })}

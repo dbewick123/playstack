@@ -15,7 +15,7 @@
   --color-frog: rgba(23, 135, 109, 1);
 
   /* Color System Platforms */
-  --color-pc: rgba(0, 0, 0, 1);
+  --color-pc: rgba(255, 255, 255, 0.871);
   --color-xbox: #34701e;
   --color-ps5: #3061c0;
   --color-ps4: rgba(48, 97, 192, 1);
@@ -24,6 +24,7 @@
   /* 🎨 Color System Text */
   --color-text-base: rgba(255, 255, 255, 0.6);
   --color-text-highemp: rgba(255, 255, 255, 0.871);
+  --color-text-contrast: #1e1e1e;
   --color-text-disabled: rgba(255, 255, 255, 0.38);
   --color-text-link: rgba(47, 169, 140, 1);
 
@@ -73,7 +74,7 @@
   --icon-size-md: 24px;
   --icon-size-lg: 32px;
   --icon-size-xl: 40px;
-  
+
   /* 📏 Spacing Scale */
   --space-xxs: 2px;
   --space-xs: 4px;
@@ -93,7 +94,6 @@
   --content-start-marketing-top-margin-base: 100px;
   --content-start-marketing-top-margin-mobile-base: 30px;
   --wrapper-padding-sides: 16px;
-
 
   /* 📐 Breakpoints */
   --breakpoint-sm: 430px;
@@ -119,16 +119,18 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --shadow-input: 0 0 4px var(--color-shadow);
- 
+
   /* Specific Component Settings */
   --header-height: 80px;
   --header-height-mobile: 100px;
+  --footer-height: 80px;
+  /*TODO: Implement this in layout*/
+  --footer-height-mobile: 100px;
   --gallary-circle-size: 8px;
   --gallary-circle-padding: 4px;
   --gallary-circle-color-default: var(--color-overlay-32dp);
   --gallary-circle-color-border: var(--color-text-highemp);
   --gallary-circle-color-selected: var(--color-text-highemp);
-
 }
 
 /* Reset/set base styles */
@@ -182,8 +184,7 @@ h4 {
   font-weight: var(--font-weight-medium);
 }
 
-h5
-{
+h5 {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }
@@ -226,7 +227,7 @@ a {
   transition: color var(--transition-base) var(--ease-default);
 }
 
-.subtle-links a{
+.subtle-links a {
   color: var(--color-text-highemp);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
@@ -279,4 +280,3 @@ select:focus {
 .heading-emoji {
   font-size: var(--heading-emoji-size);
 }
-

@@ -83,7 +83,8 @@
 
 .platform-pc {
   color: var(--color-pc);
-  margin-right: calc(var(--icon-size-md) * -0.2916666667);
+  /*TODO: Calculate this properly */
+  margin-right: -3px;
 }
 
 .platform-xbox {
@@ -162,3 +163,4 @@
   display: flex;
   align-items: center;
 }
+

@@ -1,13 +1,17 @@
+  /*TODO: Consider a change in layout, maybe dont have the footer always visable and have sticky filters but games all the way to the bottom of the vh */
 .home-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: var(--container-width-base);
-  margin: var(--content-start-top-margin-base) auto 0 auto;
+  margin: 0 auto 0 auto;
+  padding-top: var(--content-start-top-margin-base);
 }
 
 .home-grid {
   display: grid;
   grid-template-areas: "home-filters home-main";
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: minmax(188px, 1fr) 4fr;
   column-gap: var(--space-xl);
   margin-top: var(--space-xl);
 }
@@ -18,6 +22,9 @@
 
 .home-main {
   grid-area: home-main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-heading {
@@ -32,18 +39,36 @@
 .game-card-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  width: 100%;
   gap: var(--space-xl);
 }
 
-@media (max-width: 1024px) {
+.game-card-wrapper-paging {
+  margin-top: auto;
 }
 
-@media (max-width: 430px) {
+/*Bespoke media query to handle forcing 3 columns for larger screens*/
+@media (min-width: 1054px) {
+  .game-card-wrapper {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 495px) {
   .home-container {
     margin: var(--content-start-top-margin-mobile) auto 0 auto;
   }
 
   .home-heading h1 {
     font-size: var(--font-size-xl);
+    text-align: center;
+  }
+
+  .home-grid {
+    grid-template-areas: "home-main";
+    grid-template-columns: auto;
+  }
+  .home-filters {
+    display: none;
   }
 }

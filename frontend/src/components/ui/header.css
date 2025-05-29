@@ -64,13 +64,11 @@
   .header-logo {
     grid-area: header-logo;
     padding-right: 0;
-    padding-left: calc(var(--space-lg) + var(--space-sm));
   }
 
   .header-links {
     grid-area: header-links;
     padding-left: 0;
-    padding-right: calc(var(--space-lg) + var(--space-sm));
     justify-content: end;
     align-items: end;
     line-height: 1;
@@ -78,6 +76,5 @@
 
   .header-search {
     grid-area: header-search;
-    padding: 0 var(--space-lg);
   }
 }

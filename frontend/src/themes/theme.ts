@@ -6,12 +6,14 @@ declare module "@mui/material/styles" {
     playstackDisabled: Palette["primary"];
     playstackPrimary: Palette["primary"];
     playstackPrimaryChip: Palette["primary"];
+    playstackContrast: Palette["primary"];
   }
   interface PaletteOptions {
     playstackSelected?: PaletteOptions["primary"];
     playstackDisabled?: PaletteOptions["primary"];
     playstackPrimary?: PaletteOptions["primary"];
     playstackPrimaryChip?: PaletteOptions["primary"];
+    playstackContrast?: PaletteOptions["primary"];
   }
 }
 
@@ -21,6 +23,7 @@ declare module "@mui/material/Button" {
     playstackDisabled: true;
     playstackPrimary: true;
     playstackPrimaryChip: true;
+    playstackContrast: true;
   }
 }
 
@@ -42,7 +45,10 @@ export const theme = createTheme({
     playstackPrimaryChip: {
       main: "#ffffff1f",
       light: "#2c433b",
-      contrastText: "#2fa98c",
+      contrastText: "rgba(255, 255, 255, 0.871)",
+    },
+    playstackContrast: {
+      main: "#1e1e1e",
     },
   },
 });

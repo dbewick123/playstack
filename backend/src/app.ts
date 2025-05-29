@@ -5,7 +5,7 @@ import errorHandler from "./middleware/errorHandler.js";
 import thirdPartyAuthentication from "./middleware/thirdPartyAuthentication.js";
 import {
   gameCountController,
-  gamesTextSearchController,
+  gamesSearchController,
 } from "./controllers/gameController.js";
 
 const app = express();
@@ -31,7 +31,8 @@ app.get("/", (req, res) => {
 
 app.get("/games/count", gameCountController);
 
-app.get("/games/search/:query/:exact", gamesTextSearchController);
+// TODO: Document API, especially the query parameters available
+app.get("/games/query/", gamesSearchController);
 
 //Error handler should be the last middleware & after routes
 app.use(errorHandler);

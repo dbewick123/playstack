@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 function Landing() {
   const isMobile = useIsMobile();
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [gameCount, setGameCount] = useState(0);
+  const [gameCount, setGameCount] = useState(0); 
 
   useEffect(() => {
     const fetchGameCount = async () => {

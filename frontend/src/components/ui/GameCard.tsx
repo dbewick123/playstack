@@ -5,20 +5,23 @@ import CircleSelector from "../utilities/CircleSelector";
 import GetPlatformIcons from "../utilities/GetPlatformIcons";
 import metacriticIcon from "../../assets/logos/third-party/metacritic.png";
 import GetGenreIcons from "../utilities/GetGenreIcons";
-import { Chip, Stack, Tooltip } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 
+//External Components
+import { Skeleton, Stack } from "@mui/material";
 import WishlistAddIcon from '@mui/icons-material/AddCard';
 import WishlistRemoveIcon from '@mui/icons-material/CreditScore';
 
+
 import LibraryRemoveIcon from '@mui/icons-material/PlaylistAddCheck';
 import LibraryAddIcon from '@mui/icons-material/PlaylistAdd';
-import GetEsrbRating from "../utilities/GetEsrbRating";
 
 interface GameCardProps {
+  loading: boolean;
   game: Game;
 }
 
-function GameCard({ game }: GameCardProps) {
+function GameCard({ loading, game }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
@@ -37,7 +40,8 @@ function GameCard({ game }: GameCardProps) {
     //TODO: add Redux logic to add to library (in parent component probs)
   };
 
-  return (
+  console.log(loading)
+  return !loading ? (
     <div className="game-card">
       <div
         className="game-card-gallary-image"
@@ -116,7 +120,28 @@ function GameCard({ game }: GameCardProps) {
         </div>
       </div>
     </div>
-  );
+  ) : 
+    <div className="game-card">
+      <Stack
+        height="56.25%"
+        spacing={1}>
+          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }} variant="rounded"  width="100%" height="100%"/>
+      </Stack>
+      <Stack
+        height="20.75%"
+        padding="2% 1%"
+        spacing={0.5}>
+          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '1rem' }} variant="text" width="55%" />
+          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="25%" />
+      </Stack>
+      <Stack
+        padding="6% 1%"
+        spacing={0.5}>
+          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="70%" />
+          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="90%" />
+          </Stack>
+    </div>
+  ;
 }
 
 export default GameCard;
