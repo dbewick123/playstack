@@ -51,6 +51,8 @@ const getGamesSearch = async (query: ParsedQs) => {
 
   const url = `${API_URL}/games?${params.toString()}`;
 
+  console.log('Final URL in rawgService (Backend): ', url);
+
   const response = await fetch(url);
 
   if (!response.ok) {

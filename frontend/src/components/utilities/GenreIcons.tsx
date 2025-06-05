@@ -19,28 +19,108 @@ import BoardGamesIcon from "@mui/icons-material/Casino";
 import CardIcon from "@mui/icons-material/Style";
 import EducationalIcon from "@mui/icons-material/ImportContacts";
 
+type GenreInfo = {
+  id: number,
+  name: string;
+  icon: React.ReactElement<SvgIconProps>;
+};
 
-const genreIconMap: { [slug: string]: React.ReactElement<SvgIconProps> } = {
-  action: <ActionIcon />,
-  indie: <IndieIcon />,
-  adventure: <AdventureIcon />,
-  //TODO: Fix the tooltip (and aria-label) for these multi word slugs, the simple string manipulation below isnt working
-  "role-playing-games-rpg": <RpgIcon />,
-  strategy: <StrategyIcon />,
-  shooter: <ShooterIcon />,
-  casual: <CasualIcon />,
-  simulation: <SimulationIcon />,
-  puzzle: <PuzzleIcon />,
-  arcade: <ArcadeIcon />,
-  platformer: <PlatformerIcon />,
-  "massively-multiplayer": <MmoIcon />,
-  racing: <RacingIcon />,
-  sports: <SportsIcon />,
-  fighting: <FightingIcon />,
-  family: <FamilyIcon />,
-  "board-games": <BoardGamesIcon />,
-  card: <CardIcon />,
-  educational: <EducationalIcon />,
+const genreIconMap: { [id: number]: GenreInfo } = {
+  4: {
+    id: 4,
+    name: "Action",
+    icon: <ActionIcon />,
+  },
+  51: {
+    id: 51,
+    name: "Indie",
+    icon: <IndieIcon />,
+  },
+  3: {
+    id: 3,
+    name: "Adventure",
+    icon: <AdventureIcon />,
+  },
+  5: {
+    id: 5,
+    name: "RPG",
+    icon: <RpgIcon />,
+  },
+  10: {
+    id: 10,
+    name: "Strategy",
+    icon: <StrategyIcon />,
+  },
+  2: {
+    id: 2,
+    name: "Shooter",
+    icon: <ShooterIcon />,
+  },
+  40: {
+    id: 40,
+    name: "Casual",
+    icon: <CasualIcon />,
+  },
+  14: {
+    id: 14,
+    name: "Simulation",
+    icon: <SimulationIcon />,
+  },
+  7: {
+    id: 7,
+    name: "Puzzle",
+    icon: <PuzzleIcon />,
+  },
+  11: {
+    id: 11,
+    name: "Arcade",
+    icon: <ArcadeIcon />,
+  },
+  83: {
+    id: 83,
+    name: "Platformer",
+    icon: <PlatformerIcon />,
+  },
+  59: {
+    id: 59,
+    name: "MMO",
+    icon: <MmoIcon />,
+  },
+  1: {
+    id: 1,
+    name: "Racing",
+    icon: <RacingIcon />,
+  },
+  15: {
+    id: 15,
+    name: "Sports",
+    icon: <SportsIcon />,
+  },
+  6: {
+    id: 6,
+    name: "Fighting",
+    icon: <FightingIcon />,
+  },
+  19: {
+    id: 19,
+    name: "Family",
+    icon: <FamilyIcon />,
+  },
+  28: {
+    id: 28,
+    name: "Board Games",
+    icon: <BoardGamesIcon />,
+  },
+  17: {
+    id: 17,
+    name: "Card",
+    icon: <CardIcon />,
+  },
+  34: {
+    id: 34,
+    name: "Educational",
+    icon: <EducationalIcon />,
+  },
 };
 
 export default genreIconMap;

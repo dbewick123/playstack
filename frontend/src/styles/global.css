@@ -2,7 +2,7 @@
 
 :root {
   /* 🎨 Color System */
-  --color-primary: rgba(47, 169, 140, 1);
+  --color-primary: #2fa98c;
   --color-background: #1e1e1e;
   --color-secondary: rgba(255, 110, 97, 0.8);
   --color-surface: rgba(255, 255, 255, 1);
@@ -46,6 +46,7 @@
 
   /* container widths */
   --container-width-base: 1280px;
+  --container-width-wide: 1920px;
   --container-width-narrow: 700px;
 
   /* 🔤 Typography */

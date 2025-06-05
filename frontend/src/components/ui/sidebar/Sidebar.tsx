@@ -17,7 +17,7 @@ interface SidebarData {
   groups: {
     groupName: string;
     groupId: number;
-    items: { id: number; itemName: string; icon: React.ReactNode }[];
+    items: { id: number; name: string; icon: React.ReactNode }[];
   }[];
 }
 
@@ -31,52 +31,37 @@ function Sidebar() {
         groupName: "Genres",
         groupId: 1,
         items: [
-          { id: 4, itemName: "action", icon: genreIconMap["action"] },
-          { id: 51, itemName: "indie", icon: genreIconMap["indie"] },
-          { id: 3, itemName: "adventure", icon: genreIconMap["adventure"] },
-          {
-            id: 5,
-            itemName: "role-playing-games-rpg",
-            icon: genreIconMap["role-playing-games-rpg"],
-          },
-          { id: 10, itemName: "strategy", icon: genreIconMap["strategy"] },
-          { id: 2, itemName: "shooter", icon: genreIconMap["shooter"] },
-          { id: 40, itemName: "casual", icon: genreIconMap["casual"] },
-          { id: 14, itemName: "simulation", icon: genreIconMap["simulation"] },
-          { id: 7, itemName: "puzzle", icon: genreIconMap["puzzle"] },
-          { id: 11, itemName: "arcade", icon: genreIconMap["arcade"] },
-          { id: 83, itemName: "platformer", icon: genreIconMap["platformer"] },
-          {
-            id: 59,
-            itemName: "massively-multiplayer",
-            icon: genreIconMap["massively-multiplayer"],
-          },
-          { id: 1, itemName: "racing", icon: genreIconMap["racing"] },
-          { id: 15, itemName: "sports", icon: genreIconMap["sports"] },
-          { id: 6, itemName: "fighting", icon: genreIconMap["fighting"] },
-          { id: 19, itemName: "family", icon: genreIconMap["family"] },
-          {
-            id: 28,
-            itemName: "board-games",
-            icon: genreIconMap["board-games"],
-          },
-          { id: 17, itemName: "card", icon: genreIconMap["card"] },
-          {
-            id: 34,
-            itemName: "educational",
-            icon: genreIconMap["educational"],
-          },
+          genreIconMap['4'],
+          genreIconMap['51'],
+          genreIconMap['3'],
+          genreIconMap['5'],
+          genreIconMap['10'],
+          genreIconMap['2'],
+          genreIconMap['40'],
+          genreIconMap['14'],
+          genreIconMap['7'],
+          genreIconMap['11'],
+          genreIconMap['83'],
+          genreIconMap['59'],
+          genreIconMap['1'],
+          genreIconMap['15'],
+          genreIconMap['6'],
+          genreIconMap['19'],
+          genreIconMap['28'],
+          genreIconMap['17'],
+          genreIconMap['34']
+
         ],
       },
       {
         groupName: "Platforms",
         groupId: 2,
         items: [
-          { id: 187, itemName: "Playstation 5", icon: <PsBasicIcon /> },
-          { id: 18, itemName: "Playstation 4", icon: <PsBasicIcon /> },
-          { id: 186, itemName: "Xbox Series X/S", icon: <XboxIcon /> },
-          { id: 7, itemName: "Nintendo Switch", icon: <SwitchIcon /> },
-          { id: 4, itemName: "PC", icon: <PcIcon /> },
+          { id: 187, name: "Playstation 5", icon: <PsBasicIcon /> },
+          { id: 18, name: "Playstation 4", icon: <PsBasicIcon /> },
+          { id: 186, name: "Xbox Series X/S", icon: <XboxIcon /> },
+          { id: 7, name: "Nintendo Switch", icon: <SwitchIcon /> },
+          { id: 4, name: "PC", icon: <PcIcon /> },
         ],
       },
     ],

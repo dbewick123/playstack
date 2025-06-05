@@ -15,7 +15,9 @@ interface Game {
 interface SearchState {
   query: string;
   filters: { platforms: string[]; genres: string[] };
-  results: { games: Game[]; nextPage: string; previousPage: string, count: number };
+  results: { games: Game[]; nextPage: string; previousPage: string, count: number, status: string; };
+  pageSize: string;
+  pageNumber: string;
   loading: boolean;
   error: string | null;
 }

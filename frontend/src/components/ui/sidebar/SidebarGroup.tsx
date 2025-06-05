@@ -5,22 +5,24 @@ import SidebarItem from "./SidebarItem";
 
 //Redux
 import { AppDispatch } from "../../../store/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addGenre,
   removeGenre,
   addPlatform,
-  removePlatform
+  removePlatform,
+  selectFilters
 } from "../../../store/slices/searchSlice";
 
 interface SidebarGroupProps {
   groupName: string;
   groupId: number;
-  items: { id: number; itemName: string; icon: React.ReactNode }[];
+  items: { id: number; name: string; icon: React.ReactNode }[];
 }
 // TODO: Test that the clicks update redux properly
 function SidebarGroup({ groupId, groupName, items }: SidebarGroupProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const currentReduxFilters = useSelector(selectFilters);
 
   const handleClick = (
     parentGroupId: number,
@@ -28,13 +30,13 @@ function SidebarGroup({ groupId, groupName, items }: SidebarGroupProps) {
     active: boolean
   ) => {
     if (parentGroupId === 1 && active === true) {
-      dispatch(addGenre(itemId.toString()));
-    } else if (parentGroupId === 1 && active === false) {
       dispatch(removeGenre(itemId.toString()));
+    } else if (parentGroupId === 1 && active === false) {
+      dispatch(addGenre(itemId.toString()));
     } else if (parentGroupId === 2 && active === true) {
-      dispatch(addPlatform(itemId.toString()));
-    } else if (parentGroupId === 2 && active === false) {
       dispatch(removePlatform(itemId.toString()));
+    } else if (parentGroupId === 2 && active === false) {
+      dispatch(addPlatform(itemId.toString()));
     }
   };
 
@@ -52,7 +54,8 @@ function SidebarGroup({ groupId, groupName, items }: SidebarGroupProps) {
               key={item.id}
               parentGroupId={groupId}
               itemId={item.id}
-              title={item.itemName}
+              active={groupId === 1 ? currentReduxFilters.genres.includes(item.id.toString()) : currentReduxFilters.platforms.includes(item.id.toString())}
+              title={item.name}
               icon={item.icon}
               handleClick={handleClick}
             />

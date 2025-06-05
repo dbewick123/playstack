@@ -1,22 +1,17 @@
 import Search from "../ui/Search";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import {
-  setQuery,
-  selectSearchQuery,
-  fetchSearchResults,
-} from "../../store/slices/searchSlice";
+import { setQuery, fetchSearchResults } from "../../store/slices/searchSlice";
 
 const SearchWrapper = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const searchQuery = useSelector(selectSearchQuery);
 
-  const handleOnChange = (queryString: string) => {
-    dispatch(setQuery(queryString));
-  };
-
-  const handleOnKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterPressed = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+    queryValue: string
+  ) => {
     if (event.key === "Enter") {
+      dispatch(setQuery(queryValue));
       dispatch(fetchSearchResults());
     }
   };
@@ -24,10 +19,7 @@ const SearchWrapper = () => {
   return (
     <>
       <Search
-        handleOnChange={handleOnChange}
-        handleOnKeyPressed={handleOnKeyPressed}
-        //TODO: This feels kinda janky too, I think i should cache the state and only search once I hit enter? or maybe don't subscribe the search component to the selector so that specificalyn doesnt rerender
-        queryValue={searchQuery}
+        handleOnKeyPressed={handleEnterPressed}
       />
     </>
   );

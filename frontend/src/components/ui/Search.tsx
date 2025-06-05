@@ -1,14 +1,15 @@
 import "./search.css";
 import SearchIcon from "../../assets/icons/search.svg?react";
-// import { useState } from "react";
+import { useState } from "react";
 
 interface SearchProps {
-  handleOnChange: (queryString: string) => void;
-  handleOnKeyPressed: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  queryValue: string;
+  handleOnKeyPressed: (event: React.KeyboardEvent<HTMLInputElement>, queryValue: string) => void;
 }
 
-const Search = ({ handleOnChange, handleOnKeyPressed, queryValue }: SearchProps) => {
+const Search = ({handleOnKeyPressed }: SearchProps) => {
+  const [queryValue, setQueryValue] = useState('');
+
+
   return (
     // TODO: Add a modal on cmd/ctrl K to open the search bar
     <div className="search-bar">
@@ -18,9 +19,9 @@ const Search = ({ handleOnChange, handleOnKeyPressed, queryValue }: SearchProps)
         value={queryValue}
         placeholder="Search for any game in the world"
         onChange={(e) => {
-          handleOnChange(e.target.value);
+          setQueryValue(e.target.value);
         }}
-        onKeyDown={(e) => handleOnKeyPressed(e)}
+        onKeyDown={(e) => handleOnKeyPressed(e, queryValue)}
       />
     </div>
   );

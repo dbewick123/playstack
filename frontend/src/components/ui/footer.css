@@ -72,7 +72,7 @@
   color: var(--color-hover);
 }
 
-@media (max-width: 430px) {
+@media (max-width: 535px) {
   .footer-content {
     flex-direction: column;
     width: 100%;

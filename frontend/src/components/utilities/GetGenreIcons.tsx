@@ -5,28 +5,27 @@ import genreIconMap from "./GenreIcons";
 import PlaceholderGenreIcon from "@mui/icons-material/Clear";
 
 interface GenreIconsProps {
-  genres: string[];
+  genres: number[];
 }
 
-const GetGenreIcons: React.FC<GenreIconsProps> = ({
-  genres,
-}: GenreIconsProps) => {
-  const genreJSX = genres
-    .sort()
-    .map((slug, index) => {
-      const slugNormalized = slug.toLowerCase();
+const GetGenreIcons: React.FC<GenreIconsProps> = ({genres}: GenreIconsProps) => {
+  if(genres.length < 1) {
+    return;
+  } else {
+  // TODO: Sort these alphabetically
+    const genreJSX = genres
+    .map((id, index) => {
       return (
-        genreIconMap[slugNormalized] && (
+        genreIconMap[id].icon && (
           <Tooltip
             key={index}
             title={
-              slugNormalized.charAt(0).toUpperCase() + slugNormalized.slice(1)
+              genreIconMap[id].name
             }
           >
-            {React.cloneElement(genreIconMap[slugNormalized], {
+            {React.cloneElement(genreIconMap[id].icon, {
               "aria-label":
-                slugNormalized.charAt(0).toUpperCase() +
-                slugNormalized.slice(1),
+              genreIconMap[id].name
             })}
           </Tooltip>
         )
@@ -34,6 +33,6 @@ const GetGenreIcons: React.FC<GenreIconsProps> = ({
     })
     .filter(Boolean);
   return <>{genreJSX.length > 0 ? genreJSX : <PlaceholderGenreIcon />}</>;
-};
+}};
 
 export default GetGenreIcons;

@@ -40,7 +40,6 @@ function GameCard({ loading, game }: GameCardProps) {
     //TODO: add Redux logic to add to library (in parent component probs)
   };
 
-  console.log(loading)
   return !loading ? (
     <div className="game-card">
       <div
@@ -82,7 +81,7 @@ function GameCard({ loading, game }: GameCardProps) {
             <Tooltip title="Metacritic">
               <div className="game-card-info-bottom-ratings-metacritic">
                 <img src={metacriticIcon} alt="Metacritic Logo" />
-                <h6>{game.metacritic || "n/a"}</h6>
+                <h6>{game.metacritic === -1 ? "n/a" : game.metacritic}</h6>
               </div>
             </Tooltip>
             {/* <div className="game-card-info-bottom-ratings-esrb">
