@@ -1,7 +1,7 @@
 import Search from "../ui/Search";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { setQuery, fetchSearchResults } from "../../store/slices/searchSlice";
+import { setQuery } from "../../store/slices/searchSlice";
 
 const SearchWrapper = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,7 +12,6 @@ const SearchWrapper = () => {
   ) => {
     if (event.key === "Enter") {
       dispatch(setQuery(queryValue));
-      dispatch(fetchSearchResults());
     }
   };
 
@@ -26,3 +25,4 @@ const SearchWrapper = () => {
 };
 
 export default SearchWrapper;
+ 

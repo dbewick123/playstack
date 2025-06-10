@@ -26,6 +26,8 @@ function GameCard({ loading, game }: GameCardProps) {
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
 
+  {console.log('testing log')}
+
   const handleGallaryClick = (newIndex: number) => {
     setCurrentIndex(newIndex);
   };
@@ -39,6 +41,9 @@ function GameCard({ loading, game }: GameCardProps) {
     setSelectedLibrary(!selectedLibrary);
     //TODO: add Redux logic to add to library (in parent component probs)
   };
+
+  {console.log('testing log2 ')}
+
 
   return !loading ? (
     <div className="game-card">
@@ -121,25 +126,23 @@ function GameCard({ loading, game }: GameCardProps) {
     </div>
   ) : 
     <div className="game-card">
-      <Stack
-        height="56.25%"
-        spacing={1}>
-          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }} variant="rounded"  width="100%" height="100%"/>
-      </Stack>
-      <Stack
-        height="20.75%"
-        padding="2% 1%"
-        spacing={0.5}>
-          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '1rem' }} variant="text" width="55%" />
-          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="25%" />
-      </Stack>
-      <Stack
-        padding="6% 1%"
-        spacing={0.5}>
-          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="70%" />
-          <Skeleton sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} variant="text" width="90%" />
-          </Stack>
-    </div>
+      <div className="game-card-gallary-image">
+        <Skeleton variant="rounded" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }} width="100%" height="100%" />
+      </div>
+
+      <div className="game-card-info-container">
+        <div className="game-card-info-top">
+          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '1rem' }} width="60%" height={24} />
+          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} width="30%" height={18} />
+        </div>
+        <div className="game-card-info-middle">
+          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} width="20%" height={18} />
+        </div>
+        <div className="game-card-info-bottom">
+          <Skeleton variant="rounded" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}  width="100%" height={32} />
+        </div>
+      </div>
+</div>
   ;
 }
 

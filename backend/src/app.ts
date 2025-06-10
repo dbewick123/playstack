@@ -6,6 +6,7 @@ import thirdPartyAuthentication from "./middleware/thirdPartyAuthentication.js";
 import {
   gameCountController,
   gamesSearchController,
+  gamesNextPageController
 } from "./controllers/gameController.js";
 
 const app = express();
@@ -31,8 +32,10 @@ app.get("/", (req, res) => {
 
 app.get("/games/count", gameCountController);
 
-// TODO: Document API, especially the query parameters available
+// TODO: Document API for all below routes, especially the query parameters available (as they cant be seen in the code)
 app.get("/games/query/", gamesSearchController);
+
+app.get("/games/proxy/", gamesNextPageController);
 
 //Error handler should be the last middleware & after routes
 app.use(errorHandler);

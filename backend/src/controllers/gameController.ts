@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { getGameCount, getGamesSearch } from "../services/rawgService.js";
+import {
+  getGameCount,
+  getGamesSearch,
+  getNextGamesPage,
+} from "../services/rawgService.js";
 
 const gameCountController = async (
   req: Request,
@@ -20,19 +24,51 @@ const gamesSearchController = async (
   next: NextFunction
 ) => {
   try {
-
-    // TODO: Test this error handling 
-    if(!req.query) {
+    // TODO: Test this error handling
+    if (!req.query) {
       const error = new Error("Missing search query");
       return next(error); // send to error-handling middleware
     }
-    
-    const games = await getGamesSearch(req.query);
-    
-    res.status(200).json(games);
+
+    const results = await getGamesSearch(req.query);
+
+    res.status(200).json(results);
   } catch (error) {
     next(error);
   }
 };
 
-export { gameCountController, gamesSearchController };
+//TODO: Test this and the service it calls (same test probs)
+const gamesNextPageController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+
+  try {
+    if (!req.query) {
+      const error = new Error("URL missing");
+      return next(error); // send to error-handling middleware
+    }
+
+    const targetUrl = req.query.targetUrl;
+
+    if (typeof targetUrl !== "string") {
+      const error = new Error("URL not properly formed");
+      return next(error); // send to error-handling middleware
+    }
+
+    let decodedUrl: string;
+    try {
+      decodedUrl = decodeURIComponent(targetUrl);
+    } catch (error) {
+      return next(error); // send to error-handling middleware
+    }
+    const results = await getNextGamesPage(decodedUrl);
+    res.status(200).json(results);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { gameCountController, gamesNextPageController, gamesSearchController };

@@ -10,13 +10,13 @@ const initialState: SearchState = {
   // TODO: Maybe add ordering here
   results: {
     games: [],
-    nextPage: "",
-    previousPage: "",
+    next: "",
+    previous: "",
     count: 0,
     status: "ok",
   },
-  pageSize: "12",
-  pageNumber: "1",
+  pageSize: 20,
+  pageNumber: 1,
   loading: false,
   error: null,
 };
@@ -33,12 +33,14 @@ export const fetchSearchResults = createAsyncThunk(
       const params = new URLSearchParams();
 
       //TODO: Improve the search accuracy further
-      
       const today = new Date();
-      const localISODate = today.getFullYear() +
-        "-" + String(today.getMonth() + 1).padStart(2, "0") +
-        "-" + String(today.getDate()).padStart(2, "0");
-      
+      const localISODate =
+        today.getFullYear() +
+        "-" +
+        String(today.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(today.getDate()).padStart(2, "0");
+
       //TODO: Test this for nulls, etc
       if (searchState.query) {
         params.append("search", searchState.query.replace(/\s+/g, "%"));
@@ -50,27 +52,53 @@ export const fetchSearchResults = createAsyncThunk(
         params.append("platforms", searchState.filters.platforms.join(","));
       }
       if (searchState.pageSize) {
-        params.append("page_size", searchState.pageSize);
+        params.append("page_size", searchState.pageSize.toString());
       }
       if (searchState.pageNumber) {
-        params.append("page", searchState.pageNumber);
+        params.append("page", searchState.pageNumber.toString());
       }
 
       //Defaults to improve basic search accuracy & ordering
       params.append("search_precise", "true");
 
       //TODO: Test case for this to check timezones
-      params.append('dates', `1960-01-01,${localISODate}`)
-
+      params.append("dates", `1960-01-01,${localISODate}`);
 
       const url = `${import.meta.env.VITE_BACKEND_API_URL}/games/query?${params.toString()}`;
-
 
       const response = await fetch(url);
       const data = await response.json();
       return data;
     } catch (error) {
       console.error("Error fetching games, promise rejected", error);
+      throw error;
+    }
+  }
+);
+
+//TODO: Test this
+export const fetchNextPageResults = createAsyncThunk(
+  "search/fetchNextPageResults",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (_, thunkAPI) => {
+
+    try {
+      const rootState = thunkAPI.getState() as RootState;
+      const searchState = rootState.search;
+
+      if (!searchState.results.next) {
+        return;
+      }
+
+      const encodedUrl = encodeURIComponent(searchState.results.next);
+      const finalUrl = `${import.meta.env.VITE_BACKEND_API_URL}/games/proxy?targetUrl=${encodedUrl}`
+
+      const response = await fetch(finalUrl);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching next page of games, promise rejected", error);
+      throw error;
     }
   }
 );
@@ -81,12 +109,10 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     setQuery(state, action: PayloadAction<string>) {
-      state.pageNumber = "1";
       state.query = action.payload;
     },
     // Check if value already present, if so do nothing
     addGenre(state, action: PayloadAction<string>) {
-      state.pageNumber = "1";
       if (state.filters.genres.includes(action.payload)) {
         return;
       } else {
@@ -94,11 +120,10 @@ export const searchSlice = createSlice({
       }
     },
     setPageNumber(state, action: PayloadAction<string>) {
-      state.pageNumber = action.payload || "1";
+      state.pageNumber = Number(action.payload) || 1;
     },
     // Check if value already missing, if so do nothing
     removeGenre(state, action: PayloadAction<string>) {
-      state.pageNumber = "1";
       if (state.filters.genres.includes(action.payload)) {
         state.filters.genres = state.filters.genres.filter(
           (genre) => genre !== action.payload
@@ -108,7 +133,6 @@ export const searchSlice = createSlice({
       }
     },
     addPlatform(state, action: PayloadAction<string>) {
-      state.pageNumber = "1";
       if (state.filters.platforms.includes(action.payload)) {
         return;
       } else {
@@ -116,7 +140,6 @@ export const searchSlice = createSlice({
       }
     },
     removePlatform(state, action: PayloadAction<string>) {
-      state.pageNumber = "1";
       if (state.filters.platforms.includes(action.payload)) {
         state.filters.platforms = state.filters.platforms.filter(
           (platform) => platform !== action.payload
@@ -128,8 +151,8 @@ export const searchSlice = createSlice({
     clearResults(state) {
       state.results = {
         games: [],
-        nextPage: "",
-        previousPage: "",
+        next: "",
+        previous: "",
         count: 0,
         status: "ok",
       };
@@ -147,6 +170,27 @@ export const searchSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchSearchResults.rejected, (state, action) => {
+        state.error = action.error.message || "Something went wrong";
+        state.loading = false;
+      })
+      .addCase(fetchNextPageResults.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchNextPageResults.fulfilled, (state, action) => {
+        if(!action.payload) {
+          state.error = 'true';
+          return;
+        }
+        const { games, ...rest } = action.payload;
+        state.results = {
+          ...state.results,
+          ...rest,
+          games: [...state.results.games, ...games],
+        };
+        state.loading = false;
+      })
+      .addCase(fetchNextPageResults.rejected, (state, action) => {
         state.error = action.error.message || "Something went wrong";
         state.loading = false;
       });

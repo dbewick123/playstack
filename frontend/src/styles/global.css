@@ -107,6 +107,7 @@
   --z-modal: 1100;
   --z-tooltip: 1200;
   --z-overlay: 900;
+  --z-max-standard: 1000;
 
   /* 🌀 Transitions & Timing */
   --transition-fast: 150ms;

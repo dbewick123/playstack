@@ -51,8 +51,6 @@ const getGamesSearch = async (query: ParsedQs) => {
 
   const url = `${API_URL}/games?${params.toString()}`;
 
-  console.log('Final URL in rawgService (Backend): ', url);
-
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -69,4 +67,20 @@ const getGamesSearch = async (query: ParsedQs) => {
   };
 };
 
-export { getGameCount, getGamesSearch };
+const getNextGamesPage = async (url: string) => {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`RAWG API request failed with status ${response.status}`);
+  }
+
+  const data = (await response.json()) as RawgGamesResponse;
+
+  return {
+    count: data.count,
+    next: data.next,
+    previous: data.previous,
+    games: data.results.map(mapRawgToGame),
+  };}
+
+export { getGameCount, getGamesSearch, getNextGamesPage };

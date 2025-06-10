@@ -15,8 +15,7 @@ export default function Header() {
       <div className="header-search"><SearchWrapper /></div>
       <nav className="header-links">
         <Link to="/home">Home</Link>
-        <Link to="/library">My Library</Link>
-        <Link to="/landing">Product</Link>
+        <Link to="/landing">About</Link>
       </nav>
     </div>
   );
