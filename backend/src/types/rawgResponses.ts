@@ -1,3 +1,43 @@
+//Types for returning details on a specific game
+export interface RawgGameResponse {
+  id: number;
+  slug: string;
+  name: string;
+  description: string | null;
+  metacritic: number | null;
+  metacritic_url: string | null;
+  released: string | null;
+  background_image: string | null;
+  website: string | null;
+  rating: number | null;
+  ratings: Ratings[] | null;
+  added: number | null;
+  added_by_status: AddedByStatus | null;
+  playtime: number | null;
+  screenshots_count: number | null;
+  reddit_url: string | null;
+  platforms: PlatformWrapper[] | null;
+  genres: Genre[] | null;
+}
+
+export interface Ratings {
+  id: number;
+  title: string;
+  count: number;
+  percent: number;
+}
+
+export interface AddedByStatus {
+  yet: number | null;
+  owned: number | null;
+  beaten: number | null;
+  toplay: number | null;
+  dropped: number | null;
+  playing: number | null;
+}
+
+
+//Types for response from the base games request, returning a list of results
 export interface RawgGamesResponse {
   count: number;
   next: string | null;

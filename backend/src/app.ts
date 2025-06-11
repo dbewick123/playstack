@@ -5,6 +5,7 @@ import errorHandler from "./middleware/errorHandler.js";
 import thirdPartyAuthentication from "./middleware/thirdPartyAuthentication.js";
 import {
   gameCountController,
+  gamesGetGameController,
   gamesSearchController,
   gamesNextPageController
 } from "./controllers/gameController.js";
@@ -36,6 +37,8 @@ app.get("/games/count", gameCountController);
 app.get("/games/query/", gamesSearchController);
 
 app.get("/games/proxy/", gamesNextPageController);
+
+app.get('/games/:id', gamesGetGameController)
 
 //Error handler should be the last middleware & after routes
 app.use(errorHandler);

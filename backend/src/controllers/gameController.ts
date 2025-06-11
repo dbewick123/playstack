@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   getGameCount,
+  getGame,
   getGamesSearch,
   getNextGamesPage,
 } from "../services/rawgService.js";
@@ -13,6 +14,30 @@ const gameCountController = async (
   try {
     const gameCount = await getGameCount();
     res.status(200).json({ count: gameCount });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const gamesGetGameController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // TODO: Test this error handling
+    if (!req.params) {
+      const error = new Error("Missing required params");
+      return next(error); // send to error-handling middleware
+    }
+
+    if(!req.params.id) {
+      const error = new Error("Missing required params");
+      return next(error); // send to error-handling middleware
+    }
+
+    const results = await getGame(Number(req.params.id));
+    res.status(200).json(results);
   } catch (error) {
     next(error);
   }
@@ -71,4 +96,4 @@ const gamesNextPageController = async (
   }
 };
 
-export { gameCountController, gamesNextPageController, gamesSearchController };
+export { gameCountController, gamesGetGameController, gamesNextPageController, gamesSearchController };

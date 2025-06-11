@@ -3,22 +3,54 @@ dotenv.config();
 
 import { ParsedQs } from "qs";
 import type { Game } from "../types/game.js";
-import type { RawgGame, RawgGamesResponse } from "../types/rawgResponses.js";
+import type {
+  RawgGame,
+  RawgGameResponse,
+  RawgGamesResponse,
+  Genre,
+  PlatformWrapper,
+} from "../types/rawgResponses.js";
 
-const mapRawgToGame = (raw: RawgGame): Game => ({
-  id: raw.id,
-  name: raw.name ?? "unknown-title",
-  slug: raw.slug ?? "unknown-slug",
-  released: raw.released ?? "unknown-tba",
-  backgroundImage: raw.background_image ?? "unknown-background_image",
-  metacritic: raw.metacritic ?? -1,
-  platforms: raw.platforms?.map((p) => p.platform.id) ?? [],
-  genres: raw.genres?.map((g) => g.id) ?? [],
-  tags: raw.tags?.map((t) => t.name) ?? [],
-  //TODO: Consider sorting so the 'first' screenshot is correct
-  screenshots: raw.short_screenshots?.map((s) => s.image) ?? [],
-  esrbRating: raw.esrb_rating?.name ?? null,
-});
+const mapRawgToGame = (raw: RawgGame): Game => {
+  return {
+    id: raw.id,
+    name: raw.name ?? "-1",
+    slug: raw.slug ?? "-1",
+    released: raw.released ?? "-1",
+    backgroundImage: raw.background_image ?? "-1",
+    metacritic: raw.metacritic ?? -1,
+    platforms: Array.isArray(raw.platforms)
+      ? raw.platforms?.map((p) => p.platform.id)
+      : [],
+    genres: Array.isArray(raw.genres) ? raw.genres?.map((g) => g.id) : [],
+    tags: Array.isArray(raw.tags) ? raw.tags?.map((t) => t.name) : [],
+    //TODO: Consider sorting so the 'first' screenshot is correct
+    screenshots: raw.short_screenshots?.map((s) => s.image) ?? [],
+    esrbRating: raw.esrb_rating?.name ?? null,
+  };
+};
+
+//TODO: Unit test this - this test will alert me if the structure changes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapRawgGenres = (raw: any): Genre => {
+  return {
+    id: raw?.id ?? null,
+    name: raw?.name ?? "",
+    slug: raw?.slug ?? "",
+  };
+};
+
+//TODO: Unit test this - this test will alert me if the structure changes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapRawgPlatforms = (raw: any): PlatformWrapper => {
+  return {
+    platform: {
+      id: raw?.platform?.id ?? null,
+      name: raw?.platform?.name ?? "",
+      slug: raw?.platform?.slug ?? "",
+    },
+  };
+};
 
 const API_URL = process.env.THIRD_PARTY_GAME_API_URL!;
 const API_KEY = process.env.THIRD_PARTY_GAME_API_KEY!;
@@ -27,6 +59,47 @@ const getGameCount = async () => {
   const response = await fetch(`${API_URL}/games?key=${API_KEY}`);
   const data = (await response.json()) as RawgGamesResponse;
   return data.count;
+};
+
+//TODO: Test this + its calling route (check all data is present appropriately... consider whats the best way to do this in an automated way??)
+const getGame = async (id: number) => {
+  const params = new URLSearchParams();
+  params.append("key", API_KEY);
+  const url = `${API_URL}/games/${id}?${params.toString()}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      `RAWG API game/id req failed with status ${response.status}`
+    );
+  }
+
+  const data = (await response.json()) as RawgGameResponse;
+  if (!data) {
+    throw new Error(`RAWG API game data is null`);
+  } else {
+    return {
+      id: data.id ?? -1,
+      slug: data.slug ?? "-1",
+      name: data.name ?? "-1",
+      description: data.description ?? "-1",
+      metacritic: data.metacritic ?? -1,
+      metacritic_url: data.metacritic_url ?? "-1",
+      released: data.released ?? "",
+      background_image: data.background_image ?? "-1",
+      website: data.website ?? "-1",
+      rating: data.rating ?? -1,
+      ratings: data.ratings ?? [],
+      added: data.added ?? -1,
+      added_by_status: data.added_by_status ?? {},
+      playtime: data.playtime ?? -1,
+      screenshots_count: data.screenshots_count ?? -1,
+      reddit_url: data.reddit_url ?? "-1",
+      platforms: Array.isArray(data.platforms) ? data.platforms?.map(mapRawgPlatforms) : [],
+      genres: Array.isArray(data.genres) ? data.genres?.map(mapRawgGenres) : [],
+    };
+  }
 };
 
 // TODO: test subconditions thoroughly, such as double spaces, tabs, special characters etc. When building this and the screen hung it seemed to not respond, why??
@@ -81,6 +154,7 @@ const getNextGamesPage = async (url: string) => {
     next: data.next,
     previous: data.previous,
     games: data.results.map(mapRawgToGame),
-  };}
+  };
+};
 
-export { getGameCount, getGamesSearch, getNextGamesPage };
+export { getGameCount, getGame, getGamesSearch, getNextGamesPage };
