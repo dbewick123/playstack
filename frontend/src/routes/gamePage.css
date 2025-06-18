@@ -1,5 +1,5 @@
 /*TODO: Consider a change in layout, maybe dont have the footer always visable and have sticky filters but games all the way to the bottom of the vh */
-.home-container {
+.game-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,149 +8,60 @@
   padding-top: var(--content-start-top-margin-base);
 }
 
-.home-grid {
-  display: grid;
+.game-primary-tile {
+width: 100%;
+height: 500px;
+max-height: 500px;
+}
+
+.game-media-tile {
   width: 100%;
-  grid-template-areas:
-    "home-filters home-main"
-    "home-dummy home-paging";
-  grid-template-columns: 188px 4fr;
-  column-gap: var(--space-xl);
-  margin-top: var(--space-xl);
-}
-
-.home-filters {
-  grid-area: home-filters;
-  height: 100vh;
-  position: sticky;
-  top: var(--header-height);
-  align-self: start;
-}
-
-.home-dummy {
-  grid-area: home-dummy;
-  min-height: 80px;
-  z-index: var(--z-max-standard);
-  background-color: var(--color-background);
-}
-
-.home-main {
-  grid-area: home-main;
+  height: 420px; /* This is the height for when we use 16/9 and a 3 image layout for the swiper */
   display: flex;
-  flex: 1;
   flex-direction: column;
-  align-items: center;
+  padding: var(--space-4xl);
+  padding-bottom: calc(var(--space-4xl) - var(--space-md) - 8px); /* --space-md is the row gap used in Slider.tsx, 8px is the height of the paging in Slider.tsx */
+  background-color: var(--overlay-01dp);
 }
 
-.home-heading {
+.game-media-tile-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed var(--color-muted) ;  
+  margin-bottom: calc(var(--space-md) + 8px);
+}
+
+.game-additional-info-tile {
+  width: 100%;
+  display: flex;
+}
+
+/* Utilities */
+.game-page-title {
+  margin-top: var(--content-block-separator-base);
+  margin-left: 2px;
+}
+
+.game-page-title h4 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
   color: var(--color-text-highemp);
-  width: 100%;
-}
-.home-heading h1 {
-  line-height: 1;
-  font-size: var(--font-size-mdh1);
-  font-weight: var(--font-weight-extra-bold);
 }
 
-.game-card-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  width: 100%;
-  height: 100%;
-  gap: var(--space-xl);
-}
-
-.home-paging {
-  grid-area:home-paging;
-  margin: auto;
-  margin-bottom: var(--space-xl);
-}
-
-.error-results-home {
-  width: 100%;
-  height: 100%;
-  background-color: var(--overlay-01dp);
-  padding: var(--space-xl);
-  margin-right: calc(var(--space-md)/2);
+.game-additional-info-sentiment {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var( --color-text-highemp);
-  row-gap: var(--space-md);
 }
 
-.error-results-home-message {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.error-results-home-img {
-  width: var(--icon-size-xl);
-}
-
-.no-results-home {
-  width: 100%;
-  height: 100%;
-  background-color: var(--overlay-01dp);
-  padding: var(--space-xl);
-  margin-right: calc(var(--space-md)/2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var( --color-text-highemp);
-  row-gap: var(--space-md);
-}
-
-.no-results-home-message {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.no-results-home-img {
-  width: var(--icon-size-xl);
-}
-
-/*Bespoke media query to handle forcing 3 columns for larger screens*/
-@media (min-width: 1054px) {
-  .game-card-wrapper {
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-  }
-}
-
-@media (min-width: 1440px) {
-  .game-card-wrapper {
-    grid-template-columns: repeat(4, minmax(250px, 1fr));
-  }
-}
-
-@media (min-width: 768px) {
-  .game-card-wrapper {
-    grid-auto-rows: minmax(0, 320.4px)  }
-}
-
-@media (max-width: 768px) {
-  .home-container {
-    margin: var(--content-start-top-margin-mobile) auto 0 auto;
-    padding-top: 0;
-  }
-
-  .home-heading h1 {
-    font-size: var(--font-size-xl);
-    text-align: center;
-  }
-
-  .home-grid {
-    grid-template-areas: 
-      "home-main"
-      "home-paging";
-    grid-template-columns: auto;
-  }
-  .home-filters {
-    display: none;
-  }
-  .home-dummy {
-    display: none;
-  }
+.game-additional-info-status {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }

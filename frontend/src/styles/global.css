@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 :root {
   /* 🎨 Color System */
@@ -15,7 +16,7 @@
   --color-frog: rgba(23, 135, 109, 1);
 
   /* Color System Platforms */
-  --color-pc: rgba(255, 255, 255, 0.871);
+  --color-pc: rgba(255, 255, 255, 1);
   --color-xbox: #34701e;
   --color-ps5: #3061c0;
   --color-ps4: rgba(48, 97, 192, 1);
@@ -23,7 +24,7 @@
 
   /* 🎨 Color System Text */
   --color-text-base: rgba(255, 255, 255, 0.6);
-  --color-text-highemp: rgba(255, 255, 255, 0.871);
+  --color-text-highemp: rgba(255, 255, 255, 1);
   --color-text-contrast: #1e1e1e;
   --color-text-disabled: rgba(255, 255, 255, 0.38);
   --color-text-link: rgba(47, 169, 140, 1);
@@ -43,6 +44,7 @@
   --overlay-16dp: rgba(255, 255, 255, 0.15);
   --overlay-24dp: rgba(255, 255, 255, 0.16);
   --overlay-32dp: rgba(255, 255, 255, 0.36);
+  --background-blur: rgba(0, 0, 0, 0.74);
 
   /* container widths */
   --container-width-base: 1280px;
@@ -50,11 +52,12 @@
   --container-width-narrow: 700px;
 
   /* 🔤 Typography */
-  --font-family-base: "Noto Sans", sans-serif;
+  --font-family-base: "Nunito Sans", sans-serif;
   --font-size-xxs: 0.625rem;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
+  --font-size-md: 1.125rem;
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --font-size-smh1: 2rem;
@@ -75,6 +78,7 @@
   --icon-size-md: 24px;
   --icon-size-lg: 32px;
   --icon-size-xl: 40px;
+  --separator-size-base: 3px;
 
   /* 📏 Spacing Scale */
   --space-xxs: 2px;
@@ -83,10 +87,10 @@
   --space-sm: 8px;
   --space-md: 12px;
   --space-lg: 16px;
-  --space-xl: 24px; /* must be double the size of the --space-md */
+  --space-xl: 24px; /* must be double the size of --space-md */
   --space-2xl: 32px;
   --space-3xl: 40px;
-  --space-4xl: 48px;
+  --space-4xl: 48px; /* must be double the size of --space-xl */
   --space-5xl: 56px;
   --content-block-separator-base: 100px;
   --content-block-separator-mobile: 50px;
@@ -281,4 +285,35 @@ select:focus {
 
 .heading-emoji {
   font-size: var(--heading-emoji-size);
+}
+
+.platform-icon {
+  width: auto;
+  height: var(--icon-size-sm);
+}
+
+.platform-pc {
+  color: var(--color-pc);
+}
+
+.platform-xbox {
+  color: var(--color-xbox);
+}
+
+.platform-ps {
+  color: var(--color-ps5);
+}
+
+.platform-ps4 {
+  color: var(--color-ps4);
+}
+
+.platform-switch {
+  color: var(--color-switch);
+  opacity: 1;
+}
+
+.game-card-info-middle {
+  display: flex;
+  justify-content: space-between;
 }

@@ -15,6 +15,7 @@ export interface RawgGameResponse {
   added_by_status: AddedByStatus | null;
   playtime: number | null;
   screenshots_count: number | null;
+  screenshots: RawgScreenshots | null;
   reddit_url: string | null;
   platforms: PlatformWrapper[] | null;
   genres: Genre[] | null;
@@ -36,6 +37,17 @@ export interface AddedByStatus {
   playing: number | null;
 }
 
+export interface RawgScreenshotsResponse {
+  count: number | null;
+  results: RawgScreenshots[] | null
+}
+
+export interface RawgScreenshots {
+  id: number;
+  image: string;
+  width: number | null;
+  height: number | null;
+}
 
 //Types for response from the base games request, returning a list of results
 export interface RawgGamesResponse {

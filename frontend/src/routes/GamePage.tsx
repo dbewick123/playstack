@@ -1,193 +1,141 @@
-import "./home.css";
+import "./gamePage.css";
 
-import GameCardWrapper from "../components/containers/GameCardWrapper";
-import Sidebar from "../components/ui/sidebar/Sidebar";
-import Binoculars from "../assets/icons/binoculars.svg?react";
-import Error from "../assets/icons/error.svg?react";
-import useElementOnScreen from "../hooks/useElementOnScreen";
+import { SingleGame } from "../types/game";
+import getGame from "../utilities/getGame";
+import buildPlayerRatings from "../components/utilities/buildPlayerRatings";
+import GameBannerWrapper from "../components/containers/GameBannerWrapper";
+import { Slider } from "../components/utilities/Slider";
+import {buildPlayerStatuses, playerStatusStandardised} from "../components/utilities/buildPlayerStatuses";
 
 //External Components
-import { Pagination, PaginationItem } from "@mui/material";
+import { BarChart } from "@mui/x-charts/BarChart";
+import { PieChart } from '@mui/x-charts/PieChart';
 
-//Redux
-import {
-  selectSearchQuery,
-  selectSearchResults,
-  selectSearchLoading,
-  selectSearchError,
-  selectFilters,
-  selectPageSize,
-  setPageNumber,
-  fetchSearchResults,
-  fetchNextPageResults,
-  selectPageNumber,
-} from "../store/slices/searchSlice";
-import { AppDispatch } from "../store/store";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 
-function Home() {
-  const searchQuery = useSelector(selectSearchQuery);
-  const activeFilters = useSelector(selectFilters);
+//React Library
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-  const pageSize = useSelector(selectPageSize);
-  const pageNumber = useSelector(selectPageNumber);
+function GamePage() {
+  //Get Parameters from URL
+  const { id } = useParams();
+  const gameId: number = Number(id);
 
-  const searchLoading = useSelector(selectSearchLoading);
-  const searchresults = useSelector(selectSearchResults);
-  const searchError = useSelector(selectSearchError);
+  // Manage React state here
+  const [singleGame, setSingleGame] = useState<SingleGame | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
-  const isNoSearchResults = !searchresults ? true : searchresults.count < 1 && !searchLoading;
-  const isSearchError = !searchresults ? searchError === 'Failed to fetch' : searchError === 'Failed to fetch' || searchresults.status === "error";
-  console.log('isSearchError: ', isSearchError)
-  const dispatch = useDispatch<AppDispatch>();
-
-  const options: IntersectionObserverInit = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 1,
-  };
-  const [containerRef, isVisable] = useElementOnScreen(options);
-
-  //TODO: Test this with lots of edge cases etc
-  //useEffect for the filters and search query calls
+  //Functions here
   useEffect(() => {
-    dispatch(setPageNumber("1"));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    dispatch(fetchSearchResults());
-  }, [activeFilters, searchQuery]);
+    const fetchGame = async () => {
+      try {
+        const game = await getGame(gameId);
+        setSingleGame(game);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchGame();
+  }, []);
 
-  //useEffect for the infinate scroll 'next page' api call
-  //TODO: Improve logic so that on super high res screens the scroll is triggered even when already in view
-  useEffect(() => {
-    if (
-      //TODO: See this level of safety type/null checking, I need this everywhere where the API structure could suddenly change. Look up alternatives though, as it feels janky
-      !isVisable ||
-      searchLoading ||
-      isSearchError ||
-      !searchresults || //guard to protect against errors from below conditions ||
-      searchresults.count === searchresults.games?.length
-    ) {
-      return;
-    }
-    dispatch(setPageNumber(String(pageNumber + 1)));
-    dispatch(fetchNextPageResults());
-  }, [isVisable]);
+  //TODO: Handle all TypeErrors/safe variable setup here
+  const playerRatings = !singleGame?.ratings
+    ? "n/a"
+    : buildPlayerRatings(singleGame.ratings);
 
-  const renderGameCardWrappers = () => {
-    if (searchLoading) {
-      return Array.from({
-        length:
-          searchresults.games?.length < pageSize
-            ? pageSize
-            : searchresults.games?.length,
-      }).map((_, index) => {
-        // @ts-expect-error – Ignore as this is always a loading screen
-        return <GameCardWrapper key={index} loading={true} />;
-      });
-    } else if (searchresults.count < 1) {
-      return <></>;
-    }
-    return (
-      <>
-        {searchresults.games.map((game, i) => (
-          <GameCardWrapper key={i} game={game} loading={false} />
-        ))}
-      </>
-    );
-  };
+  //Setup gallary images
+  let gallaryPlaceholder: boolean = true;
+  let sliderImages: string[] = [];
+  if (!singleGame?.screenshots) {
+    gallaryPlaceholder = true;
+  } else {
+    sliderImages = singleGame.screenshots.map((screenshot) => screenshot.image);
+  }
 
+  //Setup status data
+  let statusPlaceholder: boolean = true;
+  let statuses: playerStatusStandardised[] = [];
+  if (!singleGame?.added_by_status) {
+    statusPlaceholder = true;
+  } else {
+    statuses = buildPlayerStatuses(singleGame.added_by_status)
+  }
+
+  // Render JSX here
+  //TODO: Handle error on the UI
   return (
-    <div className="home-container">
-      <div className="home-heading">
-        {searchQuery.trim() || isSearchError ? (
-          isNoSearchResults ? (
-            <></>
-          ) : (
-            <h1>{searchQuery}</h1>
-          )
+    <main className="game-container">
+      <div className="game-primary-tile">
+        <GameBannerWrapper singleGame={singleGame} />
+      </div>
+      <div className="game-page-title" style={{borderBottom: '1px solid var(--color-separator)'}}>
+        <h4>Gallary</h4>
+        {gallaryPlaceholder === true ? (
+          <p>Sorry, this game currently has no media available</p>
         ) : (
-          <h1>
-            Check out the games creating a buzz{" "}
-            <span className="heading-emoji">🐝</span>
-          </h1>
+          <></>
         )}
       </div>
-      <div className="home-grid">
-        {/* TODO: Improve for mobile view, update filters UX so they don't just hide  */}
-        <aside className="home-filters">
-          <Sidebar />
-        </aside>
-        <main className="home-main">
-          {isNoSearchResults || isSearchError ? (
-            isSearchError ? (
-              // TODO: Test This
-              <div className="error-results-home">
-                <div className="error-results-home-message">
-                  <h2>Uh oh, we&apos;re having a connection issue</h2>
-                  <p>Please try reloading the page</p>
-                </div>
-                <div className="error-results-home-img">
-                  <Error />
-                </div>
-              </div>
-            ) : (
-              <div className="no-results-home">
-                <div className="no-results-home-message">
-                  <h2>Oh no, we can&apos;t find anything for</h2>
-                  <p>{searchQuery}</p>
-                </div>
-                <div className="no-results-home-img">
-                  <Binoculars />
-                </div>
-              </div>
-            )
+      {gallaryPlaceholder === true ? (
+        <></>
+      ) : (
+        <div className="game-media-tile">
+          <Slider slides={sliderImages} />
+        </div>
+      )}
+
+      <div className="game-page-title">
+        <h4>What the Players Think</h4>
+        Our data looks at xyz...
+      </div>
+      <div className="game-additional-info-tile">
+        <div className="game-additional-info-sentiment">
+          {/*TODO: Add placeholder if no data */}
+          {!playerRatings || playerRatings === "n/a" ? (
+            <>NO DATA YEAHHHHH</>
           ) : (
-            <div className="game-card-wrapper">{renderGameCardWrappers()}</div>
+            <BarChart
+              xAxis={[
+                {
+                  data: playerRatings.map((rating) => {
+                    return rating.title;
+                  }),
+                  colorMap: {
+                    type: "ordinal",
+                    colors: ["#2fa98c", "#a8ddb5", "#ff6e6199", "#ff6e61cc"],
+                  },
+                },
+              ]}
+              series={[
+                {
+                  data: playerRatings.map((rating) => {
+                    return Number(rating.count);
+                  }),
+                  color: "#2fa98c",
+                },
+              ]}
+              height={300}
+              width={400}
+            />
           )}
-        </main>
-        <div className="home-dummy"></div>
-        {/*TODO: Consider adding a small delay to the rendering of the next page on infinate scroll event*/}
-        <div ref={containerRef} className="home-paging">
-          {/*TODO: Test this, inc with edge cases such as paging to the end and then new search etc*/}
-          <Pagination
-            count={!searchresults ? 0 : Math.ceil(searchresults.count / pageSize)}
-            page={pageNumber}
-            siblingCount={0}
-            hideNextButton={true}
-            hidePrevButton={true}
-            renderItem={(item) => (
-              // @ts-expect-error – Spread passing from internal Component variable
-              <PaginationItem {...item} disabled />
-            )}
-            sx={{
-              paddingTop: "24px",
-              // Override Classes to target specific styles
-              ".MuiPaginationItem-root": {
-                color: "rgba(255, 255, 255, 0.871)",
-                backgroundColor: "#1e1e1e",
+        </div>
+        <div className="game-additional-info-status">
+          {/*TODO: Add placeholder if no data */}
+          <PieChart
+            series={[
+              {
+                data: statuses,
               },
-              ".Mui-disabled.Mui-selected": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
-              },
-              "Mui-selected": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
-              },
-              "Mui-disabled": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
-              },
-            }}
-            shape="rounded"
-          />
+            ]}
+            height={250}
+            width={300}
+    />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
-export default Home;
+export default GamePage;

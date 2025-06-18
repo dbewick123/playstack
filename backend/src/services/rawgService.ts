@@ -6,6 +6,8 @@ import type { Game } from "../types/game.js";
 import type {
   RawgGame,
   RawgGameResponse,
+  RawgScreenshots,
+  RawgScreenshotsResponse,
   RawgGamesResponse,
   Genre,
   PlatformWrapper,
@@ -52,6 +54,17 @@ const mapRawgPlatforms = (raw: any): PlatformWrapper => {
   };
 };
 
+//TODO: Unit test this - this test will alert me if the structure changes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapRawgScreenshots = (raw: any): RawgScreenshots => {
+  return {
+    id: raw?.id ?? null,
+    image: raw?.image ?? "",
+    width: raw?.width ?? -1,
+    height: raw?.height ?? -1,
+  };
+};
+
 const API_URL = process.env.THIRD_PARTY_GAME_API_URL!;
 const API_KEY = process.env.THIRD_PARTY_GAME_API_KEY!;
 
@@ -63,42 +76,60 @@ const getGameCount = async () => {
 
 //TODO: Test this + its calling route (check all data is present appropriately... consider whats the best way to do this in an automated way??)
 const getGame = async (id: number) => {
-  const params = new URLSearchParams();
-  params.append("key", API_KEY);
-  const url = `${API_URL}/games/${id}?${params.toString()}`;
+  try {
+    const params = new URLSearchParams();
+    params.append("key", API_KEY);
+    const url = `${API_URL}/games/${id}?${params.toString()}`;
+    const screenshotUrl = `${API_URL}/games/${id}/screenshots?${params.toString()}`;
 
-  const response = await fetch(url);
+    const response = await fetch(url);
+    const screenshotsResponse = await fetch(screenshotUrl);
 
-  if (!response.ok) {
+    if (!response.ok) {
+      throw new Error(
+        `RAWG API game/id req failed with status ${response.status}`
+      );
+    }
+
+    const data = (await response.json()) as RawgGameResponse;
+    const screenshotsData =
+      (await screenshotsResponse.json()) as RawgScreenshotsResponse;
+
+    if (!data) {
+      throw new Error(`RAWG API game data is null`);
+    } else {
+      return {
+        id: data.id ?? -1,
+        slug: data.slug ?? "-1",
+        name: data.name ?? "-1",
+        description: data.description ?? "-1",
+        metacritic: data.metacritic ?? -1,
+        metacritic_url: data.metacritic_url ?? "-1",
+        released: data.released ?? "",
+        background_image: data.background_image ?? "-1",
+        website: data.website ?? "-1",
+        rating: data.rating ?? -1,
+        ratings: data.ratings ?? [],
+        added: data.added ?? -1,
+        added_by_status: data.added_by_status ?? {},
+        playtime: data.playtime ?? -1,
+        screenshots_count: screenshotsData?.count ?? -1,
+        screenshots: Array.isArray(screenshotsData.results)
+          ? screenshotsData.results?.map(mapRawgScreenshots)
+          : [],
+        reddit_url: data.reddit_url ?? "-1",
+        platforms: Array.isArray(data.platforms)
+          ? data.platforms?.map(mapRawgPlatforms)
+          : [],
+        genres: Array.isArray(data.genres)
+          ? data.genres?.map(mapRawgGenres)
+          : [],
+      };
+    }
+  } catch (error) {
     throw new Error(
-      `RAWG API game/id req failed with status ${response.status}`
+      `Error caught in catch block of getGame: ${(error as Error).message}`
     );
-  }
-
-  const data = (await response.json()) as RawgGameResponse;
-  if (!data) {
-    throw new Error(`RAWG API game data is null`);
-  } else {
-    return {
-      id: data.id ?? -1,
-      slug: data.slug ?? "-1",
-      name: data.name ?? "-1",
-      description: data.description ?? "-1",
-      metacritic: data.metacritic ?? -1,
-      metacritic_url: data.metacritic_url ?? "-1",
-      released: data.released ?? "",
-      background_image: data.background_image ?? "-1",
-      website: data.website ?? "-1",
-      rating: data.rating ?? -1,
-      ratings: data.ratings ?? [],
-      added: data.added ?? -1,
-      added_by_status: data.added_by_status ?? {},
-      playtime: data.playtime ?? -1,
-      screenshots_count: data.screenshots_count ?? -1,
-      reddit_url: data.reddit_url ?? "-1",
-      platforms: Array.isArray(data.platforms) ? data.platforms?.map(mapRawgPlatforms) : [],
-      genres: Array.isArray(data.genres) ? data.genres?.map(mapRawgGenres) : [],
-    };
   }
 };
 

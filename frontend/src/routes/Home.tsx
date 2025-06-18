@@ -149,7 +149,8 @@ function Home() {
         <div className="home-dummy"></div>
         {/*TODO: Consider adding a small delay to the rendering of the next page on infinate scroll event*/}
         <div ref={containerRef} className="home-paging">
-          {/*TODO: Test this, inc with edge cases such as paging to the end and then new search etc*/}
+          {/*TODO: Test this, inc with edge cases such as paging to the end and then new search etc
+             TODO: Refactor with simple div, Pagination is overkill*/}
           <Pagination
             count={!searchresults ? 0 : Math.ceil(searchresults.count / pageSize)}
             page={pageNumber}

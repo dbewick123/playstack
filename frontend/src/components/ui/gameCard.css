@@ -71,43 +71,12 @@
 
 .game-card-info-platforms {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--space-ssm);
   align-items: center;
   flex-shrink: 0;
 }
 
-.platform-icon {
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
-}
 
-.platform-pc {
-  color: var(--color-pc);
-  /*TODO: Calculate this properly */
-  margin-right: -3px;
-}
-
-.platform-xbox {
-  color: var(--color-xbox);
-}
-
-.platform-ps {
-  color: var(--color-ps5);
-}
-
-.platform-ps4 {
-  color: var(--color-ps4);
-}
-
-.platform-switch {
-  color: var(--color-switch);
-  opacity: 1;
-}
-
-.game-card-info-middle {
-  display: flex;
-  justify-content: space-between;
-}
 
 .genre-icon-container {
   display: flex;
