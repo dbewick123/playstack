@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest --config jest.config.ts",
     "lint": "eslint",
-    "dev": "tsc-watch --onSuccess \"nodemon\""
+    "dev": "tsc-watch --onSuccess \"nodemon\"",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,7 @@
     "target": "es2020", // Modern JS features, supported by Node 14+
     "lib": ["es2020"], // Tell typescript the target environment and what types to support
     "module": "ES2022", // or "NodeNext"
-    "moduleResolution": "Node", // required for ESM    "outDir": "dist", // Compiled JS files go here
+    "moduleResolution": "Node", // required for ESM
     "rootDir": "src", // Your .ts files live here
     "outDir": "dist", // where the compiled js files will be
     "strict": true, // Enables all strict type checks (highly recommended)
