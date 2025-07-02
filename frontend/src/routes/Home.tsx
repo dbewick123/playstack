@@ -39,7 +39,6 @@ function Home() {
 
   const isNoSearchResults = !searchresults ? true : searchresults.count < 1 && !searchLoading;
   const isSearchError = !searchresults ? searchError === 'Failed to fetch' : searchError === 'Failed to fetch' || searchresults.status === "error";
-  console.log('isSearchError: ', isSearchError)
   const dispatch = useDispatch<AppDispatch>();
 
   const options: IntersectionObserverInit = {
@@ -59,6 +58,7 @@ function Home() {
 
   //useEffect for the infinate scroll 'next page' api call
   //TODO: Improve logic so that on super high res screens the scroll is triggered even when already in view
+  
   useEffect(() => {
     if (
       //TODO: See this level of safety type/null checking, I need this everywhere where the API structure could suddenly change. Look up alternatives though, as it feels janky
@@ -146,9 +146,10 @@ function Home() {
             <div className="game-card-wrapper">{renderGameCardWrappers()}</div>
           )}
         </main>
-        <div className="home-dummy"></div>
         {/*TODO: Consider adding a small delay to the rendering of the next page on infinate scroll event*/}
-        <div ref={containerRef} className="home-paging">
+        
+      </div>
+      <div ref={containerRef} className="home-paging">
           {/*TODO: Test this, inc with edge cases such as paging to the end and then new search etc
              TODO: Refactor with simple div, Pagination is overkill*/}
           <Pagination
@@ -158,36 +159,34 @@ function Home() {
             hideNextButton={true}
             hidePrevButton={true}
             renderItem={(item) => (
-              // @ts-expect-error – Spread passing from internal Component variable
               <PaginationItem {...item} disabled />
             )}
             sx={{
               paddingTop: "24px",
               // Override Classes to target specific styles
               ".MuiPaginationItem-root": {
-                color: "rgba(255, 255, 255, 0.871)",
+                color: "#ffffff",
                 backgroundColor: "#1e1e1e",
+              },
+              ".css-6qpcc8-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected.Mui-disabled": {
+                border: "1px solid #ffffff1f",
+                backgroundColor: "rgba(255, 255, 255, 0.03)",
+                color: "#ffffff",
               },
               ".Mui-disabled.Mui-selected": {
                 border: "1px solid #ffffff1f",
                 backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
+                color: "#ffffff",
               },
               "Mui-selected": {
                 border: "1px solid #ffffff1f",
                 backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
-              },
-              "Mui-disabled": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "rgba(255, 255, 255, 0.871)",
+                color: "#ffffff",
               },
             }}
             shape="rounded"
           />
         </div>
-      </div>
     </div>
   );
 }

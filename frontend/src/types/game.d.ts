@@ -44,7 +44,7 @@ export interface SingleGame {
   genres: Genre[] | null;
 }
 
-interface Ratings {
+export interface Ratings {
   id: number;
   title: string;
   count: number;

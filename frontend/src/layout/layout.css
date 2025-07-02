@@ -74,8 +74,8 @@
       "header"
       "middle"
       "footer";
-    padding-right: var(--space-sm);
-    padding-left: var(--space-sm);
+    padding-right: 0;
+    padding-left: 0;
 
   }
 

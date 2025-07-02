@@ -59,8 +59,9 @@ function Landing() {
             variant="contained"
             color="playstackPrimary"
             size={isMobile ? "small" : "medium"}
+            href="/home"
           >
-            Sign Up Now
+            LETS GET GOING
           </Button>
         </div>
         {/* <GamepadIcon /> */}

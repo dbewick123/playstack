@@ -13,9 +13,20 @@ export function Slider({ slides }: SliderProps) {
   return Array.isArray(slides) ? (
     <div className="slider-wrapper">
       <Swiper
-        spaceBetween={48}
         direction="horizontal"
-        slidesPerView={3}
+        breakpoints={{
+          // when window width is >= 320px
+          0: {
+            slidesPerView: 'auto',
+            spaceBetween: '2.631%'
+          },
+          // when window width is >= 1024px
+          1024: {
+            slidesPerView: 'auto',
+            spaceBetween: '2.631%'
+          },
+
+        }}
         pagination={{
           clickable: true,
           el: '.custom-pagination',
@@ -27,7 +38,7 @@ export function Slider({ slides }: SliderProps) {
       >
         {slides.map((slide, index) => {
           return (
-            <SwiperSlide key={index} className="slider-item">
+            <SwiperSlide key={index}>
               <img src={slide} alt="" />
             </SwiperSlide>
           );
@@ -36,7 +47,6 @@ export function Slider({ slides }: SliderProps) {
       <div className="custom-pagination"></div>
     </div>
   ) : (
-    //TODO: implement this
-    <>NO SLIDES PASSED</>
+    null
   );
 }

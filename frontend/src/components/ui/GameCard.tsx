@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Game } from "../../types/game";
 import "./gameCard.css";
-import CircleSelector from "../utilities/CircleSelector";
+import CircleSelector from "../utilities/circleSelector/CircleSelector";
 import GetPlatformIcons from "../utilities/GetPlatformIcons";
 import metacriticIcon from "../../assets/logos/third-party/metacritic.png";
 import GetGenreIcons from "../utilities/GetGenreIcons";
@@ -9,12 +10,11 @@ import { Chip, Tooltip } from "@mui/material";
 
 //External Components
 import { Skeleton, Stack } from "@mui/material";
-import WishlistAddIcon from '@mui/icons-material/AddCard';
-import WishlistRemoveIcon from '@mui/icons-material/CreditScore';
+import WishlistAddIcon from "@mui/icons-material/AddCard";
+import WishlistRemoveIcon from "@mui/icons-material/CreditScore";
 
-
-import LibraryRemoveIcon from '@mui/icons-material/PlaylistAddCheck';
-import LibraryAddIcon from '@mui/icons-material/PlaylistAdd';
+import LibraryRemoveIcon from "@mui/icons-material/PlaylistAddCheck";
+import LibraryAddIcon from "@mui/icons-material/PlaylistAdd";
 
 interface GameCardProps {
   loading: boolean;
@@ -25,8 +25,6 @@ function GameCard({ loading, game }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
-
-  {console.log('testing log')}
 
   const handleGallaryClick = (newIndex: number) => {
     setCurrentIndex(newIndex);
@@ -41,9 +39,6 @@ function GameCard({ loading, game }: GameCardProps) {
     setSelectedLibrary(!selectedLibrary);
     //TODO: add Redux logic to add to library (in parent component probs)
   };
-
-  {console.log('testing log2 ')}
-
 
   return !loading ? (
     <div className="game-card">
@@ -67,9 +62,9 @@ function GameCard({ loading, game }: GameCardProps) {
       <div className="game-card-info-container">
         <div className="game-card-info-top">
           <div className="game-card-info-title">
-            <Tooltip title={game.name}>
-              <h2>{game.name}</h2>
-            </Tooltip>
+              <Link 
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              to={`/game/${game.id}`}><h2 className="links">{game.name}</h2></Link>
           </div>
           <div className="game-card-info-platforms">
             <GetPlatformIcons platforms={game.platforms} />
@@ -89,9 +84,6 @@ function GameCard({ loading, game }: GameCardProps) {
                 <h6>{game.metacritic === -1 ? "n/a" : game.metacritic}</h6>
               </div>
             </Tooltip>
-            {/* <div className="game-card-info-bottom-ratings-esrb">
-              <GetEsrbRating esrb={game.esrbRating || "pending"} />
-            </div> */}
           </div>
           <div className="game-card-info-bottom-buttons">
             <Stack direction="row" spacing={0.5}>
@@ -103,9 +95,15 @@ function GameCard({ loading, game }: GameCardProps) {
                   selectedWishlist
                     ? { border: "1px solid #ffffff1f" }
                     : { bgcolor: "#1e1e1e", border: "1px solid #ffffff1f" }
-                  }
+                }
                 onClick={() => handleWishlistClick()}
-                icon={selectedWishlist ? <WishlistRemoveIcon /> : <WishlistAddIcon />}
+                icon={
+                  selectedWishlist ? (
+                    <WishlistRemoveIcon />
+                  ) : (
+                    <WishlistAddIcon />
+                  )
+                }
               />
               <Chip
                 size="small"
@@ -115,35 +113,62 @@ function GameCard({ loading, game }: GameCardProps) {
                   selectedLibrary
                     ? { border: "1px solid #ffffff1f" }
                     : { bgcolor: "#1e1e1e", border: "1px solid #ffffff1f" }
-                  }
+                }
                 onClick={() => handleLibraryClick()}
-                icon={selectedLibrary ? <LibraryRemoveIcon /> : <LibraryAddIcon />}
+                icon={
+                  selectedLibrary ? <LibraryRemoveIcon /> : <LibraryAddIcon />
+                }
               />
             </Stack>
           </div>
         </div>
       </div>
     </div>
-  ) : 
+  ) : (
     <div className="game-card">
       <div className="game-card-gallary-image">
-        <Skeleton variant="rounded" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }} width="100%" height="100%" />
+        <Skeleton
+          variant="rounded"
+          sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+          width="100%"
+          height="100%"
+        />
       </div>
 
       <div className="game-card-info-container">
         <div className="game-card-info-top">
-          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '1rem' }} width="60%" height={24} />
-          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} width="30%" height={18} />
+          <Skeleton
+            variant="text"
+            sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "1rem" }}
+            width="60%"
+            height={24}
+          />
+          <Skeleton
+            variant="text"
+            sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
+            width="30%"
+            height={18}
+          />
         </div>
         <div className="game-card-info-middle">
-          <Skeleton variant="text" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: '0.75rem' }} width="20%" height={18} />
+          <Skeleton
+            variant="text"
+            sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
+            width="20%"
+            height={18}
+          />
         </div>
         <div className="game-card-info-bottom">
-          <Skeleton variant="rounded" sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}  width="100%" height={32} />
+          <Skeleton
+            variant="rounded"
+            sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+            width="100%"
+            height={32}
+          />
         </div>
       </div>
-</div>
-  ;
+    </div>
+  );
 }
 
 export default GameCard;

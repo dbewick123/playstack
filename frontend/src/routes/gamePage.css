@@ -1,26 +1,22 @@
-/*TODO: Consider a change in layout, maybe dont have the footer always visable and have sticky filters but games all the way to the bottom of the vh */
 .game-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: var(--container-width-wide);
-  margin: 0 auto 0 auto;
-  padding-top: var(--content-start-top-margin-base);
+  margin-top: var(--space-4xl);
 }
 
 .game-primary-tile {
-width: 100%;
-height: 500px;
-max-height: 500px;
+  width: 100%;
+  height: 500px;
+  max-height: 500px;
 }
 
 .game-media-tile {
   width: 100%;
-  height: 420px; /* This is the height for when we use 16/9 and a 3 image layout for the swiper */
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--space-4xl);
-  padding-bottom: calc(var(--space-4xl) - var(--space-md) - 8px); /* --space-md is the row gap used in Slider.tsx, 8px is the height of the paging in Slider.tsx */
   background-color: var(--overlay-01dp);
 }
 
@@ -31,13 +27,65 @@ max-height: 500px;
   align-items: center;
   width: 100%;
   height: 100%;
-  border: 1px dashed var(--color-muted) ;  
+  border: 1px dashed var(--color-muted);
   margin-bottom: calc(var(--space-md) + 8px);
 }
 
 .game-additional-info-tile {
   width: 100%;
+  height: 282px;
   display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-5xl);
+  margin: var(--content-block-separator-base) 0;
+}
+
+.game-additional-info-sentiment,
+.game-additional-info-playtime-counter,
+.game-additional-info-status {
+  flex-basis: 0;
+}
+
+.game-additional-info-sentiment {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-additional-info-sentiment h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-highemp);
+  line-height: 1;
+  margin-bottom: 10%;
+}
+
+.game-additional-info-sentiment-sub {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-additional-info-playtime-counter {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  font-size: var(--font-size-xxlh1);
+  color: var(--color-text-highemp);
+  line-height: 1;
+}
+
+.game-additional-info-playtime-counter h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-highemp);
+  line-height: 1;
+  margin-bottom: 10%;
 }
 
 /* Utilities */
@@ -52,16 +100,124 @@ max-height: 500px;
   color: var(--color-text-highemp);
 }
 
-.game-additional-info-sentiment {
-  flex: 1;
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.counter-no-data {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 100%;
+  width: 100%;
+  color: var(--color-primary);
+}
+
+.loading-tile-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: var(--space-4xl);
+  justify-content: space-between;
+}
+
+.media-load-one,
+.media-load-two,
+.media-load-three {
+  width: 100%
+}
+
+.loading-tile {
+  height: 300px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-4xl);
+  padding-top: 0;
 }
 
-.game-additional-info-status {
- flex: 1;
- display: flex;
- flex-direction: column;
- align-items: center;
+.no-data-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: var(--color-primary);
+}
+
+.game-page-error {
+  margin-top: var(--space-4xl);
+  height: 100vh;
+}
+
+@media (max-width: 1024px) {
+  .game-container {
+    margin-top: var(--space-lg);
+  }
+  .game-page-title {
+    margin-top: var(--content-block-separator-mobile);
+  }
+  .game-additional-info-tile {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--content-block-separator-mobile);
+    padding-bottom: 0;
+    margin-top: var(--content-block-separator-mobile);
+  }
+  .game-additional-info-sentiment h1,
+  .game-additional-info-playtime-counter h1 {
+    margin-bottom: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-highemp);
+  }
+  .pie-mux {
+    margin-left: -100px;
+  }
+
+  .loading-tile {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    margin-top: var(--space-lg);
+  }
+  .game-primary-tile {
+    height: 100%;
+    max-height: 500px;
+  }
+  .media-load-one,
+  .media-load-three {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .game-container {
+    margin-top: 0;
+  }
+
+  .game-primary-tile {
+    max-height: 300px;
+  }
+
+  .game-page-title {
+    margin-top: var(--space-md);
+    text-align: center;
+  }
+
+  .game-additional-info-tile { 
+    margin-top: var(--space-md);
+  }
 }

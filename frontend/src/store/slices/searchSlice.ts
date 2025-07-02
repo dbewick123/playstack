@@ -81,7 +81,6 @@ export const fetchNextPageResults = createAsyncThunk(
   "search/fetchNextPageResults",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (_, thunkAPI) => {
-
     try {
       const rootState = thunkAPI.getState() as RootState;
       const searchState = rootState.search;

@@ -1,10 +1,16 @@
 import Search from "../ui/Search";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { setQuery } from "../../store/slices/searchSlice";
+import { setQuery, selectSearchQuery } from "../../store/slices/searchSlice";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 const SearchWrapper = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const reduxQueryValue = useSelector(selectSearchQuery);
 
   const handleEnterPressed = (
     event: React.KeyboardEvent<HTMLInputElement>,
@@ -14,6 +20,14 @@ const SearchWrapper = () => {
       dispatch(setQuery(queryValue));
     }
   };
+  
+  useEffect (() => {
+    if(location.pathname.startsWith('/home')) {
+      return;
+    } else {
+      navigate('/home')
+    }
+  }, [reduxQueryValue])
 
   return (
     <>

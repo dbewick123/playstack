@@ -105,7 +105,7 @@ const getGame = async (id: number) => {
         description: data.description ?? "-1",
         metacritic: data.metacritic ?? -1,
         metacritic_url: data.metacritic_url ?? "-1",
-        released: data.released ?? "",
+        released: data.released ?? "-1",
         background_image: data.background_image ?? "-1",
         website: data.website ?? "-1",
         rating: data.rating ?? -1,

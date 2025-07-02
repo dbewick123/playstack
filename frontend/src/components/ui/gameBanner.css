@@ -1,12 +1,14 @@
 .game-banner-background {
   width: 100%;
   height: 100%;
+  display: flex;
 }
 
 .game-banner {
   width: 100%;
   height: 100%;
-  padding: calc(2* var(--space-xl));
+  min-width: 0px;
+  padding: var(--space-4xl);
   display: flex;
   column-gap: var(--space-xl);
   background-color: var(--background-blur);
@@ -22,7 +24,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-
 }
 
 .game-banner-info {
@@ -46,7 +47,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-
 .game-banner-info-info1 {
   height: 24px; /* Had to hard code to get perfect alignment with icons */
   display: flex;
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   column-gap: var(--space-ssm);
-} 
+}
 
 .game-banner-info-info2 {
   display: flex;
@@ -75,13 +75,89 @@
   flex-direction: column;
   margin-top: var(--space-xl);
   row-gap: var(--space-sm);
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .game-banner-info-info3 p {
   font-size: var(--font-size-sm);
 }
 
+.game-banner-info-info3 span {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
 /* Utilities */
 .separator svg {
   height: var(--separator-size-base);
+}
+
+@media (max-width: 1024px) {
+  .game-banner {
+    padding: var(--space-xl);
+  }
+
+  .game-banner-info {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-banner {
+    padding: 0;
+    max-height: 500px;
+  }
+
+  .game-banner-info {
+    padding: var(--space-xl) var(--space-xl) var(--space-md) 0;
+  }
+
+  .game-banner-info h3 {
+    font-size: var(--font-size-smh1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .game-banner-info h4 {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .game-banner-info-info3 p {
+    font-size: var(--font-size-xs);
+  }
+
+  .game-banner-info-info3 {
+    margin-top: var(--space-sm);
+    text-align: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .game-banner {
+    padding: 0;
+    max-height: 300px;
+  }
+  .game-banner-art {
+    display: none;
+  }
+  .game-banner-info {
+    align-items: center;
+    padding: var(--space-md);
+    width: 100%;
+    max-width: 100%;
+  }
+  .game-banner-info h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+  }
+  .separator {
+    display: none;
+  }
+  .game-banner-info-info2 {
+    display: flex;
+    align-items: center;
+    column-gap: var(--space-md);
+  }
 }

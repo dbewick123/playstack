@@ -19,7 +19,7 @@ const Search = ({handleOnKeyPressed }: SearchProps) => {
         value={queryValue}
         placeholder="Search for any game in the world"
         onChange={(e) => {
-          setQueryValue(e.target.value);
+          setQueryValue(e.target.value.replace(/^\s+/, ''));
         }}
         onKeyDown={(e) => handleOnKeyPressed(e, queryValue)}
       />

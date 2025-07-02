@@ -12,26 +12,17 @@
   display: grid;
   width: 100%;
   grid-template-areas:
-    "home-filters home-main"
-    "home-dummy home-paging";
+    "home-filters home-main";
   grid-template-columns: 188px 4fr;
   column-gap: var(--space-xl);
   margin-top: var(--space-xl);
 }
 
+
 .home-filters {
   grid-area: home-filters;
-  height: 100vh;
-  position: sticky;
-  top: var(--header-height);
-  align-self: start;
-}
-
-.home-dummy {
-  grid-area: home-dummy;
-  min-height: 80px;
-  z-index: var(--z-max-standard);
-  background-color: var(--color-background);
+  height: 100%;
+  background-color: var(--overlay-01dp);
 }
 
 .home-main {
@@ -61,7 +52,6 @@
 }
 
 .home-paging {
-  grid-area:home-paging;
   margin: auto;
   margin-bottom: var(--space-xl);
 }
