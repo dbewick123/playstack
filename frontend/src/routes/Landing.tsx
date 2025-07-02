@@ -66,7 +66,7 @@ function Landing() {
         </div>
         {/* <GamepadIcon /> */}
         <p>
-          Join the playstack family today, track, manage and review every game
+          Join the playstack family today. Track, manage and review every game
           imaginable. We have you covered with {gameCount === -1 ? "thousands of" : gameCount} games and counting
         </p>
       </div>
@@ -104,7 +104,7 @@ function Landing() {
             <span className="text-highemp-p-span">
               Manage current & future collections.
             </span>{" "}
-            Use our massive games library alongside our collection features.
+            Use our massive games library alongside our collection features (coming soon).
             Build out your personal library, or pull together a wishlist with
             everything in it.
           </p>
@@ -112,7 +112,7 @@ function Landing() {
           <p>
             <span className="feature-info-additional-text">
               Building your own local game, or have such a niche its not yet in
-              our database, add it with our &apos;add indie game&apos; feature.
+              our database, add it with our &apos;add indie game&apos; feature (coming soon).
             </span>
           </p>
         </div>

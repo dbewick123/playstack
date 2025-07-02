@@ -117,7 +117,8 @@
   }
 
   .landing-product-screenshot {
-    margin-top: var(--content-block-separator-mobile);
+    width: 90%;
+    margin: var(--content-block-separator-mobile) auto 0 auto;
   }
 
   .landing-logos-carousel {
@@ -134,13 +135,14 @@
   }
 
   .feature-info-container {
-    width: 100%;
+    width: 90%;
+    text-align: center;
     grid-template-areas:
       "feature-summary";
     grid-template-columns: auto;
     grid-template-rows: minmax(240px, auto);
     column-gap: 0px;
-    margin-top: var(--content-block-separator-mobile);
+    margin: var(--content-block-separator-mobile) auto 0 auto;
   }
 
   .feature-info {

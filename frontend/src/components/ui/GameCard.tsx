@@ -62,9 +62,12 @@ function GameCard({ loading, game }: GameCardProps) {
       <div className="game-card-info-container">
         <div className="game-card-info-top">
           <div className="game-card-info-title">
-              <Link 
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              to={`/game/${game.id}`}><h2 className="links">{game.name}</h2></Link>
+            <Link
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              to={`/game/${game.id}`}
+            >
+              <h2 className="links">{game.name}</h2>
+            </Link>
           </div>
           <div className="game-card-info-platforms">
             <GetPlatformIcons platforms={game.platforms} />
@@ -90,6 +93,7 @@ function GameCard({ loading, game }: GameCardProps) {
               <Chip
                 size="small"
                 label="Wishlist"
+                // @ts-expect-error valid as using custom color scheme
                 color="playstackPrimaryChip"
                 sx={
                   selectedWishlist
@@ -107,6 +111,7 @@ function GameCard({ loading, game }: GameCardProps) {
               />
               <Chip
                 size="small"
+                // @ts-expect-error valid as using custom color scheme
                 color="playstackPrimaryChip"
                 label="Library"
                 sx={
