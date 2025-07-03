@@ -7,8 +7,8 @@ import car4 from "../assets/icons/carousel/car4.png";
 import car5 from "../assets/icons/carousel/car5.png";
 import car6 from "../assets/icons/carousel/car6.png";
 import { Button } from "@mui/material";
-import productScreenshot from "../assets/screenshots/product-screenshot.png";
-import productScreenshotMobile from "../assets/screenshots/product-screenshot-mobile.png";
+import productScreenshot from "../assets/screenshots/product-screenshot.jpg";
+import productScreenshotMobile from "../assets/screenshots/product-screenshot-mobile.jpg";
 import { useEffect, useMemo, useState } from "react";
 
 function Landing() {
