@@ -23,6 +23,20 @@
   background-position: center;
   overflow: hidden;
   transition: background-image 0.6s ease;
+  position: relative;
+}
+
+.game-card-gallary-back {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+}
+
+.game-card-gallary-forward {
+  position: absolute;
+  left:50%;
+  width: 50%;
+  height: 100%;
 }
 
 .game-gallary-selector-container {
@@ -31,6 +45,10 @@
   justify-content: start;
   margin-left: var(--space-sm);
   margin-top: var(--space-sm);
+}
+
+.circle-wrapper {
+  z-index: var(--z-max-standard);
 }
 
 .game-card-info-container {

@@ -26,8 +26,33 @@ function GameCard({ loading, game }: GameCardProps) {
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
 
-  const handleGallaryClick = (newIndex: number) => {
-    setCurrentIndex(newIndex);
+  const handleGallaryClick = (clickSource: string, newIndex?: number) => {
+    const imageCount = game.screenshots?.length;
+
+    if (!imageCount) {
+      return;
+    }
+
+    if (clickSource === "back") {
+      setCurrentIndex((prev) => {
+        const nextIndex = prev - 1;
+        return nextIndex < 0 ? imageCount - 1 : nextIndex;
+      });
+      return;
+    }
+
+    if (clickSource === "forward") {
+      setCurrentIndex((prev) => {
+        const nextIndex = prev + 1;
+        return nextIndex >= imageCount ? 0 : nextIndex;
+      });
+      return;
+    }
+
+    if (newIndex !== undefined && clickSource === "circles") {
+      setCurrentIndex(newIndex);
+      return;
+    }
   };
 
   const handleWishlistClick = () => {
@@ -48,13 +73,22 @@ function GameCard({ loading, game }: GameCardProps) {
           backgroundImage: `url(${game.screenshots[currentIndex]})`,
         }}
       >
+        <div
+          className="game-card-gallary-back"
+          onClick={() => handleGallaryClick("back")}
+        ></div>
+        <div
+          className="game-card-gallary-forward"
+          onClick={() => handleGallaryClick("forward")}
+        ></div>
+
         <div className="game-gallary-selector-container">
           {game.screenshots.map((_image, index) => (
             //TODO: update this to be dynamic for mobile vs desktop
             <CircleSelector
               key={index}
               selected={currentIndex === index}
-              onClick={() => handleGallaryClick(index)}
+              onClick={() => handleGallaryClick("circles", index)}
             />
           ))}
         </div>
