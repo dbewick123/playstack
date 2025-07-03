@@ -130,7 +130,6 @@
 
   .game-banner-info-info3 {
     margin-top: var(--space-sm);
-    text-align: center;
   }
 }
 
@@ -143,6 +142,7 @@
     display: none;
   }
   .game-banner-info {
+    text-align: center;
     align-items: center;
     padding: var(--space-md);
     width: 100%;
@@ -159,5 +159,10 @@
     display: flex;
     align-items: center;
     column-gap: var(--space-md);
+  }
+
+  .game-banner-info-info3 {
+    margin-top: var(--space-sm);
+    text-align: center;
   }
 }

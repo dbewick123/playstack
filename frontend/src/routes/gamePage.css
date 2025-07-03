@@ -88,6 +88,10 @@
   margin-bottom: 10%;
 }
 
+.sentiment-title {
+text-align: center;
+}
+
 /* Utilities */
 .game-page-title {
   margin-top: var(--content-block-separator-base);
@@ -156,6 +160,10 @@
   height: 100vh;
 }
 
+.bar-mux {
+  margin-left: 12%
+}
+
 @media (max-width: 1024px) {
   .game-container {
     margin-top: var(--space-lg);
@@ -181,12 +189,18 @@
     color: var(--color-text-highemp);
   }
   .pie-mux {
-    margin-left: -100px;
+    margin-left: -60px;
+  }
+
+  .bar-mux {
+    margin-left: 1%
   }
 
   .loading-tile {
     width: 100vw;
   }
+
+    
 }
 
 @media (max-width: 768px) {
@@ -206,6 +220,7 @@
 @media (max-width: 430px) {
   .game-container {
     margin-top: 0;
+    gap: var(--space-lg);
   }
 
   .game-primary-tile {
@@ -219,5 +234,23 @@
 
   .game-additional-info-tile { 
     margin-top: var(--space-md);
+    gap: var(--space-md);
   }
+
+  .sentiment-bar {
+    width: 70%;
+  }
+
+  .sentiment-pie {
+    width: 55%;
+  }
+
+  .pie-mux {
+    margin-left: -70px;
+  }
+
+  .sentiment-title {
+    margin-bottom: -14%;
+  }
+
 }

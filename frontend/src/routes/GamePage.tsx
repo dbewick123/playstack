@@ -153,7 +153,7 @@ function GamePage() {
       </div>
 
       <div className="game-additional-info-tile">
-        <div className="game-additional-info-sentiment">
+        <div className="game-additional-info-sentiment sentiment-bar">
           {isLoading ? (
             <div className="loading-tile">
               <Skeleton
@@ -180,6 +180,7 @@ function GamePage() {
                   <ErrorIcon />
                 </div>
               ) : (
+                <div className="bar-mux">
                 <BarChart
                   margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
                   xAxis={[
@@ -215,12 +216,13 @@ function GamePage() {
                   height={250}
                   width={400}
                 />
+                </div>
               )}
             </>
           )}
         </div>
 
-        <div className="game-additional-info-sentiment">
+        <div className="game-additional-info-sentiment sentiment-pie">
           {isLoading ? (
             <div className="loading-tile">
               <Skeleton
@@ -273,6 +275,7 @@ function GamePage() {
                   sx={{
                     "& .MuiChartsLegend-series": {
                       color: "var(--color-text-base) !important",
+                      height: 6
                     },
                   }}
                 />

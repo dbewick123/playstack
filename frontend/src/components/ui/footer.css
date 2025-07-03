@@ -110,4 +110,8 @@
   .footer-content .subtle-links a {
     font-size: var(--font-size-xxs);
   }
+  
+  .footer-content .subtle-links p {
+    font-size: var(--font-size-xxs);
+  }
 }
