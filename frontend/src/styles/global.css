@@ -109,7 +109,7 @@
   --breakpoint-xl: 1280px;
 
   /* 🔳 Z-Index Layers */
-  --z-header: 1000;
+  --z-header: 10000;
   --z-modal: 1100;
   --z-tooltip: 1200;
   --z-overlay: 900;

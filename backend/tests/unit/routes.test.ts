@@ -2,11 +2,31 @@ import { describe, test, expect } from "@jest/globals";
 import testRoutesApp from "../../src/app.js";
 import supertestRoutes from "supertest";
 
-describe("Rawg API Routes", () => {
+describe("Rawg API Routes (Thirdparty Contract Test)", () => {
+  //Count Route Test
   test("Should return the total number of games", async () => {
     const response = await supertestRoutes(testRoutesApp).get("/games/count");
     expect(response.status).toBe(200);
     expect(response.body.count).toBeGreaterThan(0);
+  });
+
+  //Search Rout Tests
+  test("Should return multiple results for null query", async () => {
+    const response = await supertestRoutes(testRoutesApp).get(
+      "/games/query?search=''"
+    );
+    expect(response.status).toBe(200);
+    expect(response.body.count).toBeGreaterThan(1);
+    expect(response.body.games.length).toBeGreaterThan(1);
+  });
+
+  test("Should return multiple results for precise query", async () => {
+    const response = await supertestRoutes(testRoutesApp).get(
+      "/games/query?search=blue%prince&search_precise=true"
+    );
+    expect(response.status).toBe(200);
+    expect(response.body.count).toBeGreaterThan(1);
+    expect(response.body.games.length).toBeGreaterThan(1);
   });
 
   test("Should return the exact game that match the query", async () => {
@@ -28,12 +48,7 @@ describe("Rawg API Routes", () => {
     expect(response.body.games[0].screenshots[0]).toBeTruthy();
   });
 
-  test("Should return multiple results for precise query", async () => {
-    const response = await supertestRoutes(testRoutesApp).get(
-      "/games/query?search=blue%prince&search_precise=true"
-    );
-    expect(response.status).toBe(200);
-    expect(response.body.count).toBeGreaterThan(1);
-    expect(response.body.games.length).toBeGreaterThan(1);
-  });
+  //Search Next Page Test
+
+  
 });
