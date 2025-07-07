@@ -26,13 +26,11 @@ const mapRawgToGame = (raw: RawgGame): Game => {
       : [],
     genres: Array.isArray(raw.genres) ? raw.genres?.map((g) => g.id) : [],
     tags: Array.isArray(raw.tags) ? raw.tags?.map((t) => t.name) : [],
-    //TODO: Consider sorting so the 'first' screenshot is correct
     screenshots: raw.short_screenshots?.map((s) => s.image) ?? [],
     esrbRating: raw.esrb_rating?.name ?? null,
   };
 };
 
-//TODO: Unit test this - this test will alert me if the structure changes
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapRawgGenres = (raw: any): Genre => {
   return {
@@ -42,7 +40,6 @@ const mapRawgGenres = (raw: any): Genre => {
   };
 };
 
-//TODO: Unit test this - this test will alert me if the structure changes
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapRawgPlatforms = (raw: any): PlatformWrapper => {
   return {
@@ -54,7 +51,6 @@ const mapRawgPlatforms = (raw: any): PlatformWrapper => {
   };
 };
 
-//TODO: Unit test this - this test will alert me if the structure changes
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapRawgScreenshots = (raw: any): RawgScreenshots => {
   return {
@@ -74,7 +70,6 @@ const getGameCount = async () => {
   return data.count;
 };
 
-//TODO: Test this + its calling route (check all data is present appropriately... consider whats the best way to do this in an automated way??)
 const getGame = async (id: number) => {
   try {
     const params = new URLSearchParams();
@@ -133,7 +128,6 @@ const getGame = async (id: number) => {
   }
 };
 
-// TODO: test subconditions thoroughly, such as double spaces, tabs, special characters etc. When building this and the screen hung it seemed to not respond, why??
 const getGamesSearch = async (query: ParsedQs) => {
   const params = new URLSearchParams();
 

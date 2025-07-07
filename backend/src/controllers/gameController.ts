@@ -25,7 +25,6 @@ const gamesGetGameController = async (
   next: NextFunction
 ) => {
   try {
-    // TODO: Test this error handling
     if (!req.params) {
       const error = new Error("Missing required params");
       return next(error); // send to error-handling middleware
@@ -49,7 +48,6 @@ const gamesSearchController = async (
   next: NextFunction
 ) => {
   try {
-    // TODO: Test this error handling
     if (!req.query) {
       const error = new Error("Missing search query");
       return next(error); // send to error-handling middleware
@@ -63,7 +61,6 @@ const gamesSearchController = async (
   }
 };
 
-//TODO: Test this and the service it calls (same test probs)
 const gamesNextPageController = async (
   req: Request,
   res: Response,
