@@ -23,7 +23,7 @@ app.use(
 app.use(express.json());
 app.use(thirdPartyAuthentication);
 
-// Added for testing
+// Only using for testing
 app.get("/error", (req, res) => {
   throw new Error("This is a test error");
 });

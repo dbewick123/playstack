@@ -47,10 +47,7 @@ jobs:
   deploy-frontend:
     needs: test
     runs-on: ubuntu-latest
-    if: |
-      success() &&
-      github.event.head_commit.message != '' &&
-      contains(join(github.event.commits.*.modified, ','), 'frontend/')
+    if: needs.test.result == 'success'
       
     steps:
       - name: Trigger Frontend Render Deploy
@@ -60,10 +57,7 @@ jobs:
   deploy-backend:
     needs: test
     runs-on: ubuntu-latest
-    if: |
-      success() &&
-      github.event.head_commit.message != '' &&
-      contains(join(github.event.commits.*.modified, ','), 'backend/')
+    if: needs.test.result == 'success'
       
     steps:
       - name: Trigger Backend Render Deploy
