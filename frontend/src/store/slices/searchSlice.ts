@@ -4,6 +4,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { SearchState } from "../../types/game";
 import { RootState } from "../store";
 
+import { BACKEND_API_URL } from "../../config";
+
 const initialState: SearchState = {
   query: "",
   filters: { platforms: [], genres: [] },
@@ -23,11 +25,11 @@ const initialState: SearchState = {
 
 export const fetchSearchResults = createAsyncThunk(
   //TODO: Improve the sophistication of the search, need to have better ways of showing recent games, etc (add order by)
-  //TODO: Test this (probably just from the Search component)
   "search/fetchSearchResults",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (_, thunkAPI) => {
     try {
+
       const rootState = thunkAPI.getState() as RootState;
       const searchState = rootState.search;
       const params = new URLSearchParams();
@@ -64,8 +66,7 @@ export const fetchSearchResults = createAsyncThunk(
       //TODO: Test case for this to check timezones
       params.append("dates", `1960-01-01,${localISODate}`);
 
-      const url = `${import.meta.env.VITE_BACKEND_API_URL}/games/query?${params.toString()}`;
-
+      const url = `${BACKEND_API_URL}/games/query?${params.toString()}`;
       const response = await fetch(url);
       const data = await response.json();
       return data;
@@ -76,7 +77,6 @@ export const fetchSearchResults = createAsyncThunk(
   }
 );
 
-//TODO: Test this
 export const fetchNextPageResults = createAsyncThunk(
   "search/fetchNextPageResults",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -90,13 +90,16 @@ export const fetchNextPageResults = createAsyncThunk(
       }
 
       const encodedUrl = encodeURIComponent(searchState.results.next);
-      const finalUrl = `${import.meta.env.VITE_BACKEND_API_URL}/games/proxy?targetUrl=${encodedUrl}`
+      const finalUrl = `${BACKEND_API_URL}/games/proxy?targetUrl=${encodedUrl}`;
 
       const response = await fetch(finalUrl);
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching next page of games, promise rejected", error);
+      console.error(
+        "Error fetching next page of games, promise rejected",
+        error
+      );
       throw error;
     }
   }
@@ -177,8 +180,8 @@ export const searchSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchNextPageResults.fulfilled, (state, action) => {
-        if(!action.payload) {
-          state.error = 'true';
+        if (!action.payload) {
+          state.error = "true";
           return;
         }
         const { games, ...rest } = action.payload;

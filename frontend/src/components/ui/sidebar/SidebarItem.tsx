@@ -1,11 +1,13 @@
 import "./sidebar.css";
+import { SvgIconProps } from "@mui/material";
+
 
 interface SidebarItemProps {
   parentGroupId: number;
   itemId: number;
   active: boolean;
   title: string;
-  icon: React.ReactNode;
+  icon: React.ComponentType<SvgIconProps>;
   handleClick: (parentGroupId: number, itemId: number, active: boolean) => void;
 }
 
@@ -18,6 +20,7 @@ function SidebarItem({
   handleClick,
 }: SidebarItemProps) {
 
+  const IconComponent = icon;
   return (
     <>
       <div
@@ -28,7 +31,9 @@ function SidebarItem({
         }
         onClick={() => handleClick(parentGroupId,itemId,active)}
       >
-        <div className="sidebar-item-icon">{icon}</div>
+        <div className="sidebar-item-icon">
+          <IconComponent />
+        </div>
         <div className="sidebar-item-title">
           <h5>{title}</h5>
         </div>

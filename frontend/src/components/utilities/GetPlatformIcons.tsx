@@ -11,6 +11,8 @@ interface PlatformIconsProps {
 
 const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIconsProps) => { 
 
+  if(platforms?.length > 0) {
+
   const sortPlatformOrder = (actualPlatforms: number[]) => {
     const targetOrder = [187, 18, 7, 186, 4];
     const finalOrder: number[] = [];
@@ -90,6 +92,9 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
         .filter(Boolean)}
     </>
   );
+  } else {
+    return;
+  }
 };
 
 export default GetPlatformIcons;

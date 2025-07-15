@@ -8,31 +8,27 @@ interface GenreIconsProps {
   genres: number[];
 }
 
-const GetGenreIcons: React.FC<GenreIconsProps> = ({genres}: GenreIconsProps) => {
-  if(genres.length < 1) {
-    return;
-  } else {
-  // TODO: Sort these alphabetically
+const GetGenreIcons: React.FC<GenreIconsProps> = ({
+  genres,
+}: GenreIconsProps) => {
+  if (genres?.length > 0) {
     const genreJSX = genres
-    .map((id, index) => {
-      return (
-        genreIconMap[id].icon && (
-          <Tooltip
-            key={index}
-            title={
-              genreIconMap[id].name
-            }
-          >
-            {React.cloneElement(genreIconMap[id].icon, {
-              "aria-label":
-              genreIconMap[id].name
-            })}
+      .map((id, index) => {
+        const genre = genreIconMap[id];
+        if (!genre) return null;
+
+        const IconComponent = genre.icon;
+        return (
+          <Tooltip key={index} title={genre.name}>
+            <IconComponent aria-label={genre.name} />
           </Tooltip>
-        )
-      );
-    })
-    .filter(Boolean);
-  return <>{genreJSX.length > 0 ? genreJSX : <PlaceholderGenreIcon />}</>;
-}};
+        );
+      })
+      .filter(Boolean);
+    return <>{genreJSX.length > 0 ? genreJSX : <PlaceholderGenreIcon />}</>;
+  } else {
+    return;
+  }
+};
 
 export default GetGenreIcons;

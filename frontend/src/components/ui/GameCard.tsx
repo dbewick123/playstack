@@ -6,13 +6,13 @@ import CircleSelector from "../utilities/circleSelector/CircleSelector";
 import GetPlatformIcons from "../utilities/GetPlatformIcons";
 import metacriticIcon from "../../assets/logos/third-party/metacritic.png";
 import GetGenreIcons from "../utilities/GetGenreIcons";
-import { Chip, Tooltip } from "@mui/material";
+import placeholderImage from '../../assets/game-background-placeholder.jpg'
 
 //External Components
 import { Skeleton, Stack } from "@mui/material";
 import WishlistAddIcon from "@mui/icons-material/AddCard";
 import WishlistRemoveIcon from "@mui/icons-material/CreditScore";
-
+import { Chip, Tooltip } from "@mui/material";
 import LibraryRemoveIcon from "@mui/icons-material/PlaylistAddCheck";
 import LibraryAddIcon from "@mui/icons-material/PlaylistAdd";
 
@@ -68,9 +68,13 @@ function GameCard({ loading, game }: GameCardProps) {
   return !loading ? (
     <div className="game-card">
       <div
+        data-testid="game-card-gallery-images-test"
         className="game-card-gallary-image"
         style={{
-          backgroundImage: `url(${game.screenshots[currentIndex]})`,
+          backgroundImage:
+            game.screenshots?.length > 0
+              ? `url(${game.screenshots[currentIndex]})`
+              : `url(${placeholderImage})`,
         }}
       >
         <div
@@ -83,14 +87,17 @@ function GameCard({ loading, game }: GameCardProps) {
         ></div>
 
         <div className="game-gallary-selector-container">
-          {game.screenshots.map((_image, index) => (
-            //TODO: update this to be dynamic for mobile vs desktop
-            <CircleSelector
-              key={index}
-              selected={currentIndex === index}
-              onClick={() => handleGallaryClick("circles", index)}
-            />
-          ))}
+          {game.screenshots?.length > 0 ? (
+            game.screenshots.map((_image, index) => (
+              <CircleSelector
+                key={index}
+                selected={currentIndex === index}
+                onClick={() => handleGallaryClick("circles", index)}
+              />
+            ))
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="game-card-info-container">
@@ -117,7 +124,9 @@ function GameCard({ loading, game }: GameCardProps) {
           <div className="game-card-info-bottom-ratings">
             <Tooltip title="Metacritic">
               <div className="game-card-info-bottom-ratings-metacritic">
-                <img src={metacriticIcon} alt="Metacritic Logo" />
+                {metacriticIcon ? (
+                  <img src={metacriticIcon} alt="Metacritic Logo" />
+                ) : null}{" "}
                 <h6>{game.metacritic === -1 ? "n/a" : game.metacritic}</h6>
               </div>
             </Tooltip>
@@ -167,6 +176,7 @@ function GameCard({ loading, game }: GameCardProps) {
     <div className="game-card">
       <div className="game-card-gallary-image">
         <Skeleton
+          title="skeleton"
           variant="rounded"
           sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
           width="100%"
@@ -177,12 +187,14 @@ function GameCard({ loading, game }: GameCardProps) {
       <div className="game-card-info-container">
         <div className="game-card-info-top">
           <Skeleton
+            title="skeleton"
             variant="text"
             sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "1rem" }}
             width="60%"
             height={24}
           />
           <Skeleton
+            title="skeleton"
             variant="text"
             sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
             width="30%"
@@ -191,6 +203,7 @@ function GameCard({ loading, game }: GameCardProps) {
         </div>
         <div className="game-card-info-middle">
           <Skeleton
+            title="skeleton"
             variant="text"
             sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
             width="20%"
@@ -199,6 +212,7 @@ function GameCard({ loading, game }: GameCardProps) {
         </div>
         <div className="game-card-info-bottom">
           <Skeleton
+            title="skeleton"
             variant="rounded"
             sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
             width="100%"

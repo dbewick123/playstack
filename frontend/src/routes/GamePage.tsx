@@ -71,7 +71,6 @@ function GamePage() {
     );
   }
 
-  //TEST: need to check for when loading is false but each subsection returns no data
   // Render JSX here
   return (
     isError ? 

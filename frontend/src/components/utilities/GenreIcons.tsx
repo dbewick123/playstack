@@ -20,106 +20,106 @@ import CardIcon from "@mui/icons-material/Style";
 import EducationalIcon from "@mui/icons-material/ImportContacts";
 
 type GenreInfo = {
-  id: number,
+  id: number;
   name: string;
-  icon: React.ReactElement<SvgIconProps>;
+  icon: React.ComponentType<SvgIconProps>;
 };
 
 const genreIconMap: { [id: number]: GenreInfo } = {
   4: {
     id: 4,
     name: "Action",
-    icon: <ActionIcon />,
+    icon: ActionIcon,
   },
   51: {
     id: 51,
     name: "Indie",
-    icon: <IndieIcon />,
+    icon: IndieIcon,
   },
   3: {
     id: 3,
     name: "Adventure",
-    icon: <AdventureIcon />,
+    icon: AdventureIcon,
   },
   5: {
     id: 5,
     name: "RPG",
-    icon: <RpgIcon />,
+    icon: RpgIcon,
   },
   10: {
     id: 10,
     name: "Strategy",
-    icon: <StrategyIcon />,
+    icon: StrategyIcon,
   },
   2: {
     id: 2,
     name: "Shooter",
-    icon: <ShooterIcon />,
+    icon: ShooterIcon,
   },
   40: {
     id: 40,
     name: "Casual",
-    icon: <CasualIcon />,
+    icon: CasualIcon,
   },
   14: {
     id: 14,
     name: "Simulation",
-    icon: <SimulationIcon />,
+    icon: SimulationIcon,
   },
   7: {
     id: 7,
     name: "Puzzle",
-    icon: <PuzzleIcon />,
+    icon: PuzzleIcon,
   },
   11: {
     id: 11,
     name: "Arcade",
-    icon: <ArcadeIcon />,
+    icon: ArcadeIcon,
   },
   83: {
     id: 83,
     name: "Platformer",
-    icon: <PlatformerIcon />,
+    icon: PlatformerIcon,
   },
   59: {
     id: 59,
     name: "MMO",
-    icon: <MmoIcon />,
+    icon: MmoIcon,
   },
   1: {
     id: 1,
     name: "Racing",
-    icon: <RacingIcon />,
+    icon: RacingIcon,
   },
   15: {
     id: 15,
     name: "Sports",
-    icon: <SportsIcon />,
+    icon: SportsIcon,
   },
   6: {
     id: 6,
     name: "Fighting",
-    icon: <FightingIcon />,
+    icon: FightingIcon,
   },
   19: {
     id: 19,
     name: "Family",
-    icon: <FamilyIcon />,
+    icon: FamilyIcon,
   },
   28: {
     id: 28,
     name: "Board Games",
-    icon: <BoardGamesIcon />,
+    icon: BoardGamesIcon,
   },
   17: {
     id: 17,
     name: "Card",
-    icon: <CardIcon />,
+    icon: CardIcon,
   },
   34: {
     id: 34,
     name: "Educational",
-    icon: <EducationalIcon />,
+    icon: EducationalIcon,
   },
 };
 

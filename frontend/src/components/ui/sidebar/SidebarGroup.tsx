@@ -14,10 +14,13 @@ import {
   selectFilters
 } from "../../../store/slices/searchSlice";
 
+import { SvgIconProps } from "@mui/material";
+
+
 interface SidebarGroupProps {
   groupName: string;
   groupId: number;
-  items: { id: number; name: string; icon: React.ReactNode }[];
+  items: { id: number; name: string; icon: React.ComponentType<SvgIconProps> }[];
 }
 // TODO: Test that the clicks update redux properly
 function SidebarGroup({ groupId, groupName, items }: SidebarGroupProps) {

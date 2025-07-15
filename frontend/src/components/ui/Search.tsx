@@ -18,6 +18,7 @@ const Search = ({ handleOnKeyPressed }: SearchProps) => {
       <SearchIcon className="search-icon" />
       <input
         type="text"
+        aria-label="userSearch"
         value={queryValue}
         placeholder="Search for any game in the world"
         onChange={(e) => {

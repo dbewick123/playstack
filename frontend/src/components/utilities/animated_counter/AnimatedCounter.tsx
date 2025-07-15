@@ -43,7 +43,7 @@ const AnimatedCounter = ({
   }, [currentCount, initialiseCounter]);
 
   return (
-    <div ref={containerRef} className="animated-counter">
+    <div ref={containerRef} className="animated-counter" role="counter" aria-label='animated-counter'>
       {currentCount}
     </div>
   );
