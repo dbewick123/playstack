@@ -9,14 +9,15 @@ import {
   gameCountController,
   gamesGetGameController,
   gamesSearchController,
-  gamesNextPageController
+  gamesNextPageController,
 } from "./controllers/gameController.js";
 
 const app = express();
-app.use(  cors({
-  origin: [process.env.FRONTEND_URL_FOR_CORS!]
-}));
-
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL_FOR_CORS!],
+  })
+);
 
 // Middleware
 app.use(express.json());
@@ -43,7 +44,7 @@ app.get("/games/query/", gamesSearchController);
 
 app.get("/games/proxy/", gamesNextPageController);
 
-app.get('/games/:id', gamesGetGameController)
+app.get("/games/:id", gamesGetGameController);
 
 //Error handler should be the last middleware & after routes
 app.use(errorHandler);
