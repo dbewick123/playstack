@@ -5,8 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'frontend/**'
-      - 'backend/**'
+      - "frontend/**"
+      - "backend/**"
+      - ".github/**"
 
 jobs:
   test:
