@@ -43,3 +43,30 @@ jobs:
           THIRD_PARTY_GAME_API_KEY: ${{ secrets.THIRD_PARTY_GAME_API_KEY }}
           FRONTEND_URL_FOR_CORS: ${{ secrets.FRONTEND_URL_FOR_CORS }}
         run: npm test
+
+  deploy-frontend:
+    needs: test
+    runs-on: ubuntu-latest
+    if: |
+      success() &&
+      github.event.head_commit.message != '' &&
+      contains(join(github.event.commits.*.modified, ','), 'frontend/')
+      
+    steps:
+      - name: Trigger Frontend Render Deploy
+        run: |
+          curl -X POST https://api.render.com/deploy/srv-d1j4fa95pdvs73cq4770?key=${{ secrets.FRONTEND_DEPLOY }}
+
+  deploy-backend:
+    needs: test
+    runs-on: ubuntu-latest
+    if: |
+      success() &&
+      github.event.head_commit.message != '' &&
+      contains(join(github.event.commits.*.modified, ','), 'backend/')
+      
+    steps:
+      - name: Trigger Backend Render Deploy
+        run: |
+          curl -X POST https://api.render.com/deploy/srv-d1il7lndiees739rlak0?key=${{ secrets.BACKEND_DEPLOY }}
+    
