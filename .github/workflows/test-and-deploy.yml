@@ -30,8 +30,15 @@ jobs:
 
       - name: Run frontend tests
         working-directory: ./frontend
+        env:
+          VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL }}
         run: npm test
 
       - name: Run backend tests
         working-directory: ./backend
+        env:
+          VITE_API_URL: ${{ secrets.VITE_BACKEND_API_URL }}
+          THIRD_PARTY_GAME_API_URL: ${{ secrets.THIRD_PARTY_GAME_API_URL }}
+          THIRD_PARTY_GAME_API_KEY: ${{ secrets.THIRD_PARTY_GAME_API_KEY }}
+          FRONTEND_URL_FOR_CORS: ${{ secrets.FRONTEND_URL_FOR_CORS }}
         run: npm test
