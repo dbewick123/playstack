@@ -4,9 +4,9 @@ import { Game } from "../../types/game";
 import "./gameCard.css";
 import CircleSelector from "../utilities/circleSelector/CircleSelector";
 import GetPlatformIcons from "../utilities/GetPlatformIcons";
+import localDateFormatter from "../utilities/dateFormatter";
 import metacriticIcon from "../../assets/logos/third-party/metacritic.png";
-import GetGenreIcons from "../utilities/GetGenreIcons";
-import placeholderImage from '../../assets/game-background-placeholder.jpg'
+import placeholderImage from "../../assets/game-background-placeholder.jpg";
 
 //External Components
 import { Skeleton, Stack } from "@mui/material";
@@ -25,6 +25,10 @@ function GameCard({ loading, game }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
+
+  const formattedDate = game?.released
+    ? localDateFormatter(game?.released)
+    : game?.released;
 
   const handleGallaryClick = (clickSource: string, newIndex?: number) => {
     const imageCount = game.screenshots?.length;
@@ -110,18 +114,22 @@ function GameCard({ loading, game }: GameCardProps) {
               <h2 className="links">{game.name}</h2>
             </Link>
           </div>
-          <div className="game-card-info-platforms">
+        </div>
+        <div className="game-card-info-sub">
+        <h6>Release: {formattedDate}</h6>
+
+          
+        </div>
+        <div className="game-card-info-sub2">
+        <div className="game-card-info-platforms">
             <GetPlatformIcons platforms={game.platforms} />
           </div>
         </div>
-        <div className="game-card-info-middle">
-          <div className="genre-icon-container">
-            <GetGenreIcons genres={game.genres} />
-          </div>
-          <h6>Release: {game.released ? game.released : "Tba"}</h6>
-        </div>
+
+          
+        
         <div className="game-card-info-bottom">
-          <div className="game-card-info-bottom-ratings">
+        <div className="game-card-info-bottom-ratings">
             <Tooltip title="Metacritic">
               <div className="game-card-info-bottom-ratings-metacritic">
                 {metacriticIcon ? (
@@ -131,6 +139,8 @@ function GameCard({ loading, game }: GameCardProps) {
               </div>
             </Tooltip>
           </div>
+
+          
           <div className="game-card-info-bottom-buttons">
             <Stack direction="row" spacing={0.5}>
               <Chip
@@ -185,7 +195,7 @@ function GameCard({ loading, game }: GameCardProps) {
       </div>
 
       <div className="game-card-info-container">
-        <div className="game-card-info-top">
+        <div className="game-card-info-sub">
           <Skeleton
             title="skeleton"
             variant="text"
@@ -201,7 +211,7 @@ function GameCard({ loading, game }: GameCardProps) {
             height={18}
           />
         </div>
-        <div className="game-card-info-middle">
+        <div className="game-card-info-sub">
           <Skeleton
             title="skeleton"
             variant="text"

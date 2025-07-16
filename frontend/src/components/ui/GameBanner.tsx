@@ -2,6 +2,7 @@ import "./gameBanner.css";
 import { SingleGame } from "../../types/game";
 import GetGenreIcons from "../utilities/GetGenreIcons";
 import GetPlatformIcons from "../utilities/GetPlatformIcons";
+import localDateFormatter from "../utilities/dateFormatter";
 import Separator from "../../assets/icons/separator.svg?react";
 import backgroundImage from "../../assets/game-background-placeholder.jpg";
 
@@ -14,6 +15,9 @@ interface GameBannerProps {
 }
 
 function GameBanner({ singleGame }: GameBannerProps) {
+
+  const formattedDate = singleGame?.released ? localDateFormatter(singleGame?.released) : singleGame?.released;
+
   // Render JSX here
   return (
     <div
@@ -63,7 +67,7 @@ function GameBanner({ singleGame }: GameBannerProps) {
           <div className="game-banner-info-info2">
             <h4>
               Released:{" "}
-              {singleGame?.released === "-1" ? "n/a" : singleGame?.released}
+              {singleGame?.released === "-1" ? "n/a" : formattedDate}
             </h4>
             <div className="separator">
               <Separator />

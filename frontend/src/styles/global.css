@@ -1,6 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
+html {
+  font-size: 18px; 
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 18px; 
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 20px; 
+  }
+}
+
+@media (max-width: 430px) {
+  html {
+    font-size: 20px; 
+  }
+}
+
+
 :root {
   /* 🎨 Color System */
   --color-primary: #2fa98c;
@@ -30,7 +53,7 @@
   --color-text-link: rgba(47, 169, 140, 1);
 
   /* 🎨 Color System: Actions */
-  --color-hover: rgba(47, 169, 140, 1);
+  --color-hover: #2fa98c;
   --color-shadow: rgba(255, 255, 255, 0.2);
 
   /* 🎨 Color System: Overlays for Dark Theme */
@@ -67,6 +90,7 @@
   --font-size-xxlh1: 8rem;
   --font-weight-light: 300;
   --font-weight-regular: 400;
+  --font-weight-regularplus: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 700;
   --font-weight-extra-bold: 900;
@@ -130,7 +154,7 @@
 
   /* Specific Component Settings */
   --header-height: 80px;
-  --header-height-mobile: 108px;
+  --header-height-mobile: 114px;
   --footer-height: 80px;
   /*TODO: Implement this in layout*/
   --footer-height-mobile: 100px;
@@ -228,9 +252,8 @@ select {
 }
 
 a {
-  color: var(--color-text-link);
+  color: var(--color-text-highemp);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
   text-decoration: none;
   transition: color var(--transition-base) var(--ease-default);
 }

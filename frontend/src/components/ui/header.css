@@ -24,11 +24,13 @@
 }
 
 .header-logo-text {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   user-select: none;        
   pointer-events: none;
   align-self: end;
+  line-height: 1;
+  margin-bottom: -3px;
 }
 
 .header-search {
@@ -46,8 +48,14 @@
   gap: var(--space-sm);
   padding-left: var(--space-lg);
   flex: 0 0 auto;
-
 }
+
+.header-links a {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regularplus);
+}
+
+
 
 @media (max-width: 430px) {
   .header-content {

@@ -221,6 +221,42 @@ function GamePage() {
           )}
         </div>
 
+        
+
+        <div className="game-additional-info-playtime-counter">
+          {isLoading ? (
+            <div className="loading-tile">
+              <Skeleton
+                variant="text"
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+                width="40%"
+                height="15%"
+              />
+              <Skeleton
+                variant="rounded"
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+                width="100%"
+                height="100%"
+              />
+            </div>
+          ) : (
+            <>
+              <h1>Time to Beat</h1>
+              <div className={!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? "counter-no-data" : "counter"}>
+                {!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? (
+                  "-"
+                ) : (
+                  <AnimatedCounter
+                    finalCount={
+                      !singleGame?.playtime ? -1 : singleGame.playtime
+                    }
+                    milisecondDelay={50}
+                  />
+                )}
+              </div>
+            </>
+          )}
+        </div>
         <div className="game-additional-info-sentiment sentiment-pie">
           {isLoading ? (
             <div className="loading-tile">
@@ -280,41 +316,6 @@ function GamePage() {
                 />
                 </div>
               )}
-            </>
-          )}
-        </div>
-
-        <div className="game-additional-info-playtime-counter">
-          {isLoading ? (
-            <div className="loading-tile">
-              <Skeleton
-                variant="text"
-                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
-                width="40%"
-                height="15%"
-              />
-              <Skeleton
-                variant="rounded"
-                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
-                width="100%"
-                height="100%"
-              />
-            </div>
-          ) : (
-            <>
-              <h1>Time to Beat</h1>
-              <div className={!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? "counter-no-data" : "counter"}>
-                {!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? (
-                  "-"
-                ) : (
-                  <AnimatedCounter
-                    finalCount={
-                      !singleGame?.playtime ? -1 : singleGame.playtime
-                    }
-                    milisecondDelay={50}
-                  />
-                )}
-              </div>
             </>
           )}
         </div>

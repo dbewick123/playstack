@@ -58,6 +58,7 @@
   flex-direction: column;
   margin-left: var(--space-md);
   margin-right: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .game-card-info-container h2,
@@ -69,8 +70,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: var(--space-xs);
-  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.game-card-info-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-card-info-sub2 {
+  display: flex;
+  align-items: center;
+  margin-left: 1px;
+
+}
+
+
+
+.game-card-info-sub h6 {
+  line-height: 1;
+  margin-left: 1px;
+
 }
 
 .game-card-info-title {
@@ -85,6 +106,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1;
+  padding-top: (--space-md);
+
 }
 
 .game-card-info-platforms {
@@ -149,6 +173,11 @@
 .game-card-info-bottom-buttons {
   display: flex;
   align-items: center;
+}
+
+.platform-icon {
+  width: auto;
+  height: var(--icon-size-xs);
 }
 
 

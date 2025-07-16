@@ -111,6 +111,12 @@ text-align: center;
   height: 100%;
   width: 100%;
 }
+
+.counter-hours {
+  font-size: var(--font-size-mdh1);
+  color: var(--color-muted);
+}
+
 .counter-no-data {
   display: flex;
   justify-content: center;
@@ -160,9 +166,6 @@ text-align: center;
   height: 100vh;
 }
 
-.bar-mux {
-  margin-left: 12%
-}
 
 @media (max-width: 1024px) {
   .game-container {
@@ -188,16 +191,17 @@ text-align: center;
     font-weight: var(--font-weight-regular);
     color: var(--color-text-highemp);
   }
-  .pie-mux {
-    margin-left: -60px;
-  }
 
-  .bar-mux {
-    margin-left: 1%
+  .game-additional-info-playtime-counter h1 {
+    margin-bottom: 17%;
   }
 
   .loading-tile {
     width: 100vw;
+  }
+
+  .sentiment-title {
+    margin-bottom: 5%;
   }
 
     
@@ -246,11 +250,19 @@ text-align: center;
   }
 
   .pie-mux {
-    margin-left: -70px;
+    margin-left: -60px;
   }
 
   .sentiment-title {
     margin-bottom: -14%;
+  }
+
+  .counter {
+    font-size: var(--font-size-xlh1);
+    
+  }
+  .game-additional-info-playtime-counter {
+    margin-bottom: 10%;
   }
 
 }

@@ -165,23 +165,16 @@ function Home() {
               paddingTop: "24px",
               // Override Classes to target specific styles
               ".MuiPaginationItem-root": {
-                color: "#ffffff",
-                backgroundColor: "#1e1e1e",
-              },
-              ".css-6qpcc8-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected.Mui-disabled": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "#ffffff",
+                color: "#ffffff !important",
+                backgroundColor: "#1e1e1e !important",
               },
               ".Mui-disabled.Mui-selected": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "#ffffff",
+                border: "1px solid #ffffff1f !important",
+                backgroundColor: "rgba(255, 255, 255, 0.03) !important",
               },
               "Mui-selected": {
-                border: "1px solid #ffffff1f",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                color: "#ffffff",
+                border: "1px solid #ffffff1f !important",
+                backgroundColor: "rgba(255, 255, 255, 0.03) !important",
               },
             }}
             shape="rounded"
