@@ -47,7 +47,7 @@ function GamePage() {
     fetchGame();
   }, []);
 
-  //Setup gallary images
+  //Setup gallery images
   let sliderImages: string[] | null = null;
   if (!singleGame?.screenshots || singleGame?.screenshots.length < 1) {
     sliderImages = null;
@@ -72,22 +72,24 @@ function GamePage() {
   }
 
   // Render JSX here
-  return (
-    isError ? 
+  return isError ? (
     <div className="game-page-error">
       <div className="error-results-home">
-                <div className="error-results-home-message">
-                  <h2>Uh oh, we&apos;re having a connection issue</h2>
-                  <p>Please try reloading the page</p>
-                </div>
-                <div className="error-results-home-img">
-                  <ErrorIcon />
-                </div>
-              </div>
+        <div className="error-results-home-message">
+          <h2>Uh oh, we&apos;re having a connection issue</h2>
+          <p>Please try reloading the page</p>
+        </div>
+        <div className="error-results-home-img">
+          <ErrorIcon />
+        </div>
+      </div>
     </div>
-    :
+  ) : (
     <main className="game-container">
-      <div className="game-primary-tile" style={isLoading ? {height:'500px'} : {}}>
+      <div
+        className="game-primary-tile"
+        style={isLoading ? { height: "500px" } : {}}
+      >
         {isLoading ? (
           <div className="loading-tile-wrapper">
             <Skeleton
@@ -101,47 +103,51 @@ function GamePage() {
           <GameBannerWrapper singleGame={singleGame} />
         )}
       </div>
-      <div className="game-page-title" style={
+      <div
+        className="game-page-title"
+        style={
           !sliderImages && !isLoading
             ? { borderBottom: "1px solid var(--color-separator)" }
             : {}
         }
       >
-        <h4>Gallary</h4>
+        <h4>Gallery</h4>
 
         {!sliderImages && !isLoading ? (
-          
           <p>Sorry, this game currently has no screenshots available</p>
         ) : (
           <p>Check out the latest screenshots</p>
         )}
       </div>
-      <div className="game-media-tile" style={!sliderImages && !isLoading ? { display: "none" } : {}}>
+      <div
+        className="game-media-tile"
+        style={!sliderImages && !isLoading ? { display: "none" } : {}}
+      >
         {isLoading ? (
           <div className="loading-tile-wrapper">
             <div className="media-load-one">
-            <Skeleton
-              variant="rounded"
-              sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
-              width="100%"
-              height="420px"
-            />
+              <Skeleton
+                variant="rounded"
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+                width="100%"
+                height="420px"
+              />
             </div>
             <div className="media-load-two">
-            <Skeleton
-              variant="rounded"
-              sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
-              width="100%"
-              height="420px"
-            />
+              <Skeleton
+                variant="rounded"
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+                width="100%"
+                height="420px"
+              />
             </div>
             <div className="media-load-three">
-            <Skeleton
-              variant="rounded"
-              sx={{ bgcolor: "rgba(255, 255, 255, 0.07)"}}
-              width="100%"
-              height="420px"
-            />
+              <Skeleton
+                variant="rounded"
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.07)" }}
+                width="100%"
+                height="420px"
+              />
             </div>
           </div>
         ) : !sliderImages ? (
@@ -171,7 +177,7 @@ function GamePage() {
           ) : (
             <>
               <div className="sentiment-title">
-              <h1>Player Ratings</h1>
+                <h1>Player Ratings</h1>
               </div>
               {!playerRatings || playerRatings === "n/a" ? (
                 <div className="no-data-tile">
@@ -180,48 +186,46 @@ function GamePage() {
                 </div>
               ) : (
                 <div className="bar-mux">
-                <BarChart
-                  margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
-                  xAxis={[
-                    {
-                      data: playerRatings.map((rating) => {
-                        return rating.title;
-                      }),
-                      colorMap: {
-                        type: "ordinal",
-                        colors: ["#17af68", "#8bd7b3", "#a1a38c", "#cf7673"],
+                  <BarChart
+                    margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
+                    xAxis={[
+                      {
+                        data: playerRatings.map((rating) => {
+                          return rating.title;
+                        }),
+                        colorMap: {
+                          type: "ordinal",
+                          colors: ["#17af68", "#8bd7b3", "#a1a38c", "#cf7673"],
+                        },
+                        tickLabelStyle: { fill: "#cccccc" },
+                        disableLine: true,
+                        disableTicks: true,
                       },
-                      tickLabelStyle: { fill: "#cccccc" },
-                      disableLine: true,
-                      disableTicks: true,
-                    },
-                  ]}
-                  yAxis={[
-                    {
-                      tickLabelStyle: { fill: "#cccccc" },
-                      tickLabelPlacement: "middle",
-                      disableLine: true,
-                      disableTicks: true,
-                    },
-                  ]}
-                  series={[
-                    {
-                      data: playerRatings.map((rating) => {
-                        return Number(rating.count);
-                      }),
-                      color: "#2fa98c",
-                    },
-                  ]}
-                  height={250}
-                  width={400}
-                />
+                    ]}
+                    yAxis={[
+                      {
+                        tickLabelStyle: { fill: "#cccccc" },
+                        tickLabelPlacement: "middle",
+                        disableLine: true,
+                        disableTicks: true,
+                      },
+                    ]}
+                    series={[
+                      {
+                        data: playerRatings.map((rating) => {
+                          return Number(rating.count);
+                        }),
+                        color: "#2fa98c",
+                      },
+                    ]}
+                    height={250}
+                    width={400}
+                  />
                 </div>
               )}
             </>
           )}
         </div>
-
-        
 
         <div className="game-additional-info-playtime-counter">
           {isLoading ? (
@@ -242,8 +246,18 @@ function GamePage() {
           ) : (
             <>
               <h1>Time to Beat</h1>
-              <div className={!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? "counter-no-data" : "counter"}>
-                {!singleGame?.playtime || singleGame?.playtime === 0 || singleGame?.playtime === -1 ? (
+              <div
+                className={
+                  !singleGame?.playtime ||
+                  singleGame?.playtime === 0 ||
+                  singleGame?.playtime === -1
+                    ? "counter-no-data"
+                    : "counter"
+                }
+              >
+                {!singleGame?.playtime ||
+                singleGame?.playtime === 0 ||
+                singleGame?.playtime === -1 ? (
                   "-"
                 ) : (
                   <AnimatedCounter
@@ -276,7 +290,7 @@ function GamePage() {
           ) : (
             <>
               <div className="sentiment-title">
-              <h1>Player Activity</h1>
+                <h1>Player Activity</h1>
               </div>
               {statusPlaceholder === true || !statuses ? (
                 <div className="no-data-tile">
@@ -285,35 +299,35 @@ function GamePage() {
                 </div>
               ) : (
                 <div className="pie-mux">
-                <PieChart
-                  series={[
-                    {
-                      data: statuses,
-                      innerRadius: 30,
-                      outerRadius: 100,
-                      paddingAngle: 5,
-                      cornerRadius: 5,
-                      startAngle: -45,
-                      endAngle: 225,
-                    },
-                  ]}
-                  height={250}
-                  width={300}
-                  colors={[
-                    "#a1a38c",
-                    "#8bd7b3",
-                    "#17af68",
-                    "#8bd7b3",
-                    "#cf7673",
-                    "#17af68",
-                  ]}
-                  sx={{
-                    "& .MuiChartsLegend-series": {
-                      color: "var(--color-text-base) !important",
-                      height: 6
-                    },
-                  }}
-                />
+                  <PieChart
+                    series={[
+                      {
+                        data: statuses,
+                        innerRadius: 30,
+                        outerRadius: 100,
+                        paddingAngle: 5,
+                        cornerRadius: 5,
+                        startAngle: -45,
+                        endAngle: 225,
+                      },
+                    ]}
+                    height={250}
+                    width={300}
+                    colors={[
+                      "#a1a38c",
+                      "#8bd7b3",
+                      "#17af68",
+                      "#8bd7b3",
+                      "#cf7673",
+                      "#17af68",
+                    ]}
+                    sx={{
+                      "& .MuiChartsLegend-series": {
+                        color: "var(--color-text-base) !important",
+                        height: 6,
+                      },
+                    }}
+                  />
                 </div>
               )}
             </>

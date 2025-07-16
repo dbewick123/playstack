@@ -37,7 +37,7 @@ export const fetchSearchResults = createAsyncThunk(
       //TODO: Improve the search accuracy further
       const today = new Date();
       const localISODate =
-        today.getFullYear() +
+        (today.getFullYear() + 1) +
         "-" +
         String(today.getMonth() + 1).padStart(2, "0") +
         "-" +
@@ -61,7 +61,8 @@ export const fetchSearchResults = createAsyncThunk(
       }
 
       //Defaults to improve basic search accuracy & ordering
-      params.append("search_precise", "true");
+      params.append("search_exact", "true");
+      params.append("ordering", "-released");
 
       //TODO: Test case for this to check timezones
       params.append("dates", `1960-01-01,${localISODate}`);

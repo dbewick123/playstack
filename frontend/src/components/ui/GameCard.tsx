@@ -28,9 +28,9 @@ function GameCard({ loading, game }: GameCardProps) {
 
   const formattedDate = game?.released
     ? localDateFormatter(game?.released)
-    : 'tbc';
+    : "tbc";
 
-  const handleGallaryClick = (clickSource: string, newIndex?: number) => {
+  const handleGalleryClick = (clickSource: string, newIndex?: number) => {
     const imageCount = game.screenshots?.length;
 
     if (!imageCount) {
@@ -73,7 +73,7 @@ function GameCard({ loading, game }: GameCardProps) {
     <div className="game-card">
       <div
         data-testid="game-card-gallery-images-test"
-        className="game-card-gallary-image"
+        className="game-card-gallery-image"
         style={{
           backgroundImage:
             game.screenshots?.length > 0
@@ -82,21 +82,21 @@ function GameCard({ loading, game }: GameCardProps) {
         }}
       >
         <div
-          className="game-card-gallary-back"
-          onClick={() => handleGallaryClick("back")}
+          className="game-card-gallery-back"
+          onClick={() => handleGalleryClick("back")}
         ></div>
         <div
-          className="game-card-gallary-forward"
-          onClick={() => handleGallaryClick("forward")}
+          className="game-card-gallery-forward"
+          onClick={() => handleGalleryClick("forward")}
         ></div>
 
-        <div className="game-gallary-selector-container">
+        <div className="game-gallery-selector-container">
           {game.screenshots?.length > 0 ? (
             game.screenshots.map((_image, index) => (
               <CircleSelector
                 key={index}
                 selected={currentIndex === index}
-                onClick={() => handleGallaryClick("circles", index)}
+                onClick={() => handleGalleryClick("circles", index)}
               />
             ))
           ) : (
@@ -116,20 +116,16 @@ function GameCard({ loading, game }: GameCardProps) {
           </div>
         </div>
         <div className="game-card-info-sub">
-        <h6>Release: {formattedDate}</h6>
-
-          
+          <h6>Release: {formattedDate}</h6>
         </div>
         <div className="game-card-info-sub2">
-        <div className="game-card-info-platforms">
+          <div className="game-card-info-platforms">
             <GetPlatformIcons platforms={game.platforms} />
           </div>
         </div>
 
-          
-        
         <div className="game-card-info-bottom">
-        <div className="game-card-info-bottom-ratings">
+          <div className="game-card-info-bottom-ratings">
             <Tooltip title="Metacritic">
               <div className="game-card-info-bottom-ratings-metacritic">
                 {metacriticIcon ? (
@@ -140,7 +136,6 @@ function GameCard({ loading, game }: GameCardProps) {
             </Tooltip>
           </div>
 
-          
           <div className="game-card-info-bottom-buttons">
             <Stack direction="row" spacing={0.5}>
               <Chip
@@ -184,7 +179,7 @@ function GameCard({ loading, game }: GameCardProps) {
     </div>
   ) : (
     <div className="game-card">
-      <div className="game-card-gallary-image">
+      <div className="game-card-gallery-image">
         <Skeleton
           title="skeleton"
           variant="rounded"
@@ -203,20 +198,13 @@ function GameCard({ loading, game }: GameCardProps) {
             width="60%"
             height={24}
           />
-          <Skeleton
-            title="skeleton"
-            variant="text"
-            sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
-            width="30%"
-            height={18}
-          />
         </div>
         <div className="game-card-info-sub">
           <Skeleton
             title="skeleton"
             variant="text"
             sx={{ bgcolor: "rgba(255, 255, 255, 0.07)", fontSize: "0.75rem" }}
-            width="20%"
+            width="30%"
             height={18}
           />
         </div>

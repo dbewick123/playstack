@@ -68,7 +68,7 @@ test("renders game card with loading plus data", () => {
     </MemoryRouter>
   );
 
-  expect(screen.getAllByTitle("skeleton").length).toBe(5);
+  expect(screen.getAllByTitle("skeleton").length).toBe(4);
 });
 
 test("renders game card with loading and null data", () => {
@@ -95,7 +95,7 @@ test("renders game card with loading and null data", () => {
     </MemoryRouter>
   );
 
-  expect(screen.getAllByTitle("skeleton").length).toBe(5);
+  expect(screen.getAllByTitle("skeleton").length).toBe(4);
 });
 
 test("renders game card with no passed data", () => {

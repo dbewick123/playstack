@@ -1,5 +1,5 @@
 .circle-wrapper {
-  padding: var(--gallary-circle-padding);
+  padding: var(--gallery-circle-padding);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,14 +7,14 @@
 }
 
 .circle {
-  width: var(--gallary-circle-size);
-  height: var(--gallary-circle-size);
+  width: var(--gallery-circle-size);
+  height: var(--gallery-circle-size);
   border-radius: 50%;
-  border: 1px solid var(--gallary-circle-color-border);
-  background-color: var(--gallary-circle-color-default);
+  border: 1px solid var(--gallery-circle-color-border);
+  background-color: var(--gallery-circle-color-default);
   transition: background-color 0.4s ease;
 }
 
 .circle-selected {
-  background-color: var(--gallary-circle-color-selected);
+  background-color: var(--gallery-circle-color-selected);
 }

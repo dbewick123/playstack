@@ -148,7 +148,6 @@ const getGamesSearch = async (query: ParsedQs) => {
   params.append("key", API_KEY);
 
   const url = `${API_URL}/games?${params.toString()}`;
-
   const response = await fetch(url);
 
   if (!response.ok) {
