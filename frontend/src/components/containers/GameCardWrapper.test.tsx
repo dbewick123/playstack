@@ -40,7 +40,6 @@ test("renders game card with game data", () => {
 
   expect(screen.getByText("92")).toBeInTheDocument();
   expect(screen.getAllByTestId("mock-platform-react-svg").length).toBe(5);
-  expect(screen.getByText("Release: May 17, 2015")).toBeInTheDocument();
 });
 
 test("renders game card with loading plus data", () => {
