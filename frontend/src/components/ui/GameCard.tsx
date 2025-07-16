@@ -28,7 +28,7 @@ function GameCard({ loading, game }: GameCardProps) {
 
   const formattedDate = game?.released
     ? localDateFormatter(game?.released)
-    : game?.released;
+    : 'tbc';
 
   const handleGallaryClick = (clickSource: string, newIndex?: number) => {
     const imageCount = game.screenshots?.length;
