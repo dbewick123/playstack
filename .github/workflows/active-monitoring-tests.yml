@@ -1,0 +1,41 @@
+name: Active Monitoring Tests
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Run frontend tests
+        working-directory: ./frontend
+        env:
+          VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL }}
+        run: npm test
+
+      - name: Run backend tests
+        working-directory: ./backend
+        env:
+          VITE_API_URL: ${{ secrets.VITE_BACKEND_API_URL }}
+          THIRD_PARTY_GAME_API_URL: ${{ secrets.THIRD_PARTY_GAME_API_URL }}
+          THIRD_PARTY_GAME_API_KEY: ${{ secrets.THIRD_PARTY_GAME_API_KEY }}
+          FRONTEND_URL_FOR_CORS: ${{ secrets.FRONTEND_URL_FOR_CORS }}
+        run: npm test
