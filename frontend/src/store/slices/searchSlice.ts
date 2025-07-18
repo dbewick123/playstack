@@ -65,7 +65,7 @@ export const fetchSearchResults = createAsyncThunk(
       params.append("ordering", "-released");
 
       //TODO: Test case for this to check timezones
-      params.append("dates", `1960-01-01,${localISODate}`);
+      params.append("dates", `1995-01-01,${localISODate}`);
 
       const url = `${BACKEND_API_URL}/games/query?${params.toString()}`;
       const response = await fetch(url);
@@ -151,6 +151,12 @@ export const searchSlice = createSlice({
         return;
       }
     },
+    clearFilters(state) {
+      state.filters = {
+        platforms: [],
+        genres: [],
+      };
+    },
     clearResults(state) {
       state.results = {
         games: [],
@@ -206,6 +212,7 @@ export const {
   removeGenre,
   addPlatform,
   removePlatform,
+  clearFilters,
   clearResults,
   setPageNumber,
 } = searchSlice.actions;

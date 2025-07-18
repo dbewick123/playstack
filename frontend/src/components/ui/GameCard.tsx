@@ -19,12 +19,15 @@ import LibraryAddIcon from "@mui/icons-material/PlaylistAdd";
 interface GameCardProps {
   loading: boolean;
   game: Game;
+  location?: string;
 }
 
-function GameCard({ loading, game }: GameCardProps) {
+function GameCard({ loading, game, location }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
+
+  const safeLocation = !location ? 'unknown' : location;
 
   const formattedDate = game?.released
     ? localDateFormatter(game?.released)
@@ -107,12 +110,14 @@ function GameCard({ loading, game }: GameCardProps) {
       <div className="game-card-info-container">
         <div className="game-card-info-top">
           <div className="game-card-info-title">
+            {safeLocation === 'landing' ? <h2>{game.name}</h2> :
             <Link
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               to={`/game/${game.id}`}
             >
               <h2 className="links">{game.name}</h2>
             </Link>
+}
           </div>
         </div>
         <div className="game-card-info-sub">
@@ -120,7 +125,10 @@ function GameCard({ loading, game }: GameCardProps) {
         </div>
         <div className="game-card-info-sub2">
           <div className="game-card-info-platforms">
-            <GetPlatformIcons platforms={game.platforms} />
+            <GetPlatformIcons
+              platforms={game.platforms}
+              iconClass="platform-icon-card"
+            />
           </div>
         </div>
 

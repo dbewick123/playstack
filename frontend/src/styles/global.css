@@ -267,6 +267,11 @@ a {
   cursor: pointer;
 }
 
+.link-hover:hover {
+  color: var(--color-secondary);
+  transition: color var(--transition-base) var(--ease-default);
+}
+
 a:hover {
   color: var(--color-hover);
 }
@@ -318,9 +323,14 @@ select:focus {
   font-size: var(--heading-emoji-size);
 }
 
-.platform-icon {
+.platform-icon-card {
   width: auto;
-  height: var(--icon-size-sm);
+  height: var(--icon-size-xs);
+}
+
+.platform-icon-game {
+  width: auto;
+  height: var(--icon-size-md);
 }
 
 .platform-pc {

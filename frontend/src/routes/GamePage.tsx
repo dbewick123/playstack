@@ -63,7 +63,7 @@ function GamePage() {
   //Setup status data
   let statusPlaceholder: boolean = false;
   let statuses: playerStatusStandardised[] | undefined = [];
-  if (!singleGame?.added_by_status) {
+  if (!singleGame?.added_by_status || Object.keys(singleGame.added_by_status).length === 0) {
     statusPlaceholder = true;
   } else {
     statuses = buildPlayerStatuses(
@@ -227,7 +227,13 @@ function GamePage() {
           )}
         </div>
 
-        <div className="game-additional-info-playtime-counter">
+        <div className={
+                  !singleGame?.playtime ||
+                  singleGame?.playtime === 0 ||
+                  singleGame?.playtime === -1
+                  ? "game-additional-info-sentiment"
+                  : "game-additional-info-playtime-counter"
+                }>
           {isLoading ? (
             <div className="loading-tile">
               <Skeleton
@@ -245,20 +251,26 @@ function GamePage() {
             </div>
           ) : (
             <>
+
+              <div className="sentiment-title">
               <h1>Time to Beat</h1>
+              </div>
               <div
                 className={
                   !singleGame?.playtime ||
                   singleGame?.playtime === 0 ||
                   singleGame?.playtime === -1
-                    ? "counter-no-data"
+                    ? "no-data-tile"
                     : "counter"
                 }
               >
                 {!singleGame?.playtime ||
                 singleGame?.playtime === 0 ||
                 singleGame?.playtime === -1 ? (
-                  "-"
+                  <>
+                  <p>We don&apos;t have this</p>
+                  <ErrorIcon />
+                  </>
                 ) : (
                   <AnimatedCounter
                     finalCount={

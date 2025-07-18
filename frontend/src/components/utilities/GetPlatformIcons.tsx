@@ -7,9 +7,10 @@ import Tooltip from "@mui/material/Tooltip";
 
 interface PlatformIconsProps {
   platforms: number[];
+  iconClass: string;
 }
 
-const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIconsProps) => { 
+const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms, iconClass}: PlatformIconsProps) => { 
 
   if(platforms?.length > 0) {
 
@@ -37,7 +38,7 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
               <Tooltip key={index} title="Windows">
                 <PcIcon
                   key={index}
-                  className="platform-icon platform-pc"
+                  className={`${iconClass} platform-pc`}
                   aria-label="PC"
                 />
               </Tooltip>
@@ -48,7 +49,7 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
               <Tooltip key={index} title="Xbox">
                 <XboxIcon
                   key={index}
-                  className="platform-icon platform-xbox"
+                  className={`${iconClass} platform-xbox`}
                   aria-label="Xbox"
                 />
               </Tooltip>
@@ -59,7 +60,7 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
               <Tooltip key={index} title="PlayStation 5">
                 <PsBasicIcon
                   key={index}
-                  className="platform-icon platform-ps"
+                  className={`${iconClass} platform-ps`}
                   aria-label="PS"
                 />
               </Tooltip>
@@ -70,7 +71,7 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
               <Tooltip key={index} title="PlayStation 4">
                 <PsIcon
                   key={index}
-                  className="platform-icon platform-ps"
+                  className={`${iconClass} platform-ps`}
                   aria-label="PS"
                 />
               </Tooltip>
@@ -81,7 +82,7 @@ const GetPlatformIcons: React.FC<PlatformIconsProps> = ({platforms,}: PlatformIc
               <Tooltip key={index} title="Nintendo Switch">
                 <SwitchIcon
                   key={index}
-                  className="platform-icon platform-switch"
+                  className={`${iconClass} platform-switch`}
                   aria-label="Switch"
                 />
               </Tooltip>

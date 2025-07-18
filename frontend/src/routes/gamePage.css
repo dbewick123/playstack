@@ -119,8 +119,9 @@ text-align: center;
 
 .counter-no-data {
   display: flex;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   height: 100%;
   width: 100%;
   color: var(--color-primary);
@@ -156,6 +157,7 @@ text-align: center;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  margin-top: var(--space-4xl);
   height: 100%;
   width: 100%;
   color: var(--color-primary);

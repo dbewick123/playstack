@@ -1,20 +1,34 @@
 import "./landing.css";
-import { useIsMobile } from "../hooks/useBreakpoints";
+import {
+  useIsMobile,
+  useIsLargeMobile,
+  useIsTablet,
+  useIsDesktop,
+} from "../hooks/useBreakpoints";
 import car1 from "../assets/icons/carousel/car1.png";
 import car2 from "../assets/icons/carousel/car2.png";
 import car3 from "../assets/icons/carousel/car3.png";
 import car4 from "../assets/icons/carousel/car4.png";
 import car5 from "../assets/icons/carousel/car5.png";
 import car6 from "../assets/icons/carousel/car6.png";
+import GameCardWrapper from "../components/containers/GameCardWrapper";
+import {
+  gameDataFull,
+  gameDataDesktop,
+  gameDataMobile,
+  gameDataTablet,
+} from "../utilities/landingPageData";
 import { Button } from "@mui/material";
-import productScreenshot from "../assets/screenshots/product-screenshot.jpg";
-import productScreenshotMobile from "../assets/screenshots/product-screenshot-mobile.jpg";
 import { useEffect, useMemo, useState } from "react";
 
 function Landing() {
   const isMobile = useIsMobile();
+  const isLargeMobile = useIsLargeMobile();
+  const IsTablet = useIsTablet();
+  const isDesktop = useIsDesktop();
+
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [gameCount, setGameCount] = useState(0); 
+  const [gameCount, setGameCount] = useState(0);
 
   useEffect(() => {
     const fetchGameCount = async () => {
@@ -33,6 +47,15 @@ function Landing() {
     };
     fetchGameCount();
   }, []);
+
+
+  const landingPageData = useMemo(() => {
+    if (isLargeMobile || isMobile) return gameDataMobile;
+    if (IsTablet) return gameDataTablet;
+    if (isDesktop) return gameDataDesktop;
+    return gameDataFull;
+  }, [isLargeMobile, IsTablet, isDesktop]);
+  
 
   const images: { src: string; alt: string; ariaHidden: boolean }[] = [
     { src: car1, alt: "spaceship", ariaHidden: false },
@@ -53,7 +76,7 @@ function Landing() {
   return (
     <div className="landing-container">
       <div className="landing-heading">
-        <h1>Your Ultimate Gaming Companion</h1>
+        <h1>Your One Stop Game Collection Companion</h1>
         <div className="landing-heading-button">
           <Button
             variant="contained"
@@ -66,15 +89,25 @@ function Landing() {
         </div>
         {/* <GamepadIcon /> */}
         <p>
-          Join the playstack family today. Track, manage and review every game
-          imaginable. We have you covered with {gameCount === -1 ? "thousands of" : gameCount} games and counting
+          With our extensive game library, Playstack allow you to track,
+          wishlist and rate all your games from one, central place. With{" "}
+          {gameCount === -1 ? "thousands of" : gameCount} games and counting,
+          you&apos;ll never again need to check 5+ different storefronts for the
+          games you want to play next. Hit the button and start playing more
+          now.
         </p>
       </div>
-      <div className="landing-product-screenshot">
-        <img
-          src={isMobile ? productScreenshotMobile : productScreenshot}
-          alt="product screenshot"
-        />
+      <div className="landing-product-example">
+        <div className="game-card-wrapper">
+          {landingPageData.map((game, i) => (
+            <GameCardWrapper
+              key={i}
+              game={game}
+              loading={false}
+              location="landing"
+            />
+          ))}
+        </div>
       </div>
       <div className="landing-logos-carousel">
         <div className="landing-logos">
@@ -104,15 +137,16 @@ function Landing() {
             <span className="text-highemp-p-span">
               Manage current & future collections.
             </span>{" "}
-            Use our massive games library alongside our collection features (coming soon).
-            Build out your personal library, or pull together a wishlist with
-            everything in it.
+            Use our massive games library alongside our collection features
+            (coming soon). Build out your personal library, or pull together a
+            wishlist with everything in it.
           </p>
           <br />
           <p>
             <span className="feature-info-additional-text">
               Building your own local game, or have such a niche its not yet in
-              our database, add it with our &apos;add indie game&apos; feature (coming soon).
+              our database? Add it with our &apos;add indie game&apos; feature
+              (coming soon).
             </span>
           </p>
         </div>

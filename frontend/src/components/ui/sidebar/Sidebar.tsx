@@ -4,7 +4,8 @@ import "./sidebar.css";
 import SidebarGroup from "./SidebarGroup";
 import FilterIcon from "../../../assets/icons/filter.svg?react";
 import genreIconMap from "../../utilities/GenreIcons";
-import { SvgIconProps } from "@mui/material";
+import platformIconMap from "../../utilities/PlatformIcons";
+import { SvgIconProps, Tooltip } from "@mui/material";
 
 //platform icons
 import PsBasicIcon from "../../../assets/icons/platforms/ps-basic.svg?react";
@@ -12,20 +13,62 @@ import XboxIcon from "../../../assets/icons/platforms/xbox.svg?react";
 import PcIcon from "../../../assets/icons/platforms/pc.svg?react";
 import SwitchIcon from "../../../assets/icons/platforms/switch.svg?react";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectFilters, clearFilters } from "../../../store/slices/searchSlice";
+
 interface SidebarData {
   title: string;
   subTitle: string;
   groups: {
     groupName: string;
     groupId: number;
-    items: { id: number; name: string; icon: React.ComponentType<SvgIconProps> }[];
+    items: {
+      id: number;
+      name: string;
+      icon: React.ComponentType<SvgIconProps>;
+    }[];
   }[];
 }
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const handleClearClick = () => {
+    dispatch(clearFilters())
+  }
+
+  const currentReduxFilters = useSelector(selectFilters);
+
+  const currentPlatformFilters = currentReduxFilters?.platforms
+    ?.map((platformItem) => {
+      return platformItem != null
+        ? platformIconMap[Number(platformItem)]?.name
+        : null;
+    })
+    .filter(Boolean);
+
+  const currentGenrefilters = currentReduxFilters?.genres
+    ?.map((genreItem) => {
+      return genreItem != null ? genreIconMap[Number(genreItem)]?.name : null;
+    })
+    .filter(Boolean);
+
+  const getAllCurrentFilters = () => {
+    if (!currentGenrefilters && !currentPlatformFilters) {
+      return;
+    }
+    const combinedFilters = [
+      ...(currentGenrefilters ?? []),
+      ...(currentPlatformFilters ?? []),
+    ];
+
+    return combinedFilters.join(", ");
+  };
+
+  const allCurrentFilters = getAllCurrentFilters();
+
   const sidebarData: SidebarData = {
     title: "Filters",
-    subTitle: "Select one or more",
+    subTitle: "Click to add",
     groups: [
       {
         groupName: "Genres",
@@ -78,6 +121,22 @@ function Sidebar() {
             <h6>{sidebarData.subTitle}</h6>
           </div>
         </div>
+        {!allCurrentFilters ? (
+          <></>
+        ) : (
+          <div className="sidebar-active-filters-wrapper">
+            <div className="sidebar-active-title">
+              <h6>Active</h6>
+            </div>
+            <div className="sidebar-active-filters">
+              <h6 className="clear-click-area link-hover" onClick={handleClearClick}>X</h6>
+              <Tooltip title={allCurrentFilters}>
+                <h6 className="sidebar-overflow">{allCurrentFilters}</h6>
+              </Tooltip>
+            </div>
+          </div>
+        )}
+
         {sidebarData.groups.map((group) => {
           return group.items ? (
             <SidebarGroup

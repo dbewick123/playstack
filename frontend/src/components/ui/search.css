@@ -37,6 +37,17 @@
   color: var(--color-muted);
 }
 
+.search-clear {
+  position: absolute;
+  right: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  cursor: pointer;
+  color: var(--color-muted);
+}
+
 @media (max-width: 430px) {
   .search-bar input {
     font-size: var(--font-size-base);

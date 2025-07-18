@@ -113,7 +113,7 @@ describe("fetchSearchResults thunk", () => {
     expect(parsedURL.searchParams.get("page")).toBe("1");
     expect(parsedURL.searchParams.get("search_exact")).toBe("true");
     expect(parsedURL.searchParams.get("dates")).toMatch(
-      /^1960-01-01,\d{4}-\d{2}-\d{2}$/
+      /^1995-01-01,\d{4}-\d{2}-\d{2}$/
     );
 
     //Check that the payload matches the expected response results

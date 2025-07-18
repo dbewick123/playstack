@@ -94,6 +94,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  text-overflow: ellipsis;  
   flex: 1;
   min-width: 0;
 }
@@ -166,9 +167,4 @@
 .game-card-info-bottom-buttons {
   display: flex;
   align-items: center;
-}
-
-.platform-icon {
-  width: auto;
-  height: var(--icon-size-xs);
 }

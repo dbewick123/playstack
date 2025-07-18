@@ -19,6 +19,46 @@
   column-gap: var(--space-sm);
 }
 
+
+.sidebar-active-filters-wrapper {
+  margin-bottom: -10px;
+}
+
+.sidebar-active-title {
+  display: flex;
+  flex: 0;
+  margin: var(--space-xl) var(--space-sm) 0 var(--space-sm);
+}
+
+.sidebar-active-title h6 {
+  font-size: var(--font-size-xs);
+}
+
+.clear-click-area {
+  cursor: pointer;
+  color: var(--color-secondary);
+}
+
+.sidebar-active-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0 0 0 var(--space-sm);
+}
+
+h6.clear-click-area {
+  color: var(--color-text-highemp);
+  font-size: var(--font-size-xxs);
+}
+
+.sidebar-overflow {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis; 
+color: var(--color-primary); 
+font-size: var(--font-size-xs);
+}
+
 .sidebar-icon {
   height: var(--icon-size-lg);
   width: var(--icon-size-lg);

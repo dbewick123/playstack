@@ -23,9 +23,8 @@
   margin-bottom: var(--space-xl);
 }
 
-.landing-product-screenshot {
+.landing-product-example {
   width: 100%;
-  max-height: 700px;
   margin-top: var(--content-block-separator-base);
   border: 1px solid var(--color-separator);
   border-radius: var(--radius-lg);
@@ -64,6 +63,7 @@
   grid-template-rows: minmax(240px, auto);
   column-gap: var(--content-block-separator-base);
   margin-top: var(--content-block-separator-base);
+  margin-bottom: var(--content-block-separator-base);
 }
 
 .feature-summary {
@@ -116,7 +116,7 @@
     font-size: var(--font-size-xs);
   }
 
-  .landing-product-screenshot {
+  .landing-product-example {
     width: 90%;
     margin: var(--content-block-separator-mobile) auto 0 auto;
   }

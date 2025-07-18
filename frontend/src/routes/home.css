@@ -13,7 +13,7 @@
   width: 100%;
   grid-template-areas:
     "home-filters home-main";
-  grid-template-columns: 188px 4fr;
+  grid-template-columns: 200px 4fr;
   column-gap: var(--space-xl);
   margin-top: var(--space-xl);
 }

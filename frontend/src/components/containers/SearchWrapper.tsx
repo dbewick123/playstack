@@ -21,9 +21,15 @@ const SearchWrapper = () => {
     }
   };
 
+  const handleOnClearClicked = (
+    queryValue: string
+  ) => {
+    dispatch(setQuery(queryValue));
+  };
+
   return (
     <>
-      <Search handleOnKeyPressed={handleEnterPressed} />
+      <Search handleOnKeyPressed={handleEnterPressed} handleOnClearClicked={handleOnClearClicked} />
     </>
   );
 };

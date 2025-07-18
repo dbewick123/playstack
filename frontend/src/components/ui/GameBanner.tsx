@@ -49,6 +49,7 @@ function GameBanner({ singleGame }: GameBannerProps) {
                   platforms={singleGame.platforms.map(
                     (platform) => platform.platform.id
                   )}
+                  iconClass="platform-icon-game"
                 />
               ) : (
                 <></>
