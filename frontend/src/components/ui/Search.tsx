@@ -1,7 +1,7 @@
 import "./search.css";
 import SearchIcon from "../../assets/icons/search.svg?react";
 import ClearIcon from "../../assets/icons/clear-icon.svg?react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SearchProps {
   handleOnKeyPressed: (
@@ -9,10 +9,29 @@ interface SearchProps {
     queryValue: string
   ) => void;
   handleOnClearClicked: (queryValue: string) => void;
+  handleDebouncedInputFired: (debouncedInput: string) => void;
 }
 
-const Search = ({ handleOnKeyPressed, handleOnClearClicked }: SearchProps) => {
+const Search = ({ handleOnKeyPressed, handleOnClearClicked, handleDebouncedInputFired }: SearchProps) => {
   const [queryValue, setQueryValue] = useState("");
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedInputValue(queryValue);
+    }, 500);
+  
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [queryValue]);
+
+  useEffect(() => {
+    if (debouncedInputValue) {
+      handleDebouncedInputFired(debouncedInputValue)
+    }
+  }, [debouncedInputValue
+  ]);
 
   return (
     // TODO: Add a modal on cmd/ctrl K to open the search bar

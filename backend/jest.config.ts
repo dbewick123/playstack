@@ -16,7 +16,9 @@ const config: JestConfigWithTsJest = {
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
-  }
+  },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts']
+
 };
 
 export default config;

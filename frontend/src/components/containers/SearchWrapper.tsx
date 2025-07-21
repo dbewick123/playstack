@@ -11,10 +11,8 @@ const SearchWrapper = () => {
 
   const handleEnterPressed = (
     event: React.KeyboardEvent<HTMLInputElement>,
-    queryValue: string
   ) => {
     if (event.key === "Enter") {
-      dispatch(setQuery(queryValue));
       if (!location.pathname.startsWith("/home")) {
         navigate("/home");
       }
@@ -27,9 +25,13 @@ const SearchWrapper = () => {
     dispatch(setQuery(queryValue));
   };
 
+  const handleDebouncedInputFired = (debouncedInput: string) => {
+    dispatch(setQuery(debouncedInput))
+  }
+
   return (
     <>
-      <Search handleOnKeyPressed={handleEnterPressed} handleOnClearClicked={handleOnClearClicked} />
+      <Search handleOnKeyPressed={handleEnterPressed} handleOnClearClicked={handleOnClearClicked} handleDebouncedInputFired={handleDebouncedInputFired} />
     </>
   );
 };
