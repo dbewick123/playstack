@@ -1,0 +1,15 @@
+.MuiDialogContent-root h2{
+  margin-bottom: -16px !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+.MuiDialogContent-root p{
+  font-size: var(--font-size-sm) !important;
+  margin-top: var(--space-lg) !important;
+}
+
+.MuiDialogContent-root span {
+  display: block;
+  margin-bottom: 0.4rem;
+}

@@ -5,6 +5,7 @@ import GetPlatformIcons from "../utilities/GetPlatformIcons";
 import localDateFormatter from "../utilities/dateFormatter";
 import Separator from "../../assets/icons/separator.svg?react";
 import backgroundImage from "../../assets/game-background-placeholder.jpg";
+import DialogModal from "../utilities/DialogModal";
 
 //External
 import DOMPurify from "dompurify";
@@ -15,8 +16,10 @@ interface GameBannerProps {
 }
 
 function GameBanner({ singleGame }: GameBannerProps) {
-
-  const formattedDate = singleGame?.released ? localDateFormatter(singleGame?.released) : singleGame?.released;
+  
+  const formattedDate = singleGame?.released
+    ? localDateFormatter(singleGame?.released)
+    : singleGame?.released;
 
   // Render JSX here
   return (
@@ -67,8 +70,7 @@ function GameBanner({ singleGame }: GameBannerProps) {
           </div>
           <div className="game-banner-info-info2">
             <h4>
-              Released:{" "}
-              {singleGame?.released === "-1" ? "n/a" : formattedDate}
+              Released: {singleGame?.released === "-1" ? "n/a" : formattedDate}
             </h4>
             <div className="separator">
               <Separator />
@@ -99,6 +101,16 @@ function GameBanner({ singleGame }: GameBannerProps) {
               ).replaceAll("<br>", "<span></span>"),
             }}
           ></div>
+          <div className="dialog-game-description">
+            <DialogModal
+              dialogText={
+                !singleGame?.description || typeof singleGame.description !== "string"
+                  ? "No description available"
+                  : DOMPurify.sanitize(singleGame.description).replaceAll("<br>", "<span></span>")
+              }
+              dialogTitle={!singleGame?.name ? 'Game Summary' : singleGame?.name}
+            />
+          </div>
         </div>
       </div>
     </div>

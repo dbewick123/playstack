@@ -90,6 +90,10 @@
   margin-bottom: 0.6rem;
 }
 
+.dialog-game-description {
+  margin-top: auto;
+}
+
 /* Utilities */
 .separator svg {
   height: var(--separator-size-base);
