@@ -12,8 +12,8 @@ function App() {
         <Route path="landing" element={<Landing />} />
         <Route path="home" element={<Home />} />
         <Route path="game/:id" element={<GamePage />} />
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Route>
+        <Route path="*" element={<div>404 - Page Not Found</div>} />
+        </Route>
     </Routes>
   );
 }
