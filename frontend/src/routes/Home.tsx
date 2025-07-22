@@ -48,7 +48,6 @@ function Home() {
   };
   const [containerRef, isVisable] = useElementOnScreen(options);
 
-  //TODO: Test this with lots of edge cases etc
   //useEffect for the filters and search query calls
   useEffect(() => {
     dispatch(setPageNumber("1"));

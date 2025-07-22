@@ -26,24 +26,25 @@ const initialState: SearchState = {
 export const fetchSearchResults = createAsyncThunk(
   //TODO: Improve the sophistication of the search, need to have better ways of showing recent games, etc (add order by)
   "search/fetchSearchResults",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (_, thunkAPI) => {
     try {
-
       const rootState = thunkAPI.getState() as RootState;
       const searchState = rootState.search;
       const params = new URLSearchParams();
 
-      //TODO: Improve the search accuracy further
+      const anySearchOrFilters =
+        searchState.query ||
+        searchState.filters.genres.length > 0 ||
+        searchState.filters.platforms.length > 0;
       const today = new Date();
       const localISODate =
-        (today.getFullYear() + 1) +
+        today.getFullYear() +
+        1 +
         "-" +
         String(today.getMonth() + 1).padStart(2, "0") +
         "-" +
         String(today.getDate()).padStart(2, "0");
 
-      //TODO: Test this for nulls, etc
       if (searchState.query) {
         params.append("search", searchState.query.replace(/\s+/g, "%"));
       }
@@ -62,7 +63,9 @@ export const fetchSearchResults = createAsyncThunk(
 
       //Defaults to improve basic search accuracy & ordering
       params.append("search_exact", "true");
-      params.append("ordering", "-released");
+      if (anySearchOrFilters) {
+        params.append("ordering", "-released");
+      }
 
       //TODO: Test case for this to check timezones
       params.append("dates", `1995-01-01,${localISODate}`);
