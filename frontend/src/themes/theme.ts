@@ -31,6 +31,7 @@ declare module "@mui/material/Button" {
 }
 
 export const theme = createTheme({
+
   palette: {
     playstackSelected: {
       main: "#2c433b",

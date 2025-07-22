@@ -46,7 +46,7 @@ html {
 
   /* 🎨 Color System Text */
   --color-text-base: rgba(255, 255, 255, 0.6);
-  --color-text-highemp: rgba(255, 255, 255, 1);
+  --color-text-highemp: #ffffff;
   --color-text-contrast: #1e1e1e;
   --color-text-disabled: rgba(255, 255, 255, 0.38);
   --color-text-link: rgba(47, 169, 140, 1);

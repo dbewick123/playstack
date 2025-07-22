@@ -64,12 +64,10 @@ function GameCard({ loading, game, location }: GameCardProps) {
 
   const handleWishlistClick = () => {
     setSelectedWishlist(!selectedWishlist);
-    //TODO: add Redux logic to add to wishlist (in parent component probs)
   };
 
   const handleLibraryClick = () => {
     setSelectedLibrary(!selectedLibrary);
-    //TODO: add Redux logic to add to library (in parent component probs)
   };
 
   return !loading ? (
