@@ -34,8 +34,8 @@ And so, with the initial release of [play-stack.com](http://play-stack.com), I a
 
 - **Responsive Modern UI** — Optimised for mobile, tablet, and desktop. Achieved by using reactive design principals with a combination of grids and flexbox,  persistent layout/outlet components as well as a modular variable based CSS class system.
 - **Advanced Search & Filters** — Genre, platform, and keyword-based filtering using dynamic query construction. Results dynamically rendered and paged with infinite scrolling.
-- **Redux State Management** — ****Global app state managed via Redux, with local component state covered by React states. Redux Thunks utilised to fetch external data, centralising logic inside the Slice to avoid convoluted API calls.
-- **CSS, from Scratch + Libraries** — ****To aid learning, a number of higher complexity components have been created from scratch (infinite carousel, filters sidebar, game card image gallery), as well as leveraging libraries such as Material UI and Swiper.
+- **Redux State Management** — Global app state managed via Redux, with local component state covered by React states. Redux Thunks utilised to fetch external data, centralising logic inside the Slice to avoid convoluted API calls.
+- **CSS, from Scratch + Libraries** — To aid learning, a number of higher complexity components have been created from scratch (infinite carousel, filters sidebar, game card image gallery), as well as leveraging libraries such as Material UI and Swiper.
 
 ### ⚙️ Backend
 
@@ -44,7 +44,7 @@ And so, with the initial release of [play-stack.com](http://play-stack.com), I a
 
 ### 🧩 General
 
-- **Modular Build Approach** — ****Where appropriate modularity and abstraction have been used, ensuring more efficient extension and maintenance. This includes smart/dumb container approach for UI and controller/service for backend.
+- **Modular Build Approach** — Where appropriate modularity and abstraction have been used, ensuring more efficient extension and maintenance. This includes smart/dumb container approach for UI and controller/service for backend.
 - **Security Considerations** — XXS, network & authentication addressed throughout application.
 - **Typescript and ESLint** — Used throughout development to help reduce missed code issues and runtime errors.
 
@@ -107,17 +107,17 @@ With the last point above said, if you just want to grab the repo and run it loc
 
 Grab the code from my repo into your local projects folder:
 
-`*git clone [https://github.com/dbewick123/playstack.git](https://github.com/dbewick123/playstack.git)*`
+`git clone https://github.com/dbewick123/playstack.git`
 
 ### **#2 Install Dependencies**
 
-At the root of both the ‘Frontend’ and ‘Backend’ directories run, `*npm install*` (or whatever package manager you use - yarn, etc).
+At the root of both the ‘Frontend’ and ‘Backend’ directories run, `npm install` (or whatever package manager you use - yarn, etc).
 
 ### **#3 Configure Environment Variables**
 
 You will need to configure the following env variables.
 
-**Frontend (`*.env.local*` file at root)**
+**Frontend (`.env.local` file at root)**
 
 ```jsx
 VITE_BACKEND_API_URL= 'http://localhost:3000' // <-- This should be your backend server url
@@ -125,7 +125,7 @@ VITE_BACKEND_API_URL= 'http://localhost:3000' // <-- This should be your backend
 
  
 
-**Backend (`*.env*`file at root)**
+**Backend (`.env`file at root)**
 
 ```
 THIRD_PARTY_GAME_API_KEY = <RAWG API KEY> // <-- you will need to sign up and get a RAWG api key (https://rawg.io/apidocs)
@@ -137,4 +137,4 @@ FRONTEND_URL_FOR_CORS = 'http://localhost:5173' // <-- Change to your frontend u
 
 ### **#4 Start the Servers**
 
-Again in both ‘Frontend’ and ‘Backend’ directories, run the command `*npm run dev*` You can now hit the Frontend url and get going.
+Again in both ‘Frontend’ and ‘Backend’ directories, run the command `npm run dev` You can now hit the Frontend url and get going.
