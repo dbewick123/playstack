@@ -1,10 +1,5 @@
 # Playstack
-
----
-
-# 🔗 Check it Out
-
-Playstack is live and can be found here: [**play-stack.com**](https://play-stack.com)
+Check it out - Playstack is live and can be found here: [**play-stack.com**](https://play-stack.com)
 
 # 🎯 My Personal Goal
 
@@ -68,23 +63,19 @@ I used Jira for task tracking and Notion for documentation and planning. Below, 
 
 The screenshot below outlines all the key phases I covered during the project. Again I wanted to ensure everything was well organised and that no critical steps were missed. That said, I took a pragmatic approach, focusing more time and effort on areas that offered greater value.
 
-![Project Phases p1.png](./images/Project_Phases_p1.png)
-
-![Project Phases p2.png](./images/Project_Phases_p2.png)
+![Project Phases.png](README/images/Project_Phases.png) 
 
 ### Planning
 
 I used a Kanban style methodology for this project. I had a broad deadline and an idea of how much each epic would take, but opted not to go any deeper than than, for example not estimating lower level ticket story points etc. I deemed this low value due to the nature of this solo project. Below (seen mid build) shows my rough high level plan by feature:
 
-![Jira Plan.png](./images/Jira_Plan.png)
+![Jira Plan.png](README/images/Jira_Plan.png)
 
 ### Build Process & Check-listing
 
 While working through the project, I used a structured Jira board to support an organised process from design to ‘done’. Additionally I occasionally used ‘checklists’ (eg: release checklist) for certain columns to better structure the related activities:
 
-![Jira Board p1.png](./images/Jira_Board_p1.png)
-
-![Jira Board p2.png](./images/Jira_Board_p2.png)
+![Jira Board.png](README/images/Jira_Board.png)
 
 # ✅ Testing Approach
 
