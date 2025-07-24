@@ -73,6 +73,17 @@ I used a Kanban style methodology for this project. I had a broad deadline and a
 
 ![Jira Plan.png](README/images/Jira_Plan.png)
 
+### Requirements & Design
+
+Making the more strategic requirement and design decisions was vital for a successful project. Having decided the key requirements, Some key ares I focussed on: 
+
+- **User Experience** — Personas and system usage drove my wireframe designs 
+- **State Model** — Current and future features informed my global state model
+- **Design Principles** — This included areas like smart/dumb container approach and css module approach
+- **Data Model** — While no DB is currently hooked up, I felt that having an underlying ERD of my app was important
+
+![Design Examples.png](README/images/Design_Examples.png)
+
 ### Build Process & Check-listing
 
 While working through the project, I used a structured Jira board to support an organised process from design to ‘done’. Additionally I occasionally used ‘checklists’ (eg: release checklist) for certain columns to better structure the related activities:
