@@ -1,4 +1,3 @@
-/*TODO: Consider a change in layout, maybe dont have the footer always visable and have sticky filters but games all the way to the bottom of the vh */
 .home-container {
   display: flex;
   flex-direction: column;

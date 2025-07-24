@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
 
 app.get("/games/count", gameCountController);
 
-// TODO: Document API for all below routes, especially the query parameters available (as they cant be seen in the code)
 app.get("/games/query/", gamesSearchController);
 
 app.get("/games/proxy/", gamesNextPageController);

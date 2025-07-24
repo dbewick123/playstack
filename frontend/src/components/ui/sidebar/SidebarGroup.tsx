@@ -22,7 +22,6 @@ interface SidebarGroupProps {
   groupId: number;
   items: { id: number; name: string; icon: React.ComponentType<SvgIconProps> }[];
 }
-// TODO: Test that the clicks update redux properly
 function SidebarGroup({ groupId, groupName, items }: SidebarGroupProps) {
   const dispatch = useDispatch<AppDispatch>();
   const currentReduxFilters = useSelector(selectFilters);

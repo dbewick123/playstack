@@ -1,6 +1,5 @@
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
-//TODO: Complete this functionality
 import EsrbAdults from "../../assets/icons/esrb/esrb-adult.svg?react";
 import EsrbEveryone from "../../assets/icons/esrb/esrb-everyone.svg?react";
 import EsrbEveryone10 from "../../assets/icons/esrb/esrb-everyone10.svg?react";
@@ -17,7 +16,6 @@ const esrbIconMap: {
     icon: React.ReactElement;
     alt: string;
   };
-  // TODO: Testing - consider how to know if the API changes the slugs, my test suite should pick this up
 } = {
   "adults-only": {
     icon: <EsrbAdults />,

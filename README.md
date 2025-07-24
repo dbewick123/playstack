@@ -1,4 +1,5 @@
 # Playstack
+
 Check it out - Playstack is live and can be found here: [**play-stack.com**](https://play-stack.com)
 
 # 🎯 My Personal Goal
@@ -13,26 +14,26 @@ I'm proud to say this project delivered on that goal—and I’m now more confid
 
 First and foremost, Playstack is an application built for gamers who, like me, face a growing problem, one that has me thinking:
 
-*“I have so many gaming platforms, so many wishlists, so many libraries and so many dashboards. Its frankly now a massive chore to look through my games catalogues, reflect on old titles and to enjoy the once fun process of deciding what I want to play next…”*
+_“I have so many gaming platforms, so many wishlists, so many libraries and so many dashboards. Its frankly now a massive chore to look through my games catalogues, reflect on old titles and to enjoy the once fun process of deciding what I want to play next…”_
 
 And so, with the initial release of [play-stack.com](http://play-stack.com), I aim to lay the foundations of an application that will solve this ever growing frustration faced by me and many others alike.
 
 # 💾 Technology Used
 
-| Frontend | Backend | Testing | Deployment & Versioning | Other |
-| --- | --- | --- | --- | --- |
-| React | Node.js | Jest | Git | Vite |
-| Redux | Express.js | React Testing Library | Github Actions | Nodemon |
-| React Router | Typescript | Supertest | Render | Jira |
-| Typescript |  |  |  | Notion |
-| Material UI + Swiper |  |  |  | Excalidraw |
-|  |  |  |  | YAML |
+| Frontend             | Backend    | Testing               | Deployment & Versioning | Other      |
+| -------------------- | ---------- | --------------------- | ----------------------- | ---------- |
+| React                | Node.js    | Jest                  | Git                     | Vite       |
+| Redux                | Express.js | React Testing Library | Github Actions          | Nodemon    |
+| React Router         | Typescript | Supertest             | Render                  | Jira       |
+| Typescript           |            |                       |                         | Notion     |
+| Material UI + Swiper |            |                       |                         | Excalidraw |
+|                      |            |                       |                         | YAML       |
 
 # 🎬 Project Highlights
 
 ### 🖥️ Frontend
 
-- **Responsive Modern UI** — Optimised for mobile, tablet, and desktop. Achieved by using reactive design principals with a combination of grids and flexbox,  persistent layout/outlet components as well as a modular variable based CSS class system.
+- **Responsive Modern UI** — Optimised for mobile, tablet, and desktop. Achieved by using reactive design principals with a combination of grids and flexbox, persistent layout/outlet components as well as a modular variable based CSS class system.
 - **Advanced Search & Filters** — Genre, platform, and keyword-based filtering using dynamic query construction. Results dynamically rendered and paged with infinite scrolling.
 - **Redux State Management** — Global app state managed via Redux, with local component state covered by React states. Redux Thunks utilised to fetch external data, centralising logic inside the Slice to avoid convoluted API calls.
 - **CSS, from Scratch + Libraries** — To aid learning, a number of higher complexity components have been created from scratch (infinite carousel, filters sidebar, game card image gallery), as well as leveraging libraries such as Material UI and Swiper.
@@ -63,7 +64,7 @@ I used Jira for task tracking and Notion for documentation and planning. Below, 
 
 The screenshot below outlines all the key phases I covered during the project. Again I wanted to ensure everything was well organised and that no critical steps were missed. That said, I took a pragmatic approach, focusing more time and effort on areas that offered greater value.
 
-![Project Phases.png](README/images/Project_Phases.png) 
+![Project Phases.png](README/images/Project_Phases.png)
 
 ### Planning
 
@@ -93,10 +94,11 @@ I applied techniques such as mocking (for user interactions, functions, and endp
 
 # 🔭 What Next?
 
-I still have a fairly extensive backlog, and with this being release 1.0, I plan to add a number of features in future, crucially including: 
+I still have a fairly extensive backlog, and with this being release 1.0, I plan to add a number of features in future, crucially including:
 
 - Most obviously will be to enable user accounts, utilising both sessions with cookies as well as integrating a PostgreSQL database to persist data across sessions.
 - Having the user accounts in place will allow me to fully implement the wishlist and library features, as well as enhancing the user dashboard with more rich and useful personalised information.
+- Improvements to backend service layer, in order to improve the data quality, searching and aggregating of the RAWG data.
 - Outside of features, I want to make Playstack more accessible to other developers, I plan to share my technical documentation for each layer, including things like my Swagger specification for my backend API, and design diagrams such as my redux state model, react component tree, etc.
 
 # 💻 Want it Locally?
@@ -120,10 +122,8 @@ You will need to configure the following env variables.
 **Frontend (`.env.local` file at root)**
 
 ```jsx
-VITE_BACKEND_API_URL= 'http://localhost:3000' // <-- This should be your backend server url
+VITE_BACKEND_API_URL = "http://localhost:3000"; // <-- This should be your backend server url
 ```
-
- 
 
 **Backend (`.env`file at root)**
 

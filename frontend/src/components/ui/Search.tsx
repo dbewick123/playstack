@@ -34,7 +34,6 @@ const Search = ({ handleOnKeyPressed, handleOnClearClicked, handleDebouncedInput
   ]);
 
   return (
-    // TODO: Add a modal on cmd/ctrl K to open the search bar
     <div className="search-bar">
       <SearchIcon className="search-icon" />
       <input

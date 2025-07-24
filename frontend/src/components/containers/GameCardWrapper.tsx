@@ -9,7 +9,6 @@ interface GameCardWrapperProps {
 }
 
 function GameCardWrapper({game, loading, location }: GameCardWrapperProps) {
-  //TODO): Test when getting games that all fields and combos are correct. For example all different platform icons have been tested, including ones that are not found in my helper
   return (
     <GameCard
       loading={loading}

@@ -5,9 +5,6 @@ import SteamIcon from "../../assets/logos/third-party/steam.svg?react";
 import LinkeInIcon from "../../assets/logos/third-party/linkedin.svg?react";
 
 export default function Footer() {
-  {
-    /* TODO: Update footer info to real content */
-  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
@@ -20,7 +17,6 @@ export default function Footer() {
       <div className="footer-info-container">
         <div className="footer-info footer-info-world">
           <h4>Playstack World</h4>
-          {/* TODO: add real link paths to the footer link objects */}
           <nav className="subtle-links">
             <Link to="/">Discover Playstack world</Link>
             <Link to="/">Bookings and more info</Link>

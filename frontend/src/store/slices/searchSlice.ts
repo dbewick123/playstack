@@ -9,7 +9,6 @@ import { BACKEND_API_URL } from "../../config";
 const initialState: SearchState = {
   query: "",
   filters: { platforms: [], genres: [] },
-  // TODO: Maybe add ordering here
   results: {
     games: [],
     next: "",
@@ -24,7 +23,6 @@ const initialState: SearchState = {
 };
 
 export const fetchSearchResults = createAsyncThunk(
-  //TODO: Improve the sophistication of the search, need to have better ways of showing recent games, etc (add order by)
   "search/fetchSearchResults",
   async (_, thunkAPI) => {
     try {
@@ -67,7 +65,6 @@ export const fetchSearchResults = createAsyncThunk(
         params.append("ordering", "-released");
       }
 
-      //TODO: Test case for this to check timezones
       params.append("dates", `1995-01-01,${localISODate}`);
 
       const url = `${BACKEND_API_URL}/games/query?${params.toString()}`;
@@ -109,7 +106,6 @@ export const fetchNextPageResults = createAsyncThunk(
   }
 );
 
-//TODO Tests for removing or adding Genres/Platforms when on a high page number, etc
 export const searchSlice = createSlice({
   name: "search",
   initialState,

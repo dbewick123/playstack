@@ -15,7 +15,6 @@ interface UserState {
 }
 
 // Toggle mock mode 
-// TODO: Add as Env Variable
 const MOCK_MODE = true;
 
 // Initial state
