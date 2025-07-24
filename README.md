@@ -35,6 +35,7 @@ And so, with the initial release of [play-stack.com](http://play-stack.com), I a
 
 - **Responsive Modern UI** — Optimised for mobile, tablet, and desktop. Achieved by using reactive design principals with a combination of grids and flexbox, persistent layout/outlet components as well as a modular variable based CSS class system.
 - **Advanced Search & Filters** — Genre, platform, and keyword-based filtering using dynamic query construction. Results dynamically rendered and paged with infinite scrolling.
+- **Input Debouncing** — Implemented on search inputs to provide smooth user experience, without the need for excess API calls
 - **Redux State Management** — Global app state managed via Redux, with local component state covered by React states. Redux Thunks utilised to fetch external data, centralising logic inside the Slice to avoid convoluted API calls.
 - **CSS, from Scratch + Libraries** — To aid learning, a number of higher complexity components have been created from scratch (infinite carousel, filters sidebar, game card image gallery), as well as leveraging libraries such as Material UI and Swiper.
 
