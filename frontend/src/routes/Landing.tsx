@@ -34,7 +34,7 @@ function Landing() {
     const fetchGameCount = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_API_URL}/games/count`
+          `${import.meta.env.VITE_BACKEND_API_URL}/games/count`,
         );
         const data = await response.json();
         setGameCount(data.count);
@@ -48,14 +48,12 @@ function Landing() {
     fetchGameCount();
   }, []);
 
-
   const landingPageData = useMemo(() => {
     if (isLargeMobile || isMobile) return gameDataMobile;
     if (IsTablet) return gameDataTablet;
     if (isDesktop) return gameDataDesktop;
     return gameDataFull;
   }, [isLargeMobile, IsTablet, isDesktop]);
-  
 
   const images: { src: string; alt: string; ariaHidden: boolean }[] = [
     { src: car1, alt: "spaceship", ariaHidden: false },
@@ -144,8 +142,11 @@ function Landing() {
           <br />
           <p>
             <span className="feature-info-additional-text">
-              Building your own local game, or have such a niche its not yet in
-              our database? Add it with our &apos;add indie game&apos; feature
+              <span className="text-highemp-p-span">
+                Building your own local game
+              </span>
+              , or for some crazy reason something&apos;s not yet in our
+              database? Add it with our &apos;add indie game&apos; feature
               (coming soon).
             </span>
           </p>
