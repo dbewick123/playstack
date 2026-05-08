@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Game } from "../../types/game";
 import "./gameCard.css";
@@ -16,16 +16,36 @@ import { Chip, Tooltip } from "@mui/material";
 import LibraryRemoveIcon from "@mui/icons-material/PlaylistAddCheck";
 import LibraryAddIcon from "@mui/icons-material/PlaylistAdd";
 
-interface GameCardProps {
-  loading: boolean;
-  game: Game;
-  location?: string;
-}
+
+
+type GameCardProps =
+  | {
+      loading: true;
+      game?: never;
+      location?: string;
+    }
+  | {
+      loading: false;
+      game: Game;
+      location?: string;
+    };
 
 function GameCard({ loading, game, location }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
+  console.log(game);
+  
+  useEffect(() => {
+    if (loading || !game?.screenshots?.length) {
+      return;
+    }
+    game.screenshots.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+  }, []);
 
   const safeLocation = !location ? 'unknown' : location;
 
@@ -34,7 +54,7 @@ function GameCard({ loading, game, location }: GameCardProps) {
     : "tbc";
 
   const handleGalleryClick = (clickSource: string, newIndex?: number) => {
-    const imageCount = game.screenshots?.length;
+    const imageCount = loading ? 0 : game?.screenshots?.length;
 
     if (!imageCount) {
       return;
