@@ -37,8 +37,12 @@ function Home() {
   const searchresults = useSelector(selectSearchResults);
   const searchError = useSelector(selectSearchError);
 
-  const isNoSearchResults = !searchresults ? true : searchresults.count < 1 && !searchLoading;
-  const isSearchError = !searchresults ? searchError === 'Failed to fetch' : searchError === 'Failed to fetch' || searchresults.status === "error";
+  const isNoSearchResults = !searchresults
+    ? true
+    : searchresults.count < 1 && !searchLoading;
+  const isSearchError = !searchresults
+    ? searchError === "Failed to fetch"
+    : searchError === "Failed to fetch" || searchresults.status === "error";
   const dispatch = useDispatch<AppDispatch>();
 
   const options: IntersectionObserverInit = {
@@ -55,7 +59,6 @@ function Home() {
     dispatch(fetchSearchResults());
   }, [activeFilters, searchQuery]);
 
-  
   useEffect(() => {
     if (
       !isVisable ||
@@ -78,7 +81,6 @@ function Home() {
             ? pageSize
             : searchresults.games?.length,
       }).map((_, index) => {
-        // @ts-expect-error – Ignore as this is always a loading screen
         return <GameCardWrapper key={index} loading={true} />;
       });
     } else if (searchresults.count < 1) {
@@ -139,37 +141,35 @@ function Home() {
           ) : (
             <div className="game-card-wrapper">{renderGameCardWrappers()}</div>
           )}
-        </main>        
+        </main>
       </div>
       <div ref={containerRef} className="home-paging">
-          <Pagination
-            count={!searchresults ? 0 : Math.ceil(searchresults.count / pageSize)}
-            page={pageNumber}
-            siblingCount={0}
-            hideNextButton={true}
-            hidePrevButton={true}
-            renderItem={(item) => (
-              <PaginationItem {...item} disabled />
-            )}
-            sx={{
-              paddingTop: "24px",
-              // Override Classes to target specific styles
-              ".MuiPaginationItem-root": {
-                color: "#ffffff !important",
-                backgroundColor: "#1e1e1e !important",
-              },
-              ".Mui-disabled.Mui-selected": {
-                border: "1px solid #ffffff1f !important",
-                backgroundColor: "rgba(255, 255, 255, 0.03) !important",
-              },
-              "Mui-selected": {
-                border: "1px solid #ffffff1f !important",
-                backgroundColor: "rgba(255, 255, 255, 0.03) !important",
-              },
-            }}
-            shape="rounded"
-          />
-        </div>
+        <Pagination
+          count={!searchresults ? 0 : Math.ceil(searchresults.count / pageSize)}
+          page={pageNumber}
+          siblingCount={0}
+          hideNextButton={true}
+          hidePrevButton={true}
+          renderItem={(item) => <PaginationItem {...item} disabled />}
+          sx={{
+            paddingTop: "24px",
+            // Override Classes to target specific styles
+            ".MuiPaginationItem-root": {
+              color: "#ffffff !important",
+              backgroundColor: "#1e1e1e !important",
+            },
+            ".Mui-disabled.Mui-selected": {
+              border: "1px solid #ffffff1f !important",
+              backgroundColor: "rgba(255, 255, 255, 0.03) !important",
+            },
+            "Mui-selected": {
+              border: "1px solid #ffffff1f !important",
+              backgroundColor: "rgba(255, 255, 255, 0.03) !important",
+            },
+          }}
+          shape="rounded"
+        />
+      </div>
     </div>
   );
 }
