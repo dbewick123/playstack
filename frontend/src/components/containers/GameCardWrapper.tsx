@@ -5,17 +5,22 @@ import { Game } from "../../types/game";
 type GameCardWrapperProps =
   | {
       loading: true;
-      game?: never;
+      game?: Game;
       location?: string;
     }
   | {
       loading: false;
       game: Game;
       location?: string;
+    }
+  | {
+      loading: null;
+      game: Game;
+      location?: string;
     };
 
-    function GameCardWrapper(props: GameCardWrapperProps) {
-      return <GameCard {...props} />;
-    }
+function GameCardWrapper(props: GameCardWrapperProps) {
+  return <GameCard {...props} />;
+}
 
 export default GameCardWrapper;

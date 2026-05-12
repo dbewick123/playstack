@@ -42,10 +42,58 @@ test("renders game card with game data", () => {
   expect(screen.getAllByTestId("mock-platform-react-svg").length).toBe(5);
 });
 
-test("renders game card with loading and null data", () => {
+test("renders game card with loading plus data", () => {
+  const gameCardWrapperProps = {
+    game: {
+      id: 3328,
+      name: "The Witcher 3",
+      slug: "the-witcher-3",
+      released: "2015-05-18",
+      backgroundImage:
+        "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+      metacritic: 92,
+      platforms: [4, 187, 1, 18, 186, 7, 5],
+      genres: [4, 5],
+      tags: ["singleplayer", "multiplayer"],
+      screenshots: [
+        "https://media.rawg.io/media/screenshots/1ac/1ac19f31974314855ad7be266adeb500.jpg",
+        "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+      ],
+      esrbRating: "Mature",
+    },
+    loading: true,
+  };
+
   render(
     <MemoryRouter>
-      <GameCardWrapper loading={true} />
+      <GameCardWrapper {...gameCardWrapperProps}/>
+    </MemoryRouter>,
+  );
+
+  expect(screen.getAllByTitle("skeleton").length).toBe(4);
+});
+
+test("renders game card with loading and null data", () => {
+  const gameCardWrapperProps = {
+    game: {
+      id: null,
+      name: null,
+      slug: null,
+      released: null,
+      backgroundImage: null,
+      metacritic: null,
+      platforms: null,
+      genres: null,
+      tags: null,
+      screenshots: null,
+      esrbRating: null,
+    } as unknown as Game,
+    loading: true,
+  };
+
+  render(
+    <MemoryRouter>
+      <GameCardWrapper {...gameCardWrapperProps} />
     </MemoryRouter>,
   );
 
@@ -53,9 +101,26 @@ test("renders game card with loading and null data", () => {
 });
 
 test("renders game card with no passed data", () => {
+  const gameCardWrapperProps = {
+    game: {
+      id: null,
+      name: null,
+      slug: null,
+      released: null,
+      backgroundImage: null,
+      metacritic: null,
+      platforms: null,
+      genres: null,
+      tags: null,
+      screenshots: null,
+      esrbRating: null,
+    } as unknown as Game,
+    loading: null,
+  };
+
   render(
     <MemoryRouter>
-      <GameCardWrapper game={null as unknown as Game} loading={false} />
+      <GameCardWrapper {...gameCardWrapperProps} />
     </MemoryRouter>,
   );
   expect(screen.getByText("Release: tbc")).toBeInTheDocument();

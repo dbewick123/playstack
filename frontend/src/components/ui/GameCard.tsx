@@ -16,16 +16,19 @@ import { Chip, Tooltip } from "@mui/material";
 import LibraryRemoveIcon from "@mui/icons-material/PlaylistAddCheck";
 import LibraryAddIcon from "@mui/icons-material/PlaylistAdd";
 
-
-
 type GameCardProps =
   | {
       loading: true;
-      game?: never;
+      game?: Game;
       location?: string;
     }
   | {
       loading: false;
+      game: Game;
+      location?: string;
+    }
+  | {
+      loading: null;
       game: Game;
       location?: string;
     };
@@ -35,7 +38,7 @@ function GameCard({ loading, game, location }: GameCardProps) {
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
   console.log(game);
-  
+
   useEffect(() => {
     if (loading || !game?.screenshots?.length) {
       return;
@@ -44,10 +47,9 @@ function GameCard({ loading, game, location }: GameCardProps) {
       const img = new Image();
       img.src = src;
     });
-
   }, []);
 
-  const safeLocation = !location ? 'unknown' : location;
+  const safeLocation = !location ? "unknown" : location;
 
   const formattedDate = game?.released
     ? localDateFormatter(game?.released)
@@ -128,14 +130,16 @@ function GameCard({ loading, game, location }: GameCardProps) {
       <div className="game-card-info-container">
         <div className="game-card-info-top">
           <div className="game-card-info-title">
-            {safeLocation === 'landing' ? <h2>{game.name}</h2> :
-            <Link
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              to={`/game/${game.id}`}
-            >
-              <h2 className="links">{game.name}</h2>
-            </Link>
-}
+            {safeLocation === "landing" ? (
+              <h2>{game.name}</h2>
+            ) : (
+              <Link
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                to={`/game/${game.id}`}
+              >
+                <h2 className="links">{game.name}</h2>
+              </Link>
+            )}
           </div>
         </div>
         <div className="game-card-info-sub">
