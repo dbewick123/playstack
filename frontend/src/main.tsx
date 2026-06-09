@@ -9,6 +9,15 @@ import { theme } from "./themes/theme";
 
 import App from "./App.tsx";
 import { store } from "./store/store.ts";
+import { fetchCurrentUser } from "./store/slices/userSlice.ts";
+
+store.dispatch(fetchCurrentUser());
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    store.dispatch(fetchCurrentUser());
+  }
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

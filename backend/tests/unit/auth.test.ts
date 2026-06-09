@@ -1,0 +1,102 @@
+import { describe, test, expect, afterAll } from "@jest/globals";
+import supertest from "supertest";
+import app from "../../src/app.js";
+import pool from "../../src/db/pool.js";
+
+const TEST_USER = {
+  username: "testuser_auth",
+  email: "test_auth@playstack.com",
+  password: "TestPassword123!",
+};
+
+describe("Auth Routes", () => {
+  afterAll(async () => {
+    await pool.query("DELETE FROM users WHERE email = $1", [TEST_USER.email]);
+    await pool.end();
+  });
+
+  describe("POST /auth/signup", () => {
+    test("should create a new user and return 201 with user object (no password)", async () => {
+      const response = await supertest(app).post("/auth/signup").send(TEST_USER);
+      expect(response.status).toBe(201);
+      expect(response.body.username).toBe(TEST_USER.username);
+      expect(response.body.email).toBe(TEST_USER.email);
+      expect(response.body.id).toBeDefined();
+      expect(response.body.password_hash).toBeUndefined();
+    });
+
+    test("should return 409 for duplicate email", async () => {
+      const response = await supertest(app).post("/auth/signup").send(TEST_USER);
+      expect(response.status).toBe(409);
+    });
+
+    test("should return 400 for missing fields", async () => {
+      const response = await supertest(app)
+        .post("/auth/signup")
+        .send({ email: "other@playstack.com" });
+      expect(response.status).toBe(400);
+    });
+  });
+
+  describe("POST /auth/login", () => {
+    test("should return 200 and user object with correct credentials", async () => {
+      const response = await supertest(app)
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: TEST_USER.password });
+      expect(response.status).toBe(200);
+      expect(response.body.email).toBe(TEST_USER.email);
+      expect(response.body.password_hash).toBeUndefined();
+    });
+
+    test("should return 401 for wrong password", async () => {
+      const response = await supertest(app)
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: "wrongpassword" });
+      expect(response.status).toBe(401);
+    });
+
+    test("should return 400 for missing fields", async () => {
+      const response = await supertest(app)
+        .post("/auth/login")
+        .send({ email: TEST_USER.email });
+      expect(response.status).toBe(400);
+    });
+  });
+
+  describe("GET /auth/me", () => {
+    test("should return { user: null } with no session", async () => {
+      const response = await supertest(app).get("/auth/me");
+      expect(response.status).toBe(200);
+      expect(response.body.user).toBeNull();
+    });
+
+    test("should return the user after login", async () => {
+      const agent = supertest.agent(app);
+      await agent
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: TEST_USER.password });
+      const response = await agent.get("/auth/me");
+      expect(response.status).toBe(200);
+      expect(response.body.user.email).toBe(TEST_USER.email);
+      expect(response.body.user.password_hash).toBeUndefined();
+    });
+  });
+
+  describe("POST /auth/logout", () => {
+    test("should return 401 when not logged in", async () => {
+      const response = await supertest(app).post("/auth/logout");
+      expect(response.status).toBe(401);
+    });
+
+    test("should destroy session and return 200", async () => {
+      const agent = supertest.agent(app);
+      await agent
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: TEST_USER.password });
+      const logoutResponse = await agent.post("/auth/logout");
+      expect(logoutResponse.status).toBe(200);
+      const meResponse = await agent.get("/auth/me");
+      expect(meResponse.body.user).toBeNull();
+    });
+  });
+});

@@ -37,7 +37,6 @@ function GameCard({ loading, game, location }: GameCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWishlist, setSelectedWishlist] = useState(false);
   const [selectedLibrary, setSelectedLibrary] = useState(false);
-  console.log(game);
 
   useEffect(() => {
     if (loading || !game?.screenshots?.length) {

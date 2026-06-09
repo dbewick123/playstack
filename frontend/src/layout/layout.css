@@ -65,7 +65,7 @@
 
 /* Mobile Responsive */
 
-@media (max-width: 430px) {
+@media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: var(--header-height-mobile) 1fr auto;

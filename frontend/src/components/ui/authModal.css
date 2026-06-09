@@ -1,0 +1,26 @@
+.auth-modal-title {
+  padding-bottom: 0;
+}
+
+.auth-modal-tabs {
+  margin-bottom: var(--modal-tabs-margin-bottom);
+}
+
+.auth-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--modal-form-gap);
+  padding-bottom: var(--space-xs);
+}
+
+.auth-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.auth-modal-error {
+  color: var(--modal-error-color);
+  font-size: var(--font-size-xs);
+  margin: 0;
+}

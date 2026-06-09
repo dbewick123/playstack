@@ -1,6 +1,9 @@
-import { describe, test, expect } from "@jest/globals";
+import { describe, test, expect, afterAll } from "@jest/globals";
 import testMiddlewareApp from "../../src/app.js";
 import supertestMiddleware from "supertest";
+import pool from "../../src/db/pool.js";
+
+afterAll(() => pool.end());
 
 describe("Error Handler Middleware", () => {
   test("Should return 500 with generic error message", async () => {

@@ -1,6 +1,9 @@
-import { describe, test, expect } from "@jest/globals";
+import { describe, test, expect, afterAll } from "@jest/globals";
 import testRoutesApp from "../../src/app.js";
 import supertestRoutes from "supertest";
+import pool from "../../src/db/pool.js";
+
+afterAll(() => pool.end());
 
 describe("Rawg API Routes (Thirdparty Contract Test)", () => {
   //Count Route Test

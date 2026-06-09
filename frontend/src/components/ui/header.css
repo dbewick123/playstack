@@ -55,9 +55,57 @@
   font-weight: var(--font-weight-regularplus);
 }
 
+.header-username {
+  color: var(--color-primary);
+}
+
+.header-username:hover {
+  color: var(--color-text-highemp);
+}
+
+.header-signin-btn,
+.header-signout-btn {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regularplus);
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color var(--transition-base) var(--ease-default);
+}
+
+.header-signin-btn:hover,
+.header-signout-btn:hover {
+  color: var(--color-text-highemp);
+}
+
+.header-user-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regularplus);
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: var(--space-lg);
+  cursor: pointer;
+  transition: color var(--transition-base) var(--ease-default);
+}
+
+.header-user-btn:hover {
+  color: var(--color-text-highemp);
+}
+
+.header-user-icon {
+  font-size: var(--icon-size-sm) !important;
+}
 
 
-@media (max-width: 430px) {
+
+@media (max-width: 768px) {
   .header-content {
     display: grid;
     grid-template-areas:

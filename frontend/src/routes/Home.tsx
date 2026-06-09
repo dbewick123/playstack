@@ -151,22 +151,6 @@ function Home() {
           hideNextButton={true}
           hidePrevButton={true}
           renderItem={(item) => <PaginationItem {...item} disabled />}
-          sx={{
-            paddingTop: "24px",
-            // Override Classes to target specific styles
-            ".MuiPaginationItem-root": {
-              color: "#ffffff !important",
-              backgroundColor: "#1e1e1e !important",
-            },
-            ".Mui-disabled.Mui-selected": {
-              border: "1px solid #ffffff1f !important",
-              backgroundColor: "rgba(255, 255, 255, 0.03) !important",
-            },
-            "Mui-selected": {
-              border: "1px solid #ffffff1f !important",
-              backgroundColor: "rgba(255, 255, 255, 0.03) !important",
-            },
-          }}
           shape="rounded"
         />
       </div>
