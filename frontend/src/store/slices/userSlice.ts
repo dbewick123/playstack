@@ -1,6 +1,6 @@
 import { createSlice, createAction, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { BACKEND_API_URL } from "../../config";
+import { apiFetch } from "../../api/client";
 
 interface User {
   id: string;
@@ -25,9 +25,7 @@ export const userLoggedOut = createAction("auth/userLoggedOut");
 export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
   async (_, { dispatch }) => {
-    const response = await fetch(`${BACKEND_API_URL}/auth/me`, {
-      credentials: "include",
-    });
+    const response = await apiFetch(`/auth/me`);
     const data = await response.json();
     const user = (data.user ?? null) as User | null;
     if (!user) dispatch(userLoggedOut());
@@ -38,10 +36,9 @@ export const fetchCurrentUser = createAsyncThunk(
 export const signupUser = createAsyncThunk(
   "user/signupUser",
   async (payload: { username: string; email: string; password: string }, thunkAPI) => {
-    const response = await fetch(`${BACKEND_API_URL}/auth/signup`, {
+    const response = await apiFetch(`/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify(payload),
     });
     const data = await response.json();
@@ -59,10 +56,9 @@ export const signupUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (payload: { email: string; password: string }, thunkAPI) => {
-    const response = await fetch(`${BACKEND_API_URL}/auth/login`, {
+    const response = await apiFetch(`/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify(payload),
     });
     const data = await response.json();
@@ -76,9 +72,8 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   "user/logoutUser",
   async (_, { dispatch }) => {
-    await fetch(`${BACKEND_API_URL}/auth/logout`, {
+    await apiFetch(`/auth/logout`, {
       method: "POST",
-      credentials: "include",
     });
     dispatch(userLoggedOut());
   }
@@ -112,9 +107,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        console.log("fetchCurrentUser.fulfilled", action.payload);
         state.user = action.payload;
-        console.log("state.user", state.user);
         state.loading = false;
       })
       .addCase(fetchCurrentUser.rejected, (state) => {

@@ -20,6 +20,7 @@ import {
 } from "../utilities/landingPageData";
 import { Button } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
+import { apiFetch } from "../api/client";
 
 function Landing() {
   const isMobile = useIsMobile();
@@ -33,9 +34,7 @@ function Landing() {
   useEffect(() => {
     const fetchGameCount = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_API_URL}/games/count`,
-        );
+        const response = await apiFetch(`/games/count`);
         const data = await response.json();
         setGameCount(data.count);
       } catch (error) {

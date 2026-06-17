@@ -25,6 +25,24 @@ export default defineConfig([
     ],
     rules: {
       "react/react-in-jsx-scope": "off",
+      // All backend calls must go through apiFetch (src/api/client.ts) so the
+      // 401 / X-Authenticated auth teardown is applied uniformly. Ban bare fetch.
+      // See docs/adr/0001.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "CallExpression[callee.name='fetch']",
+          message:
+            "Do not call fetch directly. Use apiFetch from src/api/client.ts so auth teardown is applied (see docs/adr/0001).",
+        },
+      ],
+    },
+  },
+  {
+    // The api client is the one place allowed to call fetch directly.
+    files: ["**/api/client.ts"],
+    rules: {
+      "no-restricted-syntax": "off",
     },
   },
 ]);

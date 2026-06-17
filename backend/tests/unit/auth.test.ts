@@ -30,6 +30,28 @@ describe("Auth Routes", () => {
       expect(response.status).toBe(409);
     });
 
+    test("should return 409 for an email matching an existing one in different case", async () => {
+      const response = await supertest(app)
+        .post("/auth/signup")
+        .send({
+          username: "different_username_ci",
+          email: TEST_USER.email.toUpperCase(),
+          password: TEST_USER.password,
+        });
+      expect(response.status).toBe(409);
+    });
+
+    test("should return 409 for a username matching an existing one in different case", async () => {
+      const response = await supertest(app)
+        .post("/auth/signup")
+        .send({
+          username: TEST_USER.username.toUpperCase(),
+          email: "different_email_ci@playstack.com",
+          password: TEST_USER.password,
+        });
+      expect(response.status).toBe(409);
+    });
+
     test("should return 400 for missing fields", async () => {
       const response = await supertest(app)
         .post("/auth/signup")
@@ -97,6 +119,34 @@ describe("Auth Routes", () => {
       expect(logoutResponse.status).toBe(200);
       const meResponse = await agent.get("/auth/me");
       expect(meResponse.body.user).toBeNull();
+    });
+  });
+
+  describe("Session expiry", () => {
+    test("should treat the user as logged out once their session has expired", async () => {
+      const agent = supertest.agent(app);
+      const loginResponse = await agent
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: TEST_USER.password });
+      const userId = loginResponse.body.id as string;
+
+      // Sanity check: the session is valid immediately after login.
+      const beforeExpiry = await agent.get("/auth/me");
+      expect(beforeExpiry.body.user.id).toBe(userId);
+
+      // Force the persisted session to expire by setting table column
+      await pool.query(
+        `UPDATE session SET expire = NOW() - interval '1 hour' WHERE sess->>'userId' = $1`,
+        [userId],
+      );
+
+      const afterExpiry = await agent.get("/auth/me");
+      expect(afterExpiry.status).toBe(200);
+      expect(afterExpiry.body.user).toBeNull();
+
+      await pool.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [
+        userId,
+      ]);
     });
   });
 });

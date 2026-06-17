@@ -4,7 +4,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { SearchState } from "../../types/game";
 import { RootState } from "../store";
 
-import { BACKEND_API_URL } from "../../config";
+import { apiFetch } from "../../api/client";
 
 const initialState: SearchState = {
   query: "",
@@ -67,8 +67,7 @@ export const fetchSearchResults = createAsyncThunk(
 
       params.append("dates", `1995-01-01,${localISODate}`);
 
-      const url = `${BACKEND_API_URL}/games/query?${params.toString()}`;
-      const response = await fetch(url);
+      const response = await apiFetch(`/games/query?${params.toString()}`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -91,9 +90,7 @@ export const fetchNextPageResults = createAsyncThunk(
       }
 
       const encodedUrl = encodeURIComponent(searchState.results.next);
-      const finalUrl = `${BACKEND_API_URL}/games/proxy?targetUrl=${encodedUrl}`;
-
-      const response = await fetch(finalUrl);
+      const response = await apiFetch(`/games/proxy?targetUrl=${encodedUrl}`);
       const data = await response.json();
       return data;
     } catch (error) {

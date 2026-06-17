@@ -8,6 +8,7 @@ import connectPgSimple from "connect-pg-simple";
 import pool from "./db/pool.js";
 import errorHandler from "./middleware/errorHandler.js";
 import thirdPartyAuthentication from "./middleware/thirdPartyAuthentication.js";
+import authStatusHeader from "./middleware/authStatusHeader.js";
 import {
   gameCountController,
   gamesGetGameController,
@@ -23,6 +24,7 @@ app.use(
   cors({
     origin: [process.env.FRONTEND_URL_FOR_CORS!],
     credentials: true,
+    exposedHeaders: ["X-Authenticated"],
   })
 );
 
@@ -42,6 +44,9 @@ app.use(
     },
   })
 );
+
+// Must run after session() so req.session is populated.
+app.use(authStatusHeader);
 
 // Only using for testing
 app.get("/error", (req, res) => {
