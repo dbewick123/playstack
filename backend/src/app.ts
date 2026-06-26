@@ -20,6 +20,11 @@ import authRouter from "./routes/authRoutes.js";
 const PgSession = connectPgSimple(session);
 
 const app = express();
+
+// Render terminates TLS at a proxy, so Express sees the request as HTTP. Trust
+// the proxy so `req.secure` is correct and Secure cookies actually get set.
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL_FOR_CORS!],
@@ -38,8 +43,10 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
+      // Cross-site in prod (frontend/backend on different onrender.com subdomains)
+      // requires SameSite=None + Secure; locally they're same-site so Lax is fine.
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 0.5 * 24 * 60 * 60 * 1000,
     },
   })
