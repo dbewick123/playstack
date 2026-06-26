@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest --config jest.config.ts",
+    "test:ci": "jest --config jest.config.ts --testPathIgnorePatterns='node_modules|routes.test.ts'",
     "lint": "eslint",
     "dev": "tsc-watch --onSuccess \"nodemon\"",
     "build": "tsc"

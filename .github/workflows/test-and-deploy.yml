@@ -44,7 +44,7 @@ jobs:
           FRONTEND_URL_FOR_CORS: ${{ secrets.FRONTEND_URL_FOR_CORS }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm test
+        run: npm run test:ci
 
   deploy-frontend:
     needs: test

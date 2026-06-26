@@ -11,7 +11,7 @@ describe("Rawg API Routes (Thirdparty Contract Test)", () => {
     const response = await supertestRoutes(testRoutesApp).get("/games/count");
     expect(response.status).toBe(200);
     expect(response.body.count).toBeGreaterThan(0);
-  });
+  }, 30000);
 
   //Get Game Route Tests
   test("Should return the game by ID, with all appropriate fields", async () => {
