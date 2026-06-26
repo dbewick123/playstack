@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import pool from "../db/pool.js";
-import { ConflictError } from "../erros/ConflictError.js";
+import { ConflictError } from "../errors/ConflictError.js";
 
 const BCRYPT_COST = 12;
 

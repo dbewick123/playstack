@@ -37,3 +37,20 @@ export function renderWithProviders(
 
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
+
+// A minimal stand-in for a fetch Response, for tests that mock `global.fetch` and our apiFetch function.
+export function mockFetchResponse(
+  body: unknown,
+  {
+    ok = true,
+    status = 200,
+    headers = {},
+  }: { ok?: boolean; status?: number; headers?: Record<string, string> } = {},
+): Promise<Response> {
+  return Promise.resolve({
+    ok,
+    status,
+    headers: { get: (name: string) => headers[name] ?? null },
+    json: () => Promise.resolve(body),
+  } as unknown as Response);
+}

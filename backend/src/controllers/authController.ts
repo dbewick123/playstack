@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
+import isEmail from "validator/lib/isEmail.js";
 import {
   createUser,
   verifyUser,
   getUserById,
 } from "../services/authService.js";
-import { ConflictError } from "../erros/ConflictError.js";
+import { ConflictError } from "../errors/ConflictError.js";
 
 const signupController = async (
   req: Request,
@@ -15,12 +16,18 @@ const signupController = async (
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-      res
-        .status(400)
-        .json({
-          status: "error",
-          message: "username, email and password are required",
-        });
+      res.status(400).json({
+        status: "error",
+        message: "username, email and password are required",
+      });
+      return;
+    }
+
+    if (!isEmail(email)) {
+      res.status(400).json({
+        status: "error",
+        message: "Please enter a valid email address",
+      });
       return;
     }
 

@@ -10,8 +10,10 @@ function Dashboard() {
   const user = useSelector(selectUser);
 
   const handleSignOut = async () => {
-    await dispatch(logoutUser());
-    navigate("/home");
+    const result = await dispatch(logoutUser());
+    if (logoutUser.fulfilled.match(result)) {
+      navigate("/home");
+    }
   };
 
   return (

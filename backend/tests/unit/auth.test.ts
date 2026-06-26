@@ -11,7 +11,10 @@ const TEST_USER = {
 
 describe("Auth Routes", () => {
   afterAll(async () => {
-    await pool.query("DELETE FROM users WHERE email = $1", [TEST_USER.email]);
+    await pool.query("DELETE FROM users WHERE email IN ($1, $2)", [
+      TEST_USER.email,
+      "notanemail",
+    ]);
     await pool.end();
   });
 
@@ -58,6 +61,33 @@ describe("Auth Routes", () => {
         .send({ email: "other@playstack.com" });
       expect(response.status).toBe(400);
     });
+
+    // 1.2.3 — both username and email already taken -> 409 with two field errors
+    test("should return 409 with two field errors when username and email are both taken", async () => {
+      const response = await supertest(app).post("/auth/signup").send({
+        username: TEST_USER.username,
+        email: TEST_USER.email,
+        password: TEST_USER.password,
+      });
+      expect(response.status).toBe(409);
+      expect(response.body.error.fields).toHaveLength(2);
+      const fields = response.body.error.fields.map(
+        (f: { field: string }) => f.field,
+      );
+      expect(fields).toEqual(expect.arrayContaining(["username", "email"]));
+    });
+
+    // 1.2.5 — malformed email rejected. TEST-FIRST: the backend has no email
+    // format validation yet, so this is RED until that is added.
+    test("should return 400 with an invalid-email message for a malformed email", async () => {
+      const response = await supertest(app).post("/auth/signup").send({
+        username: "newuser_invalid_email",
+        email: "notanemail",
+        password: TEST_USER.password,
+      });
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe("Please enter a valid email address");
+    });
   });
 
   describe("POST /auth/login", () => {
@@ -82,6 +112,23 @@ describe("Auth Routes", () => {
         .post("/auth/login")
         .send({ email: TEST_USER.email });
       expect(response.status).toBe(400);
+    });
+
+    // 1.2.6 — unknown email: 401 with the SAME generic message as a wrong
+    // password (must not leak which field was wrong)
+    test("should return 401 with the same generic message for an unknown email", async () => {
+      const unknownEmail = await supertest(app).post("/auth/login").send({
+        email: "nobody_unknown@playstack.com",
+        password: TEST_USER.password,
+      });
+      expect(unknownEmail.status).toBe(401);
+
+      const wrongPassword = await supertest(app).post("/auth/login").send({
+        email: TEST_USER.email,
+        password: "wrongpassword",
+      });
+      expect(unknownEmail.body.message).toBe("Invalid credentials");
+      expect(unknownEmail.body.message).toBe(wrongPassword.body.message);
     });
   });
 
@@ -147,6 +194,24 @@ describe("Auth Routes", () => {
       await pool.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [
         userId,
       ]);
+    });
+  });
+
+  describe("X-Authenticated header", () => {
+    // 3.3.2 — header is set on every response (here a public route), false out
+    test("a logged-out request carries X-Authenticated: false", async () => {
+      const response = await supertest(app).get("/");
+      expect(response.headers["x-authenticated"]).toBe("false");
+    });
+
+    // 3.3.1 — true once a session exists
+    test("a logged-in request carries X-Authenticated: true", async () => {
+      const agent = supertest.agent(app);
+      await agent
+        .post("/auth/login")
+        .send({ email: TEST_USER.email, password: TEST_USER.password });
+      const response = await agent.get("/");
+      expect(response.headers["x-authenticated"]).toBe("true");
     });
   });
 });

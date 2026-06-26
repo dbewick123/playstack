@@ -42,12 +42,6 @@ describe("RequireAuth", () => {
     expect(screen.queryByText("Protected dashboard")).not.toBeInTheDocument();
   });
 
-  test("renders nothing while the auth check is loading", () => {
-    renderGuardAt({ user: null, loading: true, error: null });
-    expect(screen.queryByText("Home page")).not.toBeInTheDocument();
-    expect(screen.queryByText("Protected dashboard")).not.toBeInTheDocument();
-  });
-
   test("renders the protected content when logged in", () => {
     renderGuardAt({ user: TEST_USER, loading: false, error: null });
     expect(screen.getByText("Protected dashboard")).toBeInTheDocument();

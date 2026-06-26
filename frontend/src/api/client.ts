@@ -1,4 +1,3 @@
-// The single entry point for all backend API calls.
 // Every call to the Playstack backend MUST go through `apiFetch` to ensure authorisation conformance
 
 import { BACKEND_API_URL } from "../config";
@@ -13,19 +12,9 @@ export function registerApiStore(store: AppStore) {
 }
 
 export type ApiRequestOptions = RequestInit & {
-  // Escape hatch: skip the automatic userLoggedOut teardown for this call.
   skipAuthHandling?: boolean;
 };
 
-/**
- * Make a backend API request.
- *
- * Guarantees:
- *  - sends the auth cookie (credentials: "include")
- *  - reconciles client auth state with the server on every response: if the
- *    client believes it is logged in but the server disagrees (401, or the
- *    X-Authenticated header is "false"), dispatches `userLoggedOut` to tear down all user-sensitive client state.
- */
 export async function apiFetch(
   path: string,
   options: ApiRequestOptions = {},
