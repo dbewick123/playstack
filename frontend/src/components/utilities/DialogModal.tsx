@@ -36,8 +36,8 @@ export default function DialogModal({ dialogText, dialogTitle }: DialogModalProp
         Show Full Description
       </Button>
       <Dialog fullWidth={true} maxWidth="md" open={open} onClose={handleClose}>
-        <DialogContent sx={{ backgroundColor: "var(--color-background)" }}>
-          <DialogTitle sx={{ color: "var(--color-text-modal)"}}>
+        <DialogContent>
+          <DialogTitle>
             {dialogTitle}
           </DialogTitle>
           <DialogContentText

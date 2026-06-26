@@ -30,7 +30,7 @@ html {
   --color-secondary: rgba(255, 110, 97, 0.8);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(255, 255, 255, 0.6);
-  --color-danger: rgba(229, 57, 53, 1);
+  --color-danger: rgba(255, 110, 97, 0.8);
   --color-success: rgba(67, 160, 71, 1);
   --color-separator: rgb(69, 71, 72);
   --color-meadow: rgba(44, 194, 149, 1);
@@ -134,10 +134,11 @@ html {
 
   /* 🔳 Z-Index Layers */
   --z-header: 10000;
-  --z-modal: 1100;
   --z-tooltip: 1200;
   --z-overlay: 900;
   --z-max-standard: 1000;
+  --z-popover: 10100;
+  --z-modal: 10200;
 
   /* 🌀 Transitions & Timing */
   --transition-fast: 150ms;
@@ -151,6 +152,30 @@ html {
   --radius-lg: 16px;
   --radius-xl: 24px;
   --shadow-input: 0 0 4px var(--color-shadow);
+
+  /* 🪟 Modal */
+  --modal-background-color: var(--color-background);
+  --modal-overlay: var(--overlay-24dp);
+  --modal-title-color: var(--color-text-highemp);
+  --modal-title-font-size: var(--font-size-md);
+  --modal-title-font-weight: var(--font-weight-bold);
+  --modal-text-color: var(--color-text-modal);
+  --modal-accent-color: var(--color-primary);
+  --modal-tab-color: var(--color-text-base);
+  --modal-tab-selected-color: var(--color-primary);
+  --modal-menu-hover-color: var(--color-primary);
+  --modal-tabs-margin-bottom: var(--space-xl);
+  --modal-form-gap: var(--space-lg);
+  --modal-error-color: var(--color-danger);
+
+  /* 🪟 Modal Inputs */
+  --modal-input-font-size: var(--font-size-sm);
+  --modal-input-text-color: var(--color-text-highemp);
+  --modal-input-label-color: var(--color-text-base);
+  --modal-input-label-focus-color: var(--color-primary);
+  --modal-input-border-color: rgba(255, 255, 255, 0.193);
+  --modal-input-border-hover-color: var(--color-primary);
+  --modal-input-border-focus-color: var(--color-primary);
 
   /* Specific Component Settings */
   --header-height: 80px;

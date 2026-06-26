@@ -12,6 +12,6 @@
     "types": ["node", "jest"],
     "skipLibCheck": true // Skip type checking for external libraries
   },
-  "include": ["src/**/*"], // Tells TS to compile everything in src/
+  "include": ["src/**/*", "src/errors/ConflictError.ts"], // Tells TS to compile everything in src/
   "exclude": ["node_modules", "dist"] // Don’t compile output files or dependencies
 }

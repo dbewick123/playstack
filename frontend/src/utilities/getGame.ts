@@ -1,5 +1,6 @@
 //Types
 import { SingleGame } from "../types/game";
+import { apiFetch } from "../api/client";
 
 export default async function getGame(id: number): Promise<SingleGame> {
   //Check data appropriateness
@@ -7,12 +8,9 @@ export default async function getGame(id: number): Promise<SingleGame> {
     throw new Error("Invalid ID: ID must be a non-null, non-zero number");
   }
 
-  // Build URL
-  const url = `${import.meta.env.VITE_BACKEND_API_URL}/games/${id}`;
-
   try {
     // Make Call
-    const response = await fetch(url);
+    const response = await apiFetch(`/games/${id}`);
 
     // Handle Error
     if (!response.ok) {
